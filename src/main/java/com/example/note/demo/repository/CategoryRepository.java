@@ -1,0 +1,74 @@
+package com.example.note.demo.repository;
+
+import com.example.note.demo.model.Category;
+import jakarta.transaction.Transactional;
+import lombok.AccessLevel;
+import lombok.experimental.FieldDefaults;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.jdbc.core.JdbcTemplate;
+import org.springframework.jdbc.core.simple.SimpleJdbcInsert;
+import org.springframework.stereotype.Repository;
+
+import java.util.HashMap;
+import java.util.Map;
+import java.util.Objects;
+
+@Repository
+@FieldDefaults(level = AccessLevel.PRIVATE, makeFinal = true)
+public class CategoryRepository {
+    JdbcTemplate template;
+    SimpleJdbcInsert insert;
+
+    @Autowired
+    public CategoryRepository(JdbcTemplate template) {
+        this.template = template;
+        this.insert = new SimpleJdbcInsert(template)
+                .withTableName("categories")
+                .usingGeneratedKeyColumns("id");
+    }
+
+    @Transactional
+    public Category save(Category category) {
+        Map<String, Object> values = new HashMap<>();
+        values.put("name", category.getName());
+
+        Number id = insert.executeAndReturnKey(values);
+        category.setId(id.longValue());
+        return category;
+    }
+
+    public Category getById(Long id) {
+        String sqlQuery = """
+                SELECT * 
+                FROM categories 
+                WHERE id = ?
+                """;
+        return template.queryForObject(sqlQuery, (rs, rowNum) -> {
+            Category category = new Category();
+            category.setId(rs.getLong("id"));
+            category.setName(rs.getString("name"));
+            return category;
+        }, id);
+    }
+
+    @Transactional
+    public Category update(Category category, Long id) {
+        String sqlQuery = """
+                UPDATE categories
+                SET name = ?
+                WHERE id = ?
+                """;
+        template.update(sqlQuery, category.getName(), id);
+        return category;
+    }
+
+    @Transactional
+    public Map<String, Boolean> delete(Long id) {
+        String sqlQuery = """
+                DELETE FROM categories
+                WHERE id = ?
+                """;
+        int countOfUpdate = template.update(sqlQuery, id);
+        return Map.of("deleted", countOfUpdate > 0);
+    }
+}
