@@ -1,0 +1,94 @@
+package com.example.note.demo.repository;
+
+import com.example.note.demo.model.Note;
+import jakarta.transaction.Transactional;
+import lombok.AccessLevel;
+import lombok.experimental.FieldDefaults;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.dao.EmptyResultDataAccessException;
+import org.springframework.jdbc.core.JdbcTemplate;
+import org.springframework.jdbc.core.simple.SimpleJdbcInsert;
+import org.springframework.stereotype.Repository;
+
+import java.util.Map;
+
+@Repository
+@FieldDefaults(level = AccessLevel.PRIVATE, makeFinal = true)
+public class NoteCategoryRepository {
+    JdbcTemplate template;
+
+    @Autowired
+    public NoteCategoryRepository(JdbcTemplate template) {
+        this.template = template;
+    }
+
+    @Transactional
+    public Note addCategoryToNote(Long noteId, Long categoryId) {
+        Note noteInTable = checkNoteInTable(noteId);
+        checkCategoryInTable(categoryId);
+
+        String insertSql = "INSERT INTO note_category (note_id, category_id) VALUES (?, ?)";
+        template.update(insertSql, noteId, categoryId);
+        return noteInTable;
+    }
+
+    @Transactional
+    public Note updateCategoryInNote(Long noteId, Long categoryId, Long newCategoryId) {
+        Note noteInTable = checkNoteInTable(noteId);
+        checkCategoryInTable(categoryId);
+        checkCategoryInTable(newCategoryId);
+
+        String sqlQuery = """
+                UPDATE note_category
+                SET category_id = ?
+                WHERE note_id = ? AND category_id = ?
+                """;
+        template.update(sqlQuery, newCategoryId, noteId, categoryId);
+        return noteInTable;
+    }
+
+    public Map<String, Boolean> deleteCategoryFromNote(Long noteId, Long categoryId) {
+        checkNoteCategoryInTable(noteId, categoryId);
+        String sqlQuery = """
+                DELETE FROM note_category
+                WHERE note_id = ? AND category_id = ?
+                """;
+        int countOfDeleted = template.update(sqlQuery, noteId, categoryId);
+        return Map.of("deleted", countOfDeleted > 0);
+    }
+
+    private Note checkNoteInTable(Long noteId) {
+        try {
+            String sqlNote = "SELECT * FROM notes WHERE id = ?";
+            return template.queryForObject(sqlNote, (rs, rowNum) -> {
+                Note note = new Note();
+                note.setId(rs.getLong("id"));
+                note.setName(rs.getString("name"));
+                note.setDateOfCreation(rs.getDate("date_of_creation").toLocalDate());
+                note.setDateOfUpdate(rs.getDate("date_of_update").toLocalDate());
+                note.setIsDone(rs.getBoolean("is_done"));
+                return note;
+            }, noteId);
+        } catch (EmptyResultDataAccessException e) {
+            throw new IllegalArgumentException("No note found by id " + noteId);
+        }
+    }
+
+    private void checkCategoryInTable(Long categoryId) {
+        try {
+            template.queryForObject("SELECT COUNT(*) FROM categories WHERE id = ?", Integer.class, categoryId);
+        } catch (EmptyResultDataAccessException e) {
+            throw new IllegalArgumentException("No category found by id = " + categoryId);
+        }
+    }
+
+    private void checkNoteCategoryInTable(Long noteId, Long categoryId) {
+        Integer count = template.queryForObject(
+                "SELECT COUNT(*) FROM note_category WHERE note_id = ? AND category_id = ?",
+                Integer.class, noteId, categoryId
+        );
+        if (count == null || count == 0) {
+            throw new IllegalArgumentException("No note_id= " + noteId + " and category_id= " + categoryId + " found");
+        }
+    }
+}
