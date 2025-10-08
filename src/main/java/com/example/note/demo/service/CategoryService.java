@@ -1,11 +1,13 @@
 package com.example.note.demo.service;
 
 import com.example.note.demo.dto.CategoryDto;
+import com.example.note.demo.dto.NoteDto;
 import com.example.note.demo.model.Category;
 import com.example.note.demo.model.Note;
 import com.example.note.demo.repository.CategoryRepository;
 import com.example.note.demo.repository.NoteCategoryRepository;
 import com.example.note.demo.util.CategoryMapper;
+import com.example.note.demo.util.NoteMapper;
 import lombok.AccessLevel;
 import lombok.experimental.FieldDefaults;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -17,40 +19,43 @@ import java.util.Map;
 @FieldDefaults(level = AccessLevel.PRIVATE, makeFinal = true)
 public class CategoryService {
     CategoryRepository categoryRepository;
-    CategoryMapper mapper;
+    CategoryMapper categoryMapper;
     NoteCategoryRepository noteCategoryRepository;
+    NoteMapper noteMapper;
 
     @Autowired
-    public CategoryService(CategoryRepository categoryRepository, CategoryMapper mapper, NoteCategoryRepository noteCategoryRepository) {
+    public CategoryService(CategoryRepository categoryRepository, CategoryMapper categoryMapper,
+                           NoteCategoryRepository noteCategoryRepository, NoteMapper noteMapper) {
         this.categoryRepository = categoryRepository;
-        this.mapper = mapper;
+        this.categoryMapper = categoryMapper;
         this.noteCategoryRepository = noteCategoryRepository;
+        this.noteMapper = noteMapper;
     }
 
     public CategoryDto save(CategoryDto categoryDto) {
-        Category category = mapper.toEntity(categoryDto);
-        return mapper.toDto(categoryRepository.save(category));
+        Category category = categoryMapper.toEntity(categoryDto);
+        return categoryMapper.toDto(categoryRepository.save(category));
     }
 
-    public Category getById(Long id) {
-        return categoryRepository.getById(id);
+    public CategoryDto getById(Long id) {
+        return categoryMapper.toDto(categoryRepository.getById(id));
     }
 
     public CategoryDto update(CategoryDto categoryDto, Long id) {
-        Category category = mapper.toEntity(categoryDto);
-        return mapper.toDto(categoryRepository.update(category, id));
+        Category category = categoryMapper.toEntity(categoryDto);
+        return categoryMapper.toDto(categoryRepository.update(category, id));
     }
 
     public Map<String, Boolean> delete(Long id) {
         return categoryRepository.delete(id);
     }
 
-    public Note addCategoryToNote(Long noteId, Long categoryId) {
-        return noteCategoryRepository.addCategoryToNote(noteId, categoryId);
+    public NoteDto addCategoryToNote(Long noteId, Long categoryId) {
+        return noteMapper.toDto(noteCategoryRepository.addCategoryToNote(noteId, categoryId));
     }
 
-    public Note updateCategoryInNote(Long noteId, Long categoryId, Long newCategoryId) {
-        return noteCategoryRepository.updateCategoryInNote(noteId, categoryId, newCategoryId);
+    public NoteDto updateCategoryInNote(Long noteId, Long categoryId, Long newCategoryId) {
+        return noteMapper.toDto(noteCategoryRepository.updateCategoryInNote(noteId, categoryId, newCategoryId));
     }
 
     public Map<String, Boolean> deleteCategoryFromNote(Long noteId, Long categoryId) {

@@ -18,26 +18,26 @@ import java.util.Map;
 @FieldDefaults(level = AccessLevel.PRIVATE, makeFinal = true)
 public class NoteService {
     NoteRepository noteRepository;
-    NoteMapper mapper;
+    NoteMapper noteMapper;
 
     @Autowired
-    public NoteService(NoteRepository noteRepository, NoteMapper mapper) {
+    public NoteService(NoteRepository noteRepository, NoteMapper noteMapper) {
         this.noteRepository = noteRepository;
-        this.mapper = mapper;
+        this.noteMapper = noteMapper;
     }
 
     public NoteDto save(NoteDto noteDto, List<CategoryDto> categoryNames, List<TagDto> tags) {
-        Note note = mapper.toEntity(noteDto);
-        return mapper.toDto(noteRepository.save(note, categoryNames, tags));
+        Note note = noteMapper.toEntity(noteDto);
+        return noteMapper.toDto(noteRepository.save(note, categoryNames, tags));
     }
 
-    public Note getById(Long id) {
-        return noteRepository.getById(id);
+    public NoteDto getById(Long id) {
+        return noteMapper.toDto(noteRepository.getById(id));
     }
 
     public NoteDto update(NoteDto noteDto, Long id) {
-        Note note = mapper.toEntity(noteDto);
-        return mapper.toDto(noteRepository.update(note, id));
+        Note note = noteMapper.toEntity(noteDto);
+        return noteMapper.toDto(noteRepository.update(note, id));
     }
 
     public Map<String, Boolean> delete(Long id) {

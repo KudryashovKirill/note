@@ -1,6 +1,7 @@
 package com.example.note.demo.repository;
 
 import com.example.note.demo.model.Note;
+import com.example.note.demo.model.Tag;
 import jakarta.transaction.Transactional;
 import lombok.AccessLevel;
 import lombok.experimental.FieldDefaults;
@@ -27,17 +28,6 @@ public class NoteTagRepository {
     public Note addTagToNote(Long noteId, Long tagId) {
         Note noteInTable = checkNoteInTable(noteId);
         checkTagInTable(tagId);
-
-        String insertSql = "INSERT INTO note_tag (note_id, tag_id) VALUES (?, ?)";
-        template.update(insertSql, noteId, tagId);
-
-        return noteInTable;
-    }
-
-    @Transactional
-    public Note addTagToNoteByName(Long noteId, String tagName, String colour) {
-        Note noteInTable = checkNoteInTable(noteId);
-        Long tagId = findTagIdByName(tagName);
 
         String insertSql = "INSERT INTO note_tag (note_id, tag_id) VALUES (?, ?)";
         template.update(insertSql, noteId, tagId);

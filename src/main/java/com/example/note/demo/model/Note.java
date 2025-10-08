@@ -28,9 +28,9 @@ public class Note {
     @Column(name = "is_done", nullable = false)
     Boolean isDone;
 
-    @OneToMany(mappedBy = "notes", cascade = CascadeType.ALL)
+    @OneToMany(mappedBy = "note", cascade = CascadeType.ALL)
     List<NoteCategory> noteCategories;
 
-    @OneToMany(mappedBy = "notes", cascade = CascadeType.ALL)
+    @OneToMany(mappedBy = "note", cascade = CascadeType.ALL)
     List<NoteTag> noteTags;
 }

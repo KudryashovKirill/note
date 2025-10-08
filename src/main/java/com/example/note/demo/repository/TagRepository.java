@@ -19,7 +19,7 @@ public class TagRepository {
     SimpleJdbcInsert insert;
 
     @Autowired
-    public TagRepository(JdbcTemplate template, SimpleJdbcInsert insert) {
+    public TagRepository(JdbcTemplate template) {
         this.template = template;
         this.insert = new SimpleJdbcInsert(template)
                 .withTableName("tags")
@@ -63,12 +63,12 @@ public class TagRepository {
     }
 
     @Transactional
-    public Map<String, Object> delete(Long id) {
+    public Map<String, Boolean> delete(Long id) {
         String sqlQuery = """
                 DELETE FROM tags
                 WHERE id = ?
                 """;
         int countOfUpdate = template.update(sqlQuery, id);
-        return Map.of("deleted", countOfUpdate);
+        return Map.of("deleted", countOfUpdate > 0);
     }
 }

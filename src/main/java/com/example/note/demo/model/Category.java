@@ -21,6 +21,6 @@ public class Category {
     @Column(name = "name", nullable = false)
     String name;
 
-    @OneToMany(mappedBy = "categories", cascade = CascadeType.ALL)
+    @OneToMany(mappedBy = "category", cascade = CascadeType.ALL)
     List<NoteCategory> noteCategories;
 }
