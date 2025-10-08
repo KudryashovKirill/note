@@ -12,12 +12,13 @@ import java.util.List;
 @Setter
 @AllArgsConstructor
 @NoArgsConstructor
+@Builder
 public class NoteDto {
     String name;
     LocalDate dateOfCreation;
     LocalDate dateOfUpdate;
     Boolean isDone;
-    List<Long> categoryIds;
+    List<CategoryDto> categories;
     List<TagDto> tags;
 }
 

@@ -14,6 +14,7 @@ import java.util.List;
 @Setter
 @AllArgsConstructor
 @NoArgsConstructor
+@Builder
 public class Note {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)

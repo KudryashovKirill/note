@@ -1,5 +1,6 @@
 package com.example.note.demo.repository;
 
+import com.example.note.demo.dto.CategoryDto;
 import com.example.note.demo.dto.TagDto;
 import com.example.note.demo.model.Note;
 import jakarta.transaction.Transactional;
@@ -31,7 +32,7 @@ public class NoteRepository {
     }
 
     @Transactional
-    public Note save(Note note, List<String> categoryNames, List<TagDto> tags) {
+    public Note save(Note note, List<CategoryDto> categoryNames, List<TagDto> tags) {
         Map<String, Object> values = new HashMap<>();
         values.put("name", note.getName());
         values.put("date_of_creation", note.getDateOfCreation());
@@ -42,10 +43,10 @@ public class NoteRepository {
         note.setId(id.longValue());
 
         List<Long> categoryIds = new ArrayList<>();
-        for (String name : categoryNames) {
-            Long categoryId = findCategoryByName(name);
+        for (CategoryDto categoryDto : categoryNames) {
+            Long categoryId = findCategoryByName(categoryDto.getName());
             if (categoryId == null) {
-                categoryId = insertCategory(name);
+                categoryId = insertCategory(categoryDto.getName());
             }
             categoryIds.add(categoryId);
         }
