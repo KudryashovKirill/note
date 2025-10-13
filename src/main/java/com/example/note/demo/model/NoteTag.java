@@ -11,6 +11,7 @@ import lombok.experimental.FieldDefaults;
 @Setter
 @AllArgsConstructor
 @NoArgsConstructor
+@Builder
 public class NoteTag {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)

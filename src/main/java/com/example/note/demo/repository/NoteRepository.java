@@ -2,7 +2,7 @@ package com.example.note.demo.repository;
 
 import com.example.note.demo.dto.CategoryDto;
 import com.example.note.demo.dto.TagDto;
-import com.example.note.demo.model.Note;
+import com.example.note.demo.model.*;
 import jakarta.transaction.Transactional;
 import lombok.AccessLevel;
 import lombok.experimental.FieldDefaults;
@@ -12,6 +12,7 @@ import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.jdbc.core.simple.SimpleJdbcInsert;
 import org.springframework.stereotype.Repository;
 
+import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
@@ -61,7 +62,7 @@ public class NoteRepository {
             tagIds.add(tagId);
         }
         batchInsertNoteTag(note.getId(), tagIds);
-        return note;
+        return findByIdWithRelations(note.getId());
     }
 
     public Note getById(Long id) {
@@ -148,7 +149,7 @@ public class NoteRepository {
 
     private Long insertTag(String name, String colour) {
         SimpleJdbcInsert insert = new SimpleJdbcInsert(template)
-                .withTableName("tag")
+                .withTableName("tags")
                 .usingGeneratedKeyColumns("id");
         Map<String, Object> values = Map.of("name", name, "colour", colour);
         return insert.executeAndReturnKey(values).longValue();
@@ -163,5 +164,56 @@ public class NoteRepository {
                 .map(id -> new Object[]{noteId, id})
                 .toList();
         template.batchUpdate(sqlQuery, args);
+    }
+
+    private Note findByIdWithRelations(Long noteId) {
+        String noteSql = "SELECT * FROM notes WHERE id = ?";
+        Note note = template.queryForObject(noteSql, (rs, rowNum) -> {
+            Note n = new Note();
+            n.setId(rs.getLong("id"));
+            n.setName(rs.getString("name"));
+            n.setDateOfCreation(rs.getObject("date_of_creation", LocalDate.class));
+            n.setDateOfUpdate(rs.getObject("date_of_update", LocalDate.class));
+            n.setIsDone(rs.getBoolean("is_done"));
+            return n;
+        }, noteId);
+
+        String categoriesSql = """
+                SELECT c.* FROM categories c
+                JOIN note_category nc ON c.id = nc.category_id
+                WHERE nc.note_id = ?
+                """;
+        List<NoteCategory> noteCategories = template.query(categoriesSql, (rs, rowNum) -> {
+            Category category = new Category();
+            category.setId(rs.getLong("id"));
+            category.setName(rs.getString("name"));
+
+            NoteCategory noteCategory = new NoteCategory();
+            noteCategory.setCategory(category);
+            noteCategory.setNote(note);
+            return noteCategory;
+        }, noteId);
+        note.setNoteCategories(noteCategories);
+
+        // Затем загружаем теги
+        String tagsSql = """
+                SELECT t.* FROM tags t
+                JOIN note_tag nt ON t.id = nt.tag_id
+                WHERE nt.note_id = ?
+                """;
+        List<NoteTag> noteTags = template.query(tagsSql, (rs, rowNum) -> {
+            Tag tag = new Tag();
+            tag.setId(rs.getLong("id"));
+            tag.setName(rs.getString("name"));
+            tag.setColour(rs.getString("colour"));
+
+            NoteTag noteTag = new NoteTag();
+            noteTag.setTag(tag);
+            noteTag.setNote(note);
+            return noteTag;
+        }, noteId);
+        note.setNoteTags(noteTags);
+
+        return note;
     }
 }

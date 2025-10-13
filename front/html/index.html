@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <title>📒 Заметки</title>
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+<nav>
+    <a href="index.html">Заметки</a>
+    <a href="categories.html">Категории</a>
+    <a href="tags.html">Теги</a>
+</nav>
+
+<h1>📒 Заметки</h1>
+
+<section id="note-form">
+    <h2>Создать заметку</h2>
+    <input id="note-name" placeholder="Название">
+    <input id="note-categories" placeholder="Категории (через запятую)">
+    <input id="note-tags" placeholder="Теги (через запятую)">
+    <button id="create-note">Создать</button>
+</section>
+
+<section id="note-list">
+    <h2>Список заметок</h2>
+    <ul id="notes"></ul>
+</section>
+
+<script type="module" src="notes.js"></script>
+</body>
+</html>

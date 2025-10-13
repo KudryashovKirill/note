@@ -15,8 +15,9 @@ import java.util.List;
 import java.util.Map;
 
 @RestController
-@RequestMapping("/notes")
+@RequestMapping("/note")
 @FieldDefaults(level = AccessLevel.PRIVATE, makeFinal = true)
+@CrossOrigin(origins = "*")
 public class NoteController {
     NoteService noteService;
 
@@ -27,10 +28,7 @@ public class NoteController {
 
     @PostMapping
     public ResponseEntity<NoteDto> save(@RequestBody NoteDto noteDto) {
-        return new ResponseEntity<>(noteService.save(noteDto,
-                noteDto.getCategories() == null ? List.of() : noteDto.getCategories(),
-                noteDto.getTags() == null ? List.of() : noteDto.getTags()),
-                HttpStatus.CREATED);
+        return new ResponseEntity<>(noteService.save(noteDto), HttpStatus.CREATED);
     }
 
     @GetMapping("/{id}")

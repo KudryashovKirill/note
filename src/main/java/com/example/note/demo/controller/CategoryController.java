@@ -16,6 +16,7 @@ import java.util.Map;
 @RestController
 @RequestMapping("/category")
 @FieldDefaults(level = AccessLevel.PRIVATE, makeFinal = true)
+@CrossOrigin(origins = "*")
 public class CategoryController {
     CategoryService categoryService;
 

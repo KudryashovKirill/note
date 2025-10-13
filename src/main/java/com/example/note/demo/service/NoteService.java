@@ -26,9 +26,9 @@ public class NoteService {
         this.noteMapper = noteMapper;
     }
 
-    public NoteDto save(NoteDto noteDto, List<CategoryDto> categoryNames, List<TagDto> tags) {
+    public NoteDto save(NoteDto noteDto) {
         Note note = noteMapper.toEntity(noteDto);
-        return noteMapper.toDto(noteRepository.save(note, categoryNames, tags));
+        return noteMapper.toDto(noteRepository.save(note, noteDto.getCategories(), noteDto.getTags()));
     }
 
     public NoteDto getById(Long id) {

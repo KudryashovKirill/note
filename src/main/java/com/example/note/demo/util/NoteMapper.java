@@ -5,17 +5,20 @@ import com.example.note.demo.dto.NoteDto;
 import com.example.note.demo.dto.TagDto;
 import com.example.note.demo.model.Category;
 import com.example.note.demo.model.Note;
+import com.example.note.demo.model.NoteCategory;
 import com.example.note.demo.model.Tag;
 import lombok.experimental.UtilityClass;
 import org.springframework.stereotype.Component;
+
+import java.time.LocalDate;
 
 @Component
 public class NoteMapper {
     public NoteDto toDto(Note note) {
         return NoteDto.builder()
                 .name(note.getName())
-                .dateOfCreation(note.getDateOfCreation())
-                .dateOfUpdate(note.getDateOfUpdate())
+                .dateOfCreation(LocalDate.now())
+                .dateOfUpdate(LocalDate.now())
                 .isDone(note.getIsDone())
                 .categories(note.getNoteCategories() != null ?
                         note.getNoteCategories().stream()
@@ -48,9 +51,14 @@ public class NoteMapper {
 
         return Note.builder()
                 .name(dto.getName())
-                .dateOfCreation(dto.getDateOfCreation())
-                .dateOfUpdate(dto.getDateOfUpdate())
+                .dateOfCreation(LocalDate.now())
+                .dateOfUpdate(LocalDate.now())
                 .isDone(dto.getIsDone())
+                .build();
+    }
+
+    private NoteCategory toNoteCategory(CategoryDto dto) {
+        return NoteCategory.builder()
                 .build();
     }
 }

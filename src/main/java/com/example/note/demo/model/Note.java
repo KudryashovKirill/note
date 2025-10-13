@@ -3,6 +3,7 @@ package com.example.note.demo.model;
 import jakarta.persistence.*;
 import lombok.*;
 import lombok.experimental.FieldDefaults;
+import org.hibernate.annotations.Fetch;
 
 import java.time.LocalDate;
 import java.util.List;
@@ -28,9 +29,9 @@ public class Note {
     @Column(name = "is_done", nullable = false)
     Boolean isDone;
 
-    @OneToMany(mappedBy = "note", cascade = CascadeType.ALL)
+    @OneToMany(mappedBy = "note", cascade = CascadeType.ALL, fetch = FetchType.LAZY)
     List<NoteCategory> noteCategories;
 
-    @OneToMany(mappedBy = "note", cascade = CascadeType.ALL)
+    @OneToMany(mappedBy = "note", cascade = CascadeType.ALL, fetch = FetchType.LAZY)
     List<NoteTag> noteTags;
 }

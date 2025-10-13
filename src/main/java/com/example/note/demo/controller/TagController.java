@@ -15,6 +15,7 @@ import java.util.Map;
 @RestController
 @RequestMapping("/tag")
 @FieldDefaults(level = AccessLevel.PRIVATE, makeFinal = true)
+@CrossOrigin(origins = "*")
 public class TagController {
     TagService tagService;
 

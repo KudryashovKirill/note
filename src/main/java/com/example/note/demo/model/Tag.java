@@ -7,7 +7,7 @@ import lombok.experimental.FieldDefaults;
 import java.util.List;
 
 @Entity
-@Table(name = "tag")
+@Table(name = "tags")
 @FieldDefaults(level = AccessLevel.PRIVATE)
 @Getter
 @Setter
@@ -18,9 +18,9 @@ public class Tag {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     Long id;
-    @Column(name = "name", nullable = false)
+    @Column(name = "name", nullable = false, length = 100)
     String name;
-    @Column(name = "colour", nullable = false)
+    @Column(name = "colour", nullable = false, length = 100)
     String colour;
 
     @OneToMany(mappedBy = "tag", cascade = CascadeType.ALL)
