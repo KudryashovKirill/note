@@ -2,6 +2,7 @@ package com.example.note.demo.repository;
 
 import com.example.note.demo.model.Note;
 import com.example.note.demo.model.Tag;
+import com.example.note.demo.util.exception.NoDataFoundException;
 import jakarta.transaction.Transactional;
 import lombok.AccessLevel;
 import lombok.experimental.FieldDefaults;
@@ -77,7 +78,7 @@ public class NoteTagRepository {
                     noteId
             );
         } catch (EmptyResultDataAccessException e) {
-            throw new IllegalArgumentException("No note found by id " + noteId);
+            throw new NoDataFoundException("No note found by id " + noteId);
         }
     }
 
@@ -86,7 +87,7 @@ public class NoteTagRepository {
                 "SELECT COUNT(*) FROM tag WHERE id = ?", Integer.class, tagId
         );
         if (count == null || count == 0) {
-            throw new IllegalArgumentException("No tag found by id = " + tagId);
+            throw new NoDataFoundException("No tag found by id = " + tagId);
         }
     }
 
@@ -96,17 +97,7 @@ public class NoteTagRepository {
                 Integer.class, noteId, tagId
         );
         if (count == null || count == 0) {
-            throw new IllegalArgumentException("No relation found: note_id=" + noteId + ", tag_id=" + tagId);
-        }
-    }
-
-    private Long findTagIdByName(String name) {
-        try {
-            return template.queryForObject(
-                    "SELECT id FROM tag WHERE name = ?", Long.class, name
-            );
-        } catch (EmptyResultDataAccessException e) {
-            return null;
+            throw new NoDataFoundException("No relation found: note_id=" + noteId + ", tag_id=" + tagId);
         }
     }
 }

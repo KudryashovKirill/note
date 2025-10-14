@@ -1,10 +1,13 @@
 package com.example.note.demo.repository;
 
 import com.example.note.demo.model.Category;
+import com.example.note.demo.util.exception.NoDataFoundException;
+import com.example.note.demo.util.exception.ObjectAlreadyInTableException;
 import jakarta.transaction.Transactional;
 import lombok.AccessLevel;
 import lombok.experimental.FieldDefaults;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.dao.EmptyResultDataAccessException;
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.jdbc.core.simple.SimpleJdbcInsert;
 import org.springframework.stereotype.Repository;
@@ -29,6 +32,10 @@ public class CategoryRepository {
 
     @Transactional
     public Category save(Category category) {
+        if (findCategoryByName(category.getName()) != null) {
+            throw new ObjectAlreadyInTableException(String.format("Category with name %s already in table",
+                    category.getName()));
+        }
         Map<String, Object> values = new HashMap<>();
         values.put("name", category.getName());
 
@@ -43,12 +50,16 @@ public class CategoryRepository {
                 FROM categories 
                 WHERE id = ?
                 """;
-        return template.queryForObject(sqlQuery, (rs, rowNum) -> {
-            Category category = new Category();
-            category.setId(rs.getLong("id"));
-            category.setName(rs.getString("name"));
-            return category;
-        }, id);
+        try {
+            return template.queryForObject(sqlQuery, (rs, rowNum) -> {
+                Category category = new Category();
+                category.setId(rs.getLong("id"));
+                category.setName(rs.getString("name"));
+                return category;
+            }, id);
+        } catch (EmptyResultDataAccessException e) {
+            throw new NoDataFoundException("no category found by id");
+        }
     }
 
     @Transactional
@@ -70,5 +81,18 @@ public class CategoryRepository {
                 """;
         int countOfUpdate = template.update(sqlQuery, id);
         return Map.of("deleted", countOfUpdate > 0);
+    }
+
+    private Long findCategoryByName(String name) {
+        String sqlQuery = """
+                SELECT id
+                FROM categories
+                WHERE name = ?
+                """;
+        try {
+            return template.queryForObject(sqlQuery, Long.class, name);
+        } catch (EmptyResultDataAccessException e) {
+            return null;
+        }
     }
 }

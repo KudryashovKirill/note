@@ -1,4 +1,4 @@
-package com.example.note.demo.util;
+package com.example.note.demo.util.mapper;
 
 import com.example.note.demo.dto.CategoryDto;
 import com.example.note.demo.dto.NoteDto;
@@ -7,7 +7,6 @@ import com.example.note.demo.model.Category;
 import com.example.note.demo.model.Note;
 import com.example.note.demo.model.NoteCategory;
 import com.example.note.demo.model.Tag;
-import lombok.experimental.UtilityClass;
 import org.springframework.stereotype.Component;
 
 import java.time.LocalDate;

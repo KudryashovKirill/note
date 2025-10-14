@@ -3,6 +3,7 @@ package com.example.note.demo.repository;
 import com.example.note.demo.dto.CategoryDto;
 import com.example.note.demo.dto.TagDto;
 import com.example.note.demo.model.*;
+import com.example.note.demo.util.exception.NoDataFoundException;
 import jakarta.transaction.Transactional;
 import lombok.AccessLevel;
 import lombok.experimental.FieldDefaults;
@@ -71,14 +72,19 @@ public class NoteRepository {
                 FROM notes
                 WHERE id = ?
                 """;
-        return template.queryForObject(sqlQuery, (rs, rowNum) -> {
-            Note note = new Note();
-            note.setName(rs.getString("name"));
-            note.setId(rs.getLong("id"));
-            note.setDateOfCreation(rs.getDate("date_of_creation").toLocalDate());
-            note.setDateOfUpdate(rs.getDate("date_of_update").toLocalDate());
-            return note;
-        }, id);
+        try {
+            return template.queryForObject(sqlQuery, (rs, rowNum) -> {
+                Note note = new Note();
+                note.setName(rs.getString("name"));
+                note.setId(rs.getLong("id"));
+                note.setDateOfCreation(rs.getDate("date_of_creation").toLocalDate());
+                note.setDateOfUpdate(rs.getDate("date_of_update").toLocalDate());
+                return note;
+            }, id);
+        } catch (EmptyResultDataAccessException e) {
+            throw new NoDataFoundException("No note found by id");
+        }
+
     }
 
     @Transactional
@@ -89,7 +95,7 @@ public class NoteRepository {
                 WHERE id = ?
                 """;
         template.update(sqlQuery, note.getName(), note.getDateOfCreation(), note.getDateOfUpdate(), id);
-        return note;
+        return findByIdWithRelations(id);
     }
 
     @Transactional
@@ -195,7 +201,6 @@ public class NoteRepository {
         }, noteId);
         note.setNoteCategories(noteCategories);
 
-        // Затем загружаем теги
         String tagsSql = """
                 SELECT t.* FROM tags t
                 JOIN note_tag nt ON t.id = nt.tag_id

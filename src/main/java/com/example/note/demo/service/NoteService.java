@@ -1,17 +1,14 @@
 package com.example.note.demo.service;
 
-import com.example.note.demo.dto.CategoryDto;
 import com.example.note.demo.dto.NoteDto;
-import com.example.note.demo.dto.TagDto;
 import com.example.note.demo.model.Note;
 import com.example.note.demo.repository.NoteRepository;
-import com.example.note.demo.util.NoteMapper;
+import com.example.note.demo.util.mapper.NoteMapper;
 import lombok.AccessLevel;
 import lombok.experimental.FieldDefaults;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import java.util.List;
 import java.util.Map;
 
 @Service

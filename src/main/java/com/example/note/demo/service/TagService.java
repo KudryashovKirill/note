@@ -2,12 +2,11 @@ package com.example.note.demo.service;
 
 import com.example.note.demo.dto.NoteDto;
 import com.example.note.demo.dto.TagDto;
-import com.example.note.demo.model.Note;
 import com.example.note.demo.model.Tag;
 import com.example.note.demo.repository.NoteTagRepository;
 import com.example.note.demo.repository.TagRepository;
-import com.example.note.demo.util.NoteMapper;
-import com.example.note.demo.util.TagMapper;
+import com.example.note.demo.util.mapper.NoteMapper;
+import com.example.note.demo.util.mapper.TagMapper;
 import lombok.AccessLevel;
 import lombok.experimental.FieldDefaults;
 import org.springframework.beans.factory.annotation.Autowired;

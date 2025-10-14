@@ -1,10 +1,13 @@
 package com.example.note.demo.repository;
 
 import com.example.note.demo.model.Tag;
+import com.example.note.demo.util.exception.NoDataFoundException;
+import com.example.note.demo.util.exception.ObjectAlreadyInTableException;
 import jakarta.transaction.Transactional;
 import lombok.AccessLevel;
 import lombok.experimental.FieldDefaults;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.dao.EmptyResultDataAccessException;
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.jdbc.core.simple.SimpleJdbcInsert;
 import org.springframework.stereotype.Repository;
@@ -28,6 +31,10 @@ public class TagRepository {
 
     @Transactional
     public Tag save(Tag tag) {
+        if (findTagByName(tag.getName()) != null) {
+            throw new ObjectAlreadyInTableException(String.format("Category with name %s already in table",
+                    tag.getName()));
+        }
         Map<String, Object> values = new HashMap<>();
         values.put("name", tag.getName());
         values.put("colour", tag.getColour());
@@ -43,12 +50,17 @@ public class TagRepository {
                 FROM tags
                 WHERE id = ?
                 """;
-        return template.queryForObject(sqlQuery, (rs, rowNum) -> {
-            Tag tag = new Tag();
-            tag.setName(rs.getString("name"));
-            tag.setColour(rs.getString("colour"));
-            return tag;
-        }, id);
+        try {
+            return template.queryForObject(sqlQuery, (rs, rowNum) -> {
+                Tag tag = new Tag();
+                tag.setName(rs.getString("name"));
+                tag.setColour(rs.getString("colour"));
+                return tag;
+            }, id);
+        } catch (EmptyResultDataAccessException e) {
+            throw new NoDataFoundException("No tag found by id");
+        }
+
     }
 
     @Transactional
@@ -70,5 +82,18 @@ public class TagRepository {
                 """;
         int countOfUpdate = template.update(sqlQuery, id);
         return Map.of("deleted", countOfUpdate > 0);
+    }
+
+    private Long findTagByName(String name) {
+        String sqlQuery = """
+                SELECT id
+                FROM tags
+                WHERE name = ?
+                """;
+        try {
+            return template.queryForObject(sqlQuery, Long.class, name);
+        } catch (EmptyResultDataAccessException e) {
+            return null;
+        }
     }
 }

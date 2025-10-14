@@ -1,4 +1,4 @@
-package com.example.note.demo.util;
+package com.example.note.demo.util.mapper;
 
 import com.example.note.demo.dto.CategoryDto;
 import com.example.note.demo.model.Category;

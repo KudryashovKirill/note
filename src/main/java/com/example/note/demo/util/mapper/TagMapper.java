@@ -1,8 +1,7 @@
-package com.example.note.demo.util;
+package com.example.note.demo.util.mapper;
 
 import com.example.note.demo.dto.TagDto;
 import com.example.note.demo.model.Tag;
-import lombok.experimental.UtilityClass;
 import org.springframework.stereotype.Component;
 
 @Component

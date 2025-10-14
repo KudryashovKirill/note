@@ -29,13 +29,11 @@ public class TagController {
         return new ResponseEntity<>(tagService.save(tagDto), HttpStatus.CREATED);
     }
 
-    // --- READ (by id) ---
     @GetMapping("/{id}")
     public ResponseEntity<TagDto> getById(@PathVariable Long id) {
         return new ResponseEntity<>(tagService.getById(id), HttpStatus.OK);
     }
 
-    // --- UPDATE ---
     @PutMapping("/{id}")
     public ResponseEntity<TagDto> update(@RequestBody TagDto tagDto, @PathVariable Long id) {
         return new ResponseEntity<>(tagService.update(tagDto, id), HttpStatus.OK);

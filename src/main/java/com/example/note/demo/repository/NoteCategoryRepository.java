@@ -1,6 +1,7 @@
 package com.example.note.demo.repository;
 
 import com.example.note.demo.model.Note;
+import com.example.note.demo.util.exception.NoDataFoundException;
 import jakarta.transaction.Transactional;
 import lombok.AccessLevel;
 import lombok.experimental.FieldDefaults;
@@ -70,7 +71,7 @@ public class NoteCategoryRepository {
                 return note;
             }, noteId);
         } catch (EmptyResultDataAccessException e) {
-            throw new IllegalArgumentException("No note found by id " + noteId);
+            throw new NoDataFoundException("No note found by id " + noteId);
         }
     }
 
