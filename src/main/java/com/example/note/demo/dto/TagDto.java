@@ -1,6 +1,6 @@
 package com.example.note.demo.dto;
 
-import jakarta.persistence.Column;
+import jakarta.validation.constraints.NotBlank;
 import lombok.*;
 import lombok.experimental.FieldDefaults;
 
@@ -11,6 +11,8 @@ import lombok.experimental.FieldDefaults;
 @NoArgsConstructor
 @Builder
 public class TagDto {
+    @NotBlank(message = "Название тега не может быть пустым")
     String name;
+    @NotBlank(message = "Цвет тега не может быть пустым")
     String colour;
 }

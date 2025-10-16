@@ -1,8 +1,6 @@
 package com.example.note.demo.controller;
 
-import com.example.note.demo.dto.CategoryDto;
 import com.example.note.demo.dto.NoteDto;
-import com.example.note.demo.dto.TagDto;
 import com.example.note.demo.service.NoteService;
 import lombok.AccessLevel;
 import lombok.experimental.FieldDefaults;
@@ -17,7 +15,7 @@ import java.util.Map;
 @RestController
 @RequestMapping("/note")
 @FieldDefaults(level = AccessLevel.PRIVATE, makeFinal = true)
-@CrossOrigin(origins = "*")
+@CrossOrigin(origins = {"http://127.0.0.1:5533", "http://localhost:5533"})
 public class NoteController {
     NoteService noteService;
 
@@ -34,6 +32,11 @@ public class NoteController {
     @GetMapping("/{id}")
     public ResponseEntity<NoteDto> getById(@PathVariable Long id) {
         return new ResponseEntity<>(noteService.getById(id), HttpStatus.OK);
+    }
+
+    @GetMapping
+    public ResponseEntity<List<NoteDto>> getAll() {
+        return new ResponseEntity<>(noteService.getAll(), HttpStatus.OK);
     }
 
     @PutMapping("/{id}")

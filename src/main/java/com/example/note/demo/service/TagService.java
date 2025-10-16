@@ -12,6 +12,7 @@ import lombok.experimental.FieldDefaults;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.util.List;
 import java.util.Map;
 
 @Service
@@ -44,6 +45,10 @@ public class TagService {
     public TagDto update(TagDto tagDto, Long id) {
         Tag tag = tagMapper.toEntity(tagDto);
         return tagMapper.toDto(tagRepository.update(tag, id));
+    }
+
+    public List<TagDto> getAll() {
+        return tagMapper.toDto(tagRepository.getAll());
     }
 
     public Map<String, Boolean> delete(Long id) {

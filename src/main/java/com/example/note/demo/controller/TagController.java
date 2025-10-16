@@ -1,6 +1,5 @@
 package com.example.note.demo.controller;
 
-import com.example.note.demo.dto.NoteDto;
 import com.example.note.demo.dto.TagDto;
 import com.example.note.demo.service.TagService;
 import lombok.AccessLevel;
@@ -10,12 +9,13 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.List;
 import java.util.Map;
 
 @RestController
 @RequestMapping("/tag")
 @FieldDefaults(level = AccessLevel.PRIVATE, makeFinal = true)
-@CrossOrigin(origins = "*")
+@CrossOrigin(origins = {"http://127.0.0.1:5533", "http://localhost:5533"})
 public class TagController {
     TagService tagService;
 
@@ -32,6 +32,11 @@ public class TagController {
     @GetMapping("/{id}")
     public ResponseEntity<TagDto> getById(@PathVariable Long id) {
         return new ResponseEntity<>(tagService.getById(id), HttpStatus.OK);
+    }
+
+    @GetMapping
+    public ResponseEntity<List<TagDto>> getAll() {
+        return new ResponseEntity<>(tagService.getAll(), HttpStatus.OK);
     }
 
     @PutMapping("/{id}")

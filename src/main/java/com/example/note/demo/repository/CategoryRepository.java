@@ -12,9 +12,11 @@ import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.jdbc.core.simple.SimpleJdbcInsert;
 import org.springframework.stereotype.Repository;
 
+import java.sql.ResultSet;
+import java.sql.SQLException;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
-import java.util.Objects;
 
 @Repository
 @FieldDefaults(level = AccessLevel.PRIVATE, makeFinal = true)
@@ -51,15 +53,18 @@ public class CategoryRepository {
                 WHERE id = ?
                 """;
         try {
-            return template.queryForObject(sqlQuery, (rs, rowNum) -> {
-                Category category = new Category();
-                category.setId(rs.getLong("id"));
-                category.setName(rs.getString("name"));
-                return category;
-            }, id);
+            return template.queryForObject(sqlQuery, (rs, rowNum) -> mapCategory(rs), id);
         } catch (EmptyResultDataAccessException e) {
             throw new NoDataFoundException("no category found by id");
         }
+    }
+
+    public List<Category> getAll() {
+        String sqlQuery = """
+                SELECT * 
+                FROM categories
+                """;
+        return template.query(sqlQuery, (rs, rowNum) -> mapCategory(rs));
     }
 
     @Transactional
@@ -94,5 +99,12 @@ public class CategoryRepository {
         } catch (EmptyResultDataAccessException e) {
             return null;
         }
+    }
+
+    private Category mapCategory(ResultSet rs) throws SQLException {
+        Category category = new Category();
+        category.setId(rs.getLong("id"));
+        category.setName(rs.getString("name"));
+        return category;
     }
 }

@@ -12,6 +12,7 @@ import lombok.experimental.FieldDefaults;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.util.List;
 import java.util.Map;
 
 @Service
@@ -38,6 +39,10 @@ public class CategoryService {
 
     public CategoryDto getById(Long id) {
         return categoryMapper.toDto(categoryRepository.getById(id));
+    }
+
+    public List<CategoryDto> getAll() {
+        return categoryMapper.toDto(categoryRepository.getAll());
     }
 
     public CategoryDto update(CategoryDto categoryDto, Long id) {

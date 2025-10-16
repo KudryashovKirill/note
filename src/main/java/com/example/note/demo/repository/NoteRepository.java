@@ -13,6 +13,8 @@ import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.jdbc.core.simple.SimpleJdbcInsert;
 import org.springframework.stereotype.Repository;
 
+import java.sql.ResultSet;
+import java.sql.SQLException;
 import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -73,18 +75,18 @@ public class NoteRepository {
                 WHERE id = ?
                 """;
         try {
-            return template.queryForObject(sqlQuery, (rs, rowNum) -> {
-                Note note = new Note();
-                note.setName(rs.getString("name"));
-                note.setId(rs.getLong("id"));
-                note.setDateOfCreation(rs.getDate("date_of_creation").toLocalDate());
-                note.setDateOfUpdate(rs.getDate("date_of_update").toLocalDate());
-                return note;
-            }, id);
+            return template.queryForObject(sqlQuery, (rs, rowNum) -> mapNote(rs), id);
         } catch (EmptyResultDataAccessException e) {
             throw new NoDataFoundException("No note found by id");
         }
+    }
 
+    public List<Note> getAll() {
+        String sqlQuery = """
+                SELECT *
+                FROM notes
+                """;
+        return template.query(sqlQuery, (rs, rowNum) -> mapNote(rs));
     }
 
     @Transactional
@@ -174,15 +176,7 @@ public class NoteRepository {
 
     private Note findByIdWithRelations(Long noteId) {
         String noteSql = "SELECT * FROM notes WHERE id = ?";
-        Note note = template.queryForObject(noteSql, (rs, rowNum) -> {
-            Note n = new Note();
-            n.setId(rs.getLong("id"));
-            n.setName(rs.getString("name"));
-            n.setDateOfCreation(rs.getObject("date_of_creation", LocalDate.class));
-            n.setDateOfUpdate(rs.getObject("date_of_update", LocalDate.class));
-            n.setIsDone(rs.getBoolean("is_done"));
-            return n;
-        }, noteId);
+        Note note = template.queryForObject(noteSql, (rs, rowNum) -> mapNote(rs), noteId);
 
         String categoriesSql = """
                 SELECT c.* FROM categories c
@@ -220,5 +214,15 @@ public class NoteRepository {
         note.setNoteTags(noteTags);
 
         return note;
+    }
+
+    private Note mapNote(ResultSet rs) throws SQLException {
+        Note n = new Note();
+        n.setId(rs.getLong("id"));
+        n.setName(rs.getString("name"));
+        n.setDateOfCreation(rs.getObject("date_of_creation", LocalDate.class));
+        n.setDateOfUpdate(rs.getObject("date_of_update", LocalDate.class));
+        n.setIsDone(rs.getBoolean("is_done"));
+        return n;
     }
 }

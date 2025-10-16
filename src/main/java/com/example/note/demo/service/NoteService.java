@@ -9,6 +9,7 @@ import lombok.experimental.FieldDefaults;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.util.List;
 import java.util.Map;
 
 @Service
@@ -30,6 +31,10 @@ public class NoteService {
 
     public NoteDto getById(Long id) {
         return noteMapper.toDto(noteRepository.getById(id));
+    }
+
+    public List<NoteDto> getAll() {
+        return noteMapper.toDto(noteRepository.getAll());
     }
 
     public NoteDto update(NoteDto noteDto, Long id) {

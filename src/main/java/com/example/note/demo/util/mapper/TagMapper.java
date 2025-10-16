@@ -4,6 +4,8 @@ import com.example.note.demo.dto.TagDto;
 import com.example.note.demo.model.Tag;
 import org.springframework.stereotype.Component;
 
+import java.util.List;
+
 @Component
 public class TagMapper {
     public Tag toEntity(TagDto dto) {
@@ -26,5 +28,25 @@ public class TagMapper {
                 .colour(tag.getColour())
                 .build();
     }
+
+    public List<TagDto> toDto(List<Tag> tag) {
+        if (tag == null) {
+            return null;
+        }
+        return tag.stream()
+                .map(this::toDto)
+                .toList();
+    }
+
+    public List<Tag> toEntity(List<TagDto> dto) {
+        if (dto == null) {
+            return null;
+        }
+
+        return dto.stream()
+                .map(this::toEntity)
+                .toList();
+    }
+
 
 }

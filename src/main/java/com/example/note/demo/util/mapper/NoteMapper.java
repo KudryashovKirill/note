@@ -10,6 +10,7 @@ import com.example.note.demo.model.Tag;
 import org.springframework.stereotype.Component;
 
 import java.time.LocalDate;
+import java.util.List;
 
 @Component
 public class NoteMapper {
@@ -54,6 +55,20 @@ public class NoteMapper {
                 .dateOfUpdate(LocalDate.now())
                 .isDone(dto.getIsDone())
                 .build();
+    }
+
+    public List<NoteDto> toDto(List<Note> note) {
+        return note.stream()
+                .map(this::toDto)
+                .toList();
+    }
+
+    public List<Note> toEntity(List<NoteDto> dto) {
+        if (dto == null) return null;
+
+        return dto.stream()
+                .map(this::toEntity)
+                .toList();
     }
 
     private NoteCategory toNoteCategory(CategoryDto dto) {

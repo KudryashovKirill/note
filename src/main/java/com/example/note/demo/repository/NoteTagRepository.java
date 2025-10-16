@@ -1,7 +1,6 @@
 package com.example.note.demo.repository;
 
 import com.example.note.demo.model.Note;
-import com.example.note.demo.model.Tag;
 import com.example.note.demo.util.exception.NoDataFoundException;
 import jakarta.transaction.Transactional;
 import lombok.AccessLevel;
@@ -9,10 +8,8 @@ import lombok.experimental.FieldDefaults;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.dao.EmptyResultDataAccessException;
 import org.springframework.jdbc.core.JdbcTemplate;
-import org.springframework.jdbc.core.simple.SimpleJdbcInsert;
 import org.springframework.stereotype.Repository;
 
-import java.util.HashMap;
 import java.util.Map;
 
 @Repository

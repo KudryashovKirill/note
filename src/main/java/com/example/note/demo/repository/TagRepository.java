@@ -12,7 +12,10 @@ import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.jdbc.core.simple.SimpleJdbcInsert;
 import org.springframework.stereotype.Repository;
 
+import java.sql.ResultSet;
+import java.sql.SQLException;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 
 @Repository
@@ -51,16 +54,18 @@ public class TagRepository {
                 WHERE id = ?
                 """;
         try {
-            return template.queryForObject(sqlQuery, (rs, rowNum) -> {
-                Tag tag = new Tag();
-                tag.setName(rs.getString("name"));
-                tag.setColour(rs.getString("colour"));
-                return tag;
-            }, id);
+            return template.queryForObject(sqlQuery, (rs, rowNum) -> mapTag(rs), id);
         } catch (EmptyResultDataAccessException e) {
             throw new NoDataFoundException("No tag found by id");
         }
+    }
 
+    public List<Tag> getAll() {
+        String sqlQuery = """
+                SELECT *
+                FROM tags
+                """;
+        return template.query(sqlQuery, (rs, rowNum) -> mapTag(rs));
     }
 
     @Transactional
@@ -95,5 +100,12 @@ public class TagRepository {
         } catch (EmptyResultDataAccessException e) {
             return null;
         }
+    }
+
+    private Tag mapTag(ResultSet rs) throws SQLException {
+        Tag tag = new Tag();
+        tag.setName(rs.getString("name"));
+        tag.setColour(rs.getString("colour"));
+        return tag;
     }
 }

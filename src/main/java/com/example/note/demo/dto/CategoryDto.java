@@ -1,9 +1,6 @@
 package com.example.note.demo.dto;
 
-import jakarta.persistence.Column;
-import jakarta.persistence.GeneratedValue;
-import jakarta.persistence.GenerationType;
-import jakarta.persistence.Id;
+import jakarta.validation.constraints.NotBlank;
 import lombok.*;
 import lombok.experimental.FieldDefaults;
 
@@ -14,5 +11,6 @@ import lombok.experimental.FieldDefaults;
 @NoArgsConstructor
 @Builder
 public class CategoryDto {
+    @NotBlank(message = "Имя категории не может быть пустым")
     String name;
 }

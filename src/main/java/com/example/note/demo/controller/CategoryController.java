@@ -3,20 +3,21 @@ package com.example.note.demo.controller;
 import com.example.note.demo.dto.CategoryDto;
 import com.example.note.demo.dto.NoteDto;
 import com.example.note.demo.service.CategoryService;
+import jakarta.validation.Valid;
 import lombok.AccessLevel;
 import lombok.experimental.FieldDefaults;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.List;
 import java.util.Map;
 
 @RestController
 @RequestMapping("/category")
 @FieldDefaults(level = AccessLevel.PRIVATE, makeFinal = true)
-@CrossOrigin(origins = "*")
+@CrossOrigin(origins = {"http://127.0.0.1:5533", "http://localhost:5533"})
 public class CategoryController {
     CategoryService categoryService;
 
@@ -26,7 +27,7 @@ public class CategoryController {
     }
 
     @PostMapping
-    public ResponseEntity<CategoryDto> save(@RequestBody CategoryDto categoryDto) {
+    public ResponseEntity<CategoryDto> save(@RequestBody @Valid CategoryDto categoryDto) {
         return new ResponseEntity<>(categoryService.save(categoryDto), HttpStatus.CREATED);
     }
 
@@ -35,8 +36,13 @@ public class CategoryController {
         return new ResponseEntity<>(categoryService.getById(id), HttpStatus.OK);
     }
 
+    @GetMapping
+    public ResponseEntity<List<CategoryDto>> getAll() {
+        return new ResponseEntity<>(categoryService.getAll(), HttpStatus.OK);
+    }
+
     @PutMapping("/{id}")
-    public ResponseEntity<CategoryDto> update(@RequestBody CategoryDto categoryDto, @PathVariable Long id) {
+    public ResponseEntity<CategoryDto> update(@RequestBody @Valid CategoryDto categoryDto, @PathVariable Long id) {
         return new ResponseEntity<>(categoryService.update(categoryDto, id), HttpStatus.OK);
     }
 
