@@ -16,6 +16,7 @@ import java.util.List;
 @NoArgsConstructor
 @Builder
 public class NoteDto {
+    Long id;
     @NotBlank(message = "Название заметки не может быть пустым")
     String name;
     @NotNull(message = "Дата создания обязательна")

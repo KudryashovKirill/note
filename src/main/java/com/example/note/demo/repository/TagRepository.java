@@ -104,6 +104,7 @@ public class TagRepository {
 
     private Tag mapTag(ResultSet rs) throws SQLException {
         Tag tag = new Tag();
+        tag.setId(rs.getLong("id"));
         tag.setName(rs.getString("name"));
         tag.setColour(rs.getString("colour"));
         return tag;

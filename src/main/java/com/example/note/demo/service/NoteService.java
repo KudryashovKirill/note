@@ -9,6 +9,7 @@ import lombok.experimental.FieldDefaults;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.time.LocalDate;
 import java.util.List;
 import java.util.Map;
 
@@ -25,6 +26,10 @@ public class NoteService {
     }
 
     public NoteDto save(NoteDto noteDto) {
+        if (noteDto.getDateOfCreation() == null) {
+            noteDto .setDateOfCreation(LocalDate.now());
+            noteDto.setDateOfUpdate(LocalDate.now());
+        }
         Note note = noteMapper.toEntity(noteDto);
         return noteMapper.toDto(noteRepository.save(note, noteDto.getCategories(), noteDto.getTags()));
     }

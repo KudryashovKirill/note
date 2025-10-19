@@ -11,6 +11,7 @@ import lombok.experimental.FieldDefaults;
 @NoArgsConstructor
 @Builder
 public class CategoryDto {
+    Long id;
     @NotBlank(message = "Имя категории не может быть пустым")
     String name;
 }

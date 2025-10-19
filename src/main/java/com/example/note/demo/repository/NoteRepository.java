@@ -10,6 +10,7 @@ import lombok.experimental.FieldDefaults;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.dao.EmptyResultDataAccessException;
 import org.springframework.jdbc.core.JdbcTemplate;
+import org.springframework.jdbc.core.ResultSetExtractor;
 import org.springframework.jdbc.core.simple.SimpleJdbcInsert;
 import org.springframework.stereotype.Repository;
 
@@ -46,58 +47,69 @@ public class NoteRepository {
         Number id = insert.executeAndReturnKey(values);
         note.setId(id.longValue());
 
-        List<Long> categoryIds = new ArrayList<>();
-        for (CategoryDto categoryDto : categoryNames) {
-            Long categoryId = findCategoryByName(categoryDto.getName());
-            if (categoryId == null) {
-                categoryId = insertCategory(categoryDto.getName());
-            }
-            categoryIds.add(categoryId);
-        }
+        List<Long> categoryIds = processCategories(categoryNames);
         batchInsertNoteCategory(note.getId(), categoryIds);
 
-        List<Long> tagIds = new ArrayList<>();
-        for (TagDto tag : tags) {
-            Long tagId = findTagByName(tag.getName());
-            if (tagId == null) {
-                tagId = insertTag(tag.getName(), tag.getColour() == null ? "#000000" : tag.getColour());
-            }
-            tagIds.add(tagId);
-        }
+        List<Long> tagIds = processTags(tags);
         batchInsertNoteTag(note.getId(), tagIds);
-        return findByIdWithRelations(note.getId());
+
+        return getById(note.getId());
     }
 
     public Note getById(Long id) {
         String sqlQuery = """
-                SELECT * 
-                FROM notes
-                WHERE id = ?
+                SELECT 
+                    n.id as note_id, n.name as note_name, n.date_of_creation, n.date_of_update, n.is_done,
+                    c.id as category_id, c.name as category_name,
+                    t.id as tag_id, t.name as tag_name, t.colour as tag_colour
+                FROM notes n
+                LEFT JOIN note_category nc ON n.id = nc.note_id
+                LEFT JOIN categories c ON nc.category_id = c.id
+                LEFT JOIN note_tag nt ON n.id = nt.note_id
+                LEFT JOIN tags t ON nt.tag_id = t.id
+                WHERE n.id = ?
                 """;
-        try {
-            return template.queryForObject(sqlQuery, (rs, rowNum) -> mapNote(rs), id);
-        } catch (EmptyResultDataAccessException e) {
+
+        List<Note> notes = template.query(sqlQuery, new NoteWithRelationsExtractor(), id);
+        if (notes.isEmpty()) {
             throw new NoDataFoundException("No note found by id");
         }
+        return notes.get(0);
     }
+
 
     public List<Note> getAll() {
         String sqlQuery = """
-                SELECT *
-                FROM notes
+                SELECT 
+                    n.id as note_id, n.name as note_name, n.date_of_creation, n.date_of_update, n.is_done,
+                    c.id as category_id, c.name as category_name,
+                    t.id as tag_id, t.name as tag_name, t.colour as tag_colour
+                FROM notes n
+                LEFT JOIN note_category nc ON n.id = nc.note_id
+                LEFT JOIN categories c ON nc.category_id = c.id
+                LEFT JOIN note_tag nt ON n.id = nt.note_id
+                LEFT JOIN tags t ON nt.tag_id = t.id
+                ORDER BY n.id
                 """;
-        return template.query(sqlQuery, (rs, rowNum) -> mapNote(rs));
+
+        return template.query(sqlQuery, new NoteWithRelationsExtractor());
     }
 
     @Transactional
     public Note update(Note note, Long id) {
         String sqlQuery = """
                 UPDATE notes
-                SET name = ?, date_of_creation = ?, date_of_update = ?
+                SET name = ?, date_of_creation = ?, date_of_update = ?, is_done = ?
                 WHERE id = ?
                 """;
-        template.update(sqlQuery, note.getName(), note.getDateOfCreation(), note.getDateOfUpdate(), id);
-        return findByIdWithRelations(id);
+        template.update(sqlQuery,
+                note.getName(),
+                note.getDateOfCreation(),
+                note.getDateOfUpdate(),
+                note.getIsDone(),
+                id
+        );
+        return getById(id);
     }
 
     @Transactional
@@ -174,55 +186,100 @@ public class NoteRepository {
         template.batchUpdate(sqlQuery, args);
     }
 
-    private Note findByIdWithRelations(Long noteId) {
-        String noteSql = "SELECT * FROM notes WHERE id = ?";
-        Note note = template.queryForObject(noteSql, (rs, rowNum) -> mapNote(rs), noteId);
-
-        String categoriesSql = """
-                SELECT c.* FROM categories c
-                JOIN note_category nc ON c.id = nc.category_id
-                WHERE nc.note_id = ?
-                """;
-        List<NoteCategory> noteCategories = template.query(categoriesSql, (rs, rowNum) -> {
-            Category category = new Category();
-            category.setId(rs.getLong("id"));
-            category.setName(rs.getString("name"));
-
-            NoteCategory noteCategory = new NoteCategory();
-            noteCategory.setCategory(category);
-            noteCategory.setNote(note);
-            return noteCategory;
-        }, noteId);
-        note.setNoteCategories(noteCategories);
-
-        String tagsSql = """
-                SELECT t.* FROM tags t
-                JOIN note_tag nt ON t.id = nt.tag_id
-                WHERE nt.note_id = ?
-                """;
-        List<NoteTag> noteTags = template.query(tagsSql, (rs, rowNum) -> {
-            Tag tag = new Tag();
-            tag.setId(rs.getLong("id"));
-            tag.setName(rs.getString("name"));
-            tag.setColour(rs.getString("colour"));
-
-            NoteTag noteTag = new NoteTag();
-            noteTag.setTag(tag);
-            noteTag.setNote(note);
-            return noteTag;
-        }, noteId);
-        note.setNoteTags(noteTags);
-
-        return note;
+    private List<Long> processCategories(List<CategoryDto> categoryNames) {
+        List<Long> categoryIds = new ArrayList<>();
+        for (CategoryDto categoryDto : categoryNames) {
+            Long categoryId = findCategoryByName(categoryDto.getName());
+            if (categoryId == null) {
+                categoryId = insertCategory(categoryDto.getName());
+            }
+            categoryIds.add(categoryId);
+        }
+        return categoryIds;
     }
 
-    private Note mapNote(ResultSet rs) throws SQLException {
-        Note n = new Note();
-        n.setId(rs.getLong("id"));
-        n.setName(rs.getString("name"));
-        n.setDateOfCreation(rs.getObject("date_of_creation", LocalDate.class));
-        n.setDateOfUpdate(rs.getObject("date_of_update", LocalDate.class));
-        n.setIsDone(rs.getBoolean("is_done"));
-        return n;
+    private List<Long> processTags(List<TagDto> tags) {
+        List<Long> tagIds = new ArrayList<>();
+        for (TagDto tag : tags) {
+            Long tagId = findTagByName(tag.getName());
+            if (tagId == null) {
+                tagId = insertTag(tag.getName(), tag.getColour() == null ? "#000000" : tag.getColour());
+            }
+            tagIds.add(tagId);
+        }
+        return tagIds;
+    }
+
+
+    private static class NoteWithRelationsExtractor implements ResultSetExtractor<List<Note>> {
+        @Override
+        public List<Note> extractData(ResultSet rs) throws SQLException {
+            Map<Long, Note> noteMap = new HashMap<>();
+
+            while (rs.next()) {
+                Long noteId = rs.getLong("note_id");
+                Note note = noteMap.get(noteId);
+
+                if (note == null) {
+                    note = mapNote(rs);
+                    note.setNoteCategories(new ArrayList<>());
+                    note.setNoteTags(new ArrayList<>());
+                    noteMap.put(noteId, note);
+                }
+                addCategoryToNote(rs, note);
+                addTagToNote(rs, note);
+            }
+
+            return new ArrayList<>(noteMap.values());
+        }
+
+        private static Note mapNote(ResultSet rs) throws SQLException {
+            Note n = new Note();
+            n.setId(rs.getLong("note_id"));
+            n.setName(rs.getString("note_name"));
+            n.setDateOfCreation(rs.getObject("date_of_creation", LocalDate.class));
+            n.setDateOfUpdate(rs.getObject("date_of_update", LocalDate.class));
+            n.setIsDone(rs.getBoolean("is_done"));
+            return n;
+        }
+
+        private void addCategoryToNote(ResultSet rs, Note note) throws SQLException {
+            Long categoryId = rs.getLong("category_id");
+            if (!rs.wasNull() && categoryId > 0) {
+                boolean categoryExists = note.getNoteCategories().stream()
+                        .anyMatch(nc -> nc.getCategory().getId().equals(categoryId));
+
+                if (!categoryExists) {
+                    Category category = new Category();
+                    category.setId(categoryId);
+                    category.setName(rs.getString("category_name"));
+
+                    NoteCategory noteCategory = new NoteCategory();
+                    noteCategory.setCategory(category);
+                    noteCategory.setNote(note);
+                    note.getNoteCategories().add(noteCategory);
+                }
+            }
+        }
+
+        private void addTagToNote(ResultSet rs, Note note) throws SQLException {
+            Long tagId = rs.getLong("tag_id");
+            if (!rs.wasNull() && tagId > 0) {
+                boolean tagExists = note.getNoteTags().stream()
+                        .anyMatch(nt -> nt.getTag().getId().equals(tagId));
+
+                if (!tagExists) {
+                    Tag tag = new Tag();
+                    tag.setId(tagId);
+                    tag.setName(rs.getString("tag_name"));
+                    tag.setColour(rs.getString("tag_colour"));
+
+                    NoteTag noteTag = new NoteTag();
+                    noteTag.setTag(tag);
+                    noteTag.setNote(note);
+                    note.getNoteTags().add(noteTag);
+                }
+            }
+        }
     }
 }

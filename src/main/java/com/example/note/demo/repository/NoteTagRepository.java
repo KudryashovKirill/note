@@ -81,7 +81,7 @@ public class NoteTagRepository {
 
     private void checkTagInTable(Long tagId) {
         Integer count = template.queryForObject(
-                "SELECT COUNT(*) FROM tag WHERE id = ?", Integer.class, tagId
+                "SELECT COUNT(*) FROM tags WHERE id = ?", Integer.class, tagId
         );
         if (count == null || count == 0) {
             throw new NoDataFoundException("No tag found by id = " + tagId);

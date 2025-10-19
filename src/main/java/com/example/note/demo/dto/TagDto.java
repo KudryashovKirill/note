@@ -11,6 +11,7 @@ import lombok.experimental.FieldDefaults;
 @NoArgsConstructor
 @Builder
 public class TagDto {
+    Long id;
     @NotBlank(message = "Название тега не может быть пустым")
     String name;
     @NotBlank(message = "Цвет тега не может быть пустым")
