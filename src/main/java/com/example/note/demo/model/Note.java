@@ -28,9 +28,9 @@ public class Note {
     @Column(name = "is_done", nullable = false)
     Boolean isDone;
 
-    @OneToMany(mappedBy = "note", cascade = CascadeType.ALL, fetch = FetchType.LAZY)
+    @OneToMany(mappedBy = "note", cascade = CascadeType.ALL, fetch = FetchType.LAZY, orphanRemoval = true)
     List<NoteCategory> noteCategories;
 
-    @OneToMany(mappedBy = "note", cascade = CascadeType.ALL, fetch = FetchType.LAZY)
+    @OneToMany(mappedBy = "note", cascade = CascadeType.ALL, fetch = FetchType.LAZY, orphanRemoval = true)
     List<NoteTag> noteTags;
 }

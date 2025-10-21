@@ -9,7 +9,6 @@ import com.example.note.demo.model.Tag;
 import org.springframework.stereotype.Component;
 
 import java.time.LocalDate;
-import java.util.Collection;
 import java.util.Collections;
 import java.util.List;
 
@@ -19,8 +18,8 @@ public class NoteMapper {
         return NoteDto.builder()
                 .id(note.getId())
                 .name(note.getName())
-                .dateOfCreation(note.getDateOfCreation())
-                .dateOfUpdate(note.getDateOfUpdate())
+                .dateOfCreation(LocalDate.now())
+                .dateOfUpdate(LocalDate.now())
                 .isDone(note.getIsDone())
                 .categories(note.getNoteCategories() != null ?
                         note.getNoteCategories().stream()
@@ -53,14 +52,11 @@ public class NoteMapper {
     public Note toEntity(NoteDto dto) {
         if (dto == null) return null;
 
-        LocalDate creation = dto.getDateOfCreation();
-        LocalDate update = dto.getDateOfUpdate();
-
         return Note.builder()
                 .id(dto.getId())
                 .name(dto.getName())
-                .dateOfCreation(creation)
-                .dateOfUpdate(update)
+                .dateOfCreation(LocalDate.now())
+                .dateOfUpdate(LocalDate.now())
                 .isDone(dto.getIsDone())
                 .build();
     }
@@ -76,7 +72,7 @@ public class NoteMapper {
     }
 
     public List<Note> toEntity(List<NoteDto> dto) {
-        if (dto == null){
+        if (dto == null) {
             return Collections.emptyList();
         }
 

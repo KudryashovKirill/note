@@ -75,6 +75,7 @@ public class CategoryRepository {
                 WHERE id = ?
                 """;
         template.update(sqlQuery, category.getName(), id);
+        category.setId(id);
         return category;
     }
 

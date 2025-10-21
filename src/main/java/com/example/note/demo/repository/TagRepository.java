@@ -76,6 +76,7 @@ public class TagRepository {
                 WHERE id = ?
                 """;
         template.update(sqlQuery, tag.getName(), tag.getColour(), id);
+        tag.setId(id);
         return tag;
     }
 

@@ -23,6 +23,6 @@ public class Tag {
     @Column(name = "colour", nullable = false, length = 100)
     String colour;
 
-    @OneToMany(mappedBy = "tag", cascade = CascadeType.ALL)
+    @OneToMany(mappedBy = "tag")
     List<NoteTag> noteTags;
 }
