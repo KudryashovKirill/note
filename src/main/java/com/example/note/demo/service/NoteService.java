@@ -6,6 +6,7 @@ import com.example.note.demo.repository.NoteRepository;
 import com.example.note.demo.util.mapper.NoteMapper;
 import lombok.AccessLevel;
 import lombok.experimental.FieldDefaults;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -13,6 +14,7 @@ import java.time.LocalDate;
 import java.util.List;
 import java.util.Map;
 
+@Slf4j
 @Service
 @FieldDefaults(level = AccessLevel.PRIVATE, makeFinal = true)
 public class NoteService {
@@ -26,28 +28,42 @@ public class NoteService {
     }
 
     public NoteDto save(NoteDto noteDto) {
+        log.info("Service: Saving new note with name: {}", noteDto.getName());
         if (noteDto.getDateOfCreation() == null) {
             noteDto .setDateOfCreation(LocalDate.now());
             noteDto.setDateOfUpdate(LocalDate.now());
         }
-        Note note = noteMapper.toEntity(noteDto);
-        return noteMapper.toDto(noteRepository.save(note, noteDto.getCategories(), noteDto.getTags()));
+        Note note = noteRepository.save(noteMapper.toEntity(noteDto), noteDto.getCategories(), noteDto.getTags());
+        log.info("Service: Successfully saved note with id: {}", note.getId());
+        return noteMapper.toDto(note);
     }
 
     public NoteDto getById(Long id) {
-        return noteMapper.toDto(noteRepository.getById(id));
+        log.info("Service: Getting note by id: {}", id);
+        Note note = noteRepository.getById(id);
+        log.info("Service: Successfully get note with id: {} and {} categories, {} tags",
+                id, note.getNoteCategories().size(), note.getNoteTags().size());
+        return noteMapper.toDto(note);
     }
 
     public List<NoteDto> getAll() {
-        return noteMapper.toDto(noteRepository.getAll());
+        log.debug("Service: Getting all notes");
+        List<Note> notes = noteRepository.getAll();
+        log.debug("Service: Retrieved {} notes", notes.size());
+        return noteMapper.toDto(notes);
     }
 
     public NoteDto update(NoteDto noteDto, Long id) {
-        Note note = noteMapper.toEntity(noteDto);
-        return noteMapper.toDto(noteRepository.update(note, id));
+        log.info("Service: Updating note with id: {}", id);
+        Note note = noteRepository.update(noteMapper.toEntity(noteDto), id);
+        log.info("Service: Successfully updated note with id: {}", id);
+        return noteMapper.toDto(note);
     }
 
     public Map<String, Boolean> delete(Long id) {
-        return noteRepository.delete(id);
+        log.info("Service: Deleting note with id: {}", id);
+        Map<String, Boolean> result = noteRepository.delete(id);
+        log.info("Service: Note delete completed for id: {}, result: {}", id, result);
+        return result;
     }
 }

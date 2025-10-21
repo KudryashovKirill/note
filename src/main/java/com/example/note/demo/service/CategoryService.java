@@ -3,18 +3,21 @@ package com.example.note.demo.service;
 import com.example.note.demo.dto.CategoryDto;
 import com.example.note.demo.dto.NoteDto;
 import com.example.note.demo.model.Category;
+import com.example.note.demo.model.Note;
 import com.example.note.demo.repository.CategoryRepository;
 import com.example.note.demo.repository.NoteCategoryRepository;
 import com.example.note.demo.util.mapper.CategoryMapper;
 import com.example.note.demo.util.mapper.NoteMapper;
 import lombok.AccessLevel;
 import lombok.experimental.FieldDefaults;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
 import java.util.Map;
 
+@Slf4j
 @Service
 @FieldDefaults(level = AccessLevel.PRIVATE, makeFinal = true)
 public class CategoryService {
@@ -33,36 +36,59 @@ public class CategoryService {
     }
 
     public CategoryDto save(CategoryDto categoryDto) {
-        Category category = categoryMapper.toEntity(categoryDto);
-        return categoryMapper.toDto(categoryRepository.save(category));
+        log.info("Service: Saving category with name: {}", categoryDto.getName());
+        Category savedCategory = categoryRepository.save(categoryMapper.toEntity(categoryDto));
+        log.info("Service: Successfully saved category with id: {}", savedCategory.getId());
+        return categoryMapper.toDto(savedCategory);
     }
 
     public CategoryDto getById(Long id) {
-        return categoryMapper.toDto(categoryRepository.getById(id));
+        log.info("Service: Getting category by id: {}", id);
+        Category category = categoryRepository.getById(id);
+        log.info("Service: Successfully get category: {}", category);
+        return categoryMapper.toDto(category);
     }
 
     public List<CategoryDto> getAll() {
-        return categoryMapper.toDto(categoryRepository.getAll());
+        log.info("Service: Getting all categories");
+        List<Category> categories = categoryRepository.getAll();
+        log.info("Service: get {} categories", categories.size());
+        return categoryMapper.toDto(categories);
     }
 
     public CategoryDto update(CategoryDto categoryDto, Long id) {
-        Category category = categoryMapper.toEntity(categoryDto);
-        return categoryMapper.toDto(categoryRepository.update(category, id));
+        log.info("Service: Updating category with id: {} to name: {}", id, categoryDto.getName());
+        Category updatedCategory = categoryRepository.update(categoryMapper.toEntity(categoryDto), id);
+        log.info("Service: Successfully updated category with id: {}", id);
+        return categoryMapper.toDto(categoryRepository.update(updatedCategory, id));
     }
 
     public Map<String, Boolean> delete(Long id) {
-        return categoryRepository.delete(id);
+        log.info("Service: Deleting category with id: {}", id);
+        Map<String, Boolean> result = categoryRepository.delete(id);
+        log.info("Service: Category deletion completed for id: {}, result: {}", id, result);
+        return result;
     }
 
     public NoteDto addCategoryToNote(Long noteId, Long categoryId) {
-        return noteMapper.toDto(noteCategoryRepository.addCategoryToNote(noteId, categoryId));
+        log.info("Service: Adding category id: {} to note id: {}", categoryId, noteId);
+        Note note = noteCategoryRepository.addCategoryToNote(noteId, categoryId);
+        log.info("Service: Successfully added category to note");
+        return noteMapper.toDto(note);
     }
 
     public NoteDto updateCategoryInNote(Long noteId, Long categoryId, Long newCategoryId) {
-        return noteMapper.toDto(noteCategoryRepository.updateCategoryInNote(noteId, categoryId, newCategoryId));
+        log.info("Service: Updating category in note: noteId={}, oldCategoryId={}, newCategoryId={}",
+                noteId, categoryId, newCategoryId);
+        Note note = noteCategoryRepository.updateCategoryInNote(noteId, categoryId, newCategoryId);
+        log.info("Service: Successfully updated category in note");
+        return noteMapper.toDto(note);
     }
 
     public Map<String, Boolean> deleteCategoryFromNote(Long noteId, Long categoryId) {
-        return noteCategoryRepository.deleteCategoryFromNote(noteId, categoryId);
+        log.info("Service: Deleting category id: {} from note id: {}", categoryId, noteId);
+        Map<String, Boolean> result = noteCategoryRepository.deleteCategoryFromNote(noteId, categoryId);
+        log.info("Service: Category deletion from note completed, result: {}", result);
+        return result;
     }
 }
