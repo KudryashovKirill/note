@@ -12,6 +12,10 @@ import lombok.AccessLevel;
 import lombok.experimental.FieldDefaults;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.cache.annotation.CacheConfig;
+import org.springframework.cache.annotation.CacheEvict;
+import org.springframework.cache.annotation.Cacheable;
+import org.springframework.cache.annotation.Caching;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -20,6 +24,7 @@ import java.util.Map;
 @Slf4j
 @Service
 @FieldDefaults(level = AccessLevel.PRIVATE, makeFinal = true)
+@CacheConfig(cacheNames = "categories")
 public class CategoryService {
     CategoryRepository categoryRepository;
     CategoryMapper categoryMapper;
@@ -35,6 +40,10 @@ public class CategoryService {
         this.noteMapper = noteMapper;
     }
 
+    @Caching(evict = {
+            @CacheEvict(value = "categories", allEntries = true),
+            @CacheEvict(value = "notes", allEntries = true)
+    })
     public CategoryDto save(CategoryDto categoryDto) {
         log.info("Service: Saving category with name: {}", categoryDto.getName());
         Category savedCategory = categoryRepository.save(categoryMapper.toEntity(categoryDto));
@@ -42,6 +51,7 @@ public class CategoryService {
         return categoryMapper.toDto(savedCategory);
     }
 
+    @Cacheable(key = "#id")
     public CategoryDto getById(Long id) {
         log.info("Service: Getting category by id: {}", id);
         Category category = categoryRepository.getById(id);
@@ -49,6 +59,7 @@ public class CategoryService {
         return categoryMapper.toDto(category);
     }
 
+    @Cacheable
     public List<CategoryDto> getAll() {
         log.info("Service: Getting all categories");
         List<Category> categories = categoryRepository.getAll();
@@ -56,6 +67,11 @@ public class CategoryService {
         return categoryMapper.toDto(categories);
     }
 
+    @Caching(evict = {
+            @CacheEvict(key = "#id"),
+            @CacheEvict(value = "categories", allEntries = true),
+            @CacheEvict(value = "notes", allEntries = true)
+    })
     public CategoryDto update(CategoryDto categoryDto, Long id) {
         log.info("Service: Updating category with id: {} to name: {}", id, categoryDto.getName());
         Category updatedCategory = categoryRepository.update(categoryMapper.toEntity(categoryDto), id);
@@ -63,6 +79,11 @@ public class CategoryService {
         return categoryMapper.toDto(categoryRepository.update(updatedCategory, id));
     }
 
+    @Caching(evict = {
+            @CacheEvict(key = "#id"),
+            @CacheEvict(value = "categories", allEntries = true),
+            @CacheEvict(value = "notes", allEntries = true)
+    })
     public Map<String, Boolean> delete(Long id) {
         log.info("Service: Deleting category with id: {}", id);
         Map<String, Boolean> result = categoryRepository.delete(id);

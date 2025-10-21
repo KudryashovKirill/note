@@ -8,6 +8,10 @@ import lombok.AccessLevel;
 import lombok.experimental.FieldDefaults;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.cache.annotation.CacheConfig;
+import org.springframework.cache.annotation.CacheEvict;
+import org.springframework.cache.annotation.Cacheable;
+import org.springframework.cache.annotation.Caching;
 import org.springframework.stereotype.Service;
 
 import java.time.LocalDate;
@@ -17,6 +21,7 @@ import java.util.Map;
 @Slf4j
 @Service
 @FieldDefaults(level = AccessLevel.PRIVATE, makeFinal = true)
+@CacheConfig(cacheNames = "notes")
 public class NoteService {
     NoteRepository noteRepository;
     NoteMapper noteMapper;
@@ -27,10 +32,11 @@ public class NoteService {
         this.noteMapper = noteMapper;
     }
 
+    @CacheEvict(allEntries = true)
     public NoteDto save(NoteDto noteDto) {
         log.info("Service: Saving new note with name: {}", noteDto.getName());
         if (noteDto.getDateOfCreation() == null) {
-            noteDto .setDateOfCreation(LocalDate.now());
+            noteDto.setDateOfCreation(LocalDate.now());
             noteDto.setDateOfUpdate(LocalDate.now());
         }
         Note note = noteRepository.save(noteMapper.toEntity(noteDto), noteDto.getCategories(), noteDto.getTags());
@@ -38,6 +44,7 @@ public class NoteService {
         return noteMapper.toDto(note);
     }
 
+    @Cacheable(key = "#id")
     public NoteDto getById(Long id) {
         log.info("Service: Getting note by id: {}", id);
         Note note = noteRepository.getById(id);
@@ -46,6 +53,7 @@ public class NoteService {
         return noteMapper.toDto(note);
     }
 
+    @Cacheable
     public List<NoteDto> getAll() {
         log.debug("Service: Getting all notes");
         List<Note> notes = noteRepository.getAll();
@@ -53,6 +61,10 @@ public class NoteService {
         return noteMapper.toDto(notes);
     }
 
+    @Caching(evict = {
+            @CacheEvict(key = "#id"),
+            @CacheEvict(allEntries = true)
+    })
     public NoteDto update(NoteDto noteDto, Long id) {
         log.info("Service: Updating note with id: {}", id);
         Note note = noteRepository.update(noteMapper.toEntity(noteDto), id);
@@ -60,6 +72,10 @@ public class NoteService {
         return noteMapper.toDto(note);
     }
 
+    @Caching(evict = {
+            @CacheEvict(key = "#id"),
+            @CacheEvict(allEntries = true)
+    })
     public Map<String, Boolean> delete(Long id) {
         log.info("Service: Deleting note with id: {}", id);
         Map<String, Boolean> result = noteRepository.delete(id);

@@ -12,6 +12,10 @@ import lombok.AccessLevel;
 import lombok.experimental.FieldDefaults;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.cache.annotation.CacheConfig;
+import org.springframework.cache.annotation.CacheEvict;
+import org.springframework.cache.annotation.Cacheable;
+import org.springframework.cache.annotation.Caching;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -20,6 +24,7 @@ import java.util.Map;
 @Slf4j
 @Service
 @FieldDefaults(level = AccessLevel.PRIVATE, makeFinal = true)
+@CacheConfig(cacheNames = "tags")
 public class TagService {
     TagRepository tagRepository;
     TagMapper tagMapper;
@@ -35,7 +40,10 @@ public class TagService {
         this.noteMapper = noteMapper;
     }
 
-
+    @Caching(evict = {
+            @CacheEvict(value = "tags", allEntries = true),
+            @CacheEvict(value = "notes", allEntries = true)
+    })
     public TagDto save(TagDto tagDto) {
         log.info("Service: Saving tag with name: {} and colour: {}", tagDto.getName(), tagDto.getColour());
         Tag savedTag = tagRepository.save(tagMapper.toEntity(tagDto));
@@ -43,6 +51,7 @@ public class TagService {
         return tagMapper.toDto(tagRepository.save(savedTag));
     }
 
+    @Cacheable(key = "#id")
     public TagDto getById(Long id) {
         log.info("Service: Fetching tag by id: {}", id);
         Tag tag = tagRepository.getById(id);
@@ -50,6 +59,11 @@ public class TagService {
         return tagMapper.toDto(tag);
     }
 
+    @Caching(evict = {
+            @CacheEvict(value = "#id"),
+            @CacheEvict(value = "tags", allEntries = true),
+            @CacheEvict(value = "notes", allEntries = true)
+    })
     public TagDto update(TagDto tagDto, Long id) {
         log.info("Service: Updating tag with id: {} to name: {}, colour: {}",
                 id, tagDto.getName(), tagDto.getColour());
@@ -57,6 +71,7 @@ public class TagService {
         return tagMapper.toDto(tagRepository.update(tag, id));
     }
 
+    @Cacheable
     public List<TagDto> getAll() {
         log.info("Service: Fetching all tags");
         List<Tag> tags = tagRepository.getAll();
@@ -64,6 +79,11 @@ public class TagService {
         return tagMapper.toDto(tags);
     }
 
+    @Caching(evict = {
+            @CacheEvict(key = "#id"),
+            @CacheEvict(value = "tags", allEntries = true),
+            @CacheEvict(value = "notes", allEntries = true)
+    })
     public Map<String, Boolean> delete(Long id) {
         log.info("Service: Deleting tag with id: {}", id);
         Map<String, Boolean> result = tagRepository.delete(id);
