@@ -1,0 +1,240 @@
+2025-10-22T12:56:36.233+03:00  INFO 11500 --- [demo] [main] com.example.note.demo.DemoApplication    : Starting DemoApplication using Java 23.0.1 with PID 11500 (D:\JavaProjects\demo\target\classes started by 79012 in D:\JavaProjects\demo)
+2025-10-22T12:56:36.236+03:00  INFO 11500 --- [demo] [main] com.example.note.demo.DemoApplication    : No active profile set, falling back to 1 default profile: "default"
+2025-10-22T12:56:40.237+03:00  INFO 11500 --- [demo] [main] .s.d.r.c.RepositoryConfigurationDelegate : Multiple Spring Data modules found, entering strict repository configuration mode
+2025-10-22T12:56:40.243+03:00  INFO 11500 --- [demo] [main] .s.d.r.c.RepositoryConfigurationDelegate : Bootstrapping Spring Data JPA repositories in DEFAULT mode.
+2025-10-22T12:56:40.364+03:00  INFO 11500 --- [demo] [main] .s.d.r.c.RepositoryConfigurationDelegate : Finished Spring Data repository scanning in 79 ms. Found 0 JPA repository interfaces.
+2025-10-22T12:56:40.442+03:00  INFO 11500 --- [demo] [main] .s.d.r.c.RepositoryConfigurationDelegate : Multiple Spring Data modules found, entering strict repository configuration mode
+2025-10-22T12:56:40.445+03:00  INFO 11500 --- [demo] [main] .s.d.r.c.RepositoryConfigurationDelegate : Bootstrapping Spring Data Redis repositories in DEFAULT mode.
+2025-10-22T12:56:40.503+03:00  INFO 11500 --- [demo] [main] .s.d.r.c.RepositoryConfigurationDelegate : Finished Spring Data repository scanning in 15 ms. Found 0 Redis repository interfaces.
+2025-10-22T12:56:42.894+03:00  INFO 11500 --- [demo] [main] o.s.b.w.embedded.tomcat.TomcatWebServer  : Tomcat initialized with port 8080 (http)
+2025-10-22T12:56:42.915+03:00  INFO 11500 --- [demo] [main] o.apache.catalina.core.StandardService   : Starting service [Tomcat]
+2025-10-22T12:56:42.915+03:00  INFO 11500 --- [demo] [main] o.apache.catalina.core.StandardEngine    : Starting Servlet engine: [Apache Tomcat/10.1.46]
+2025-10-22T12:56:43.009+03:00  INFO 11500 --- [demo] [main] o.a.c.c.C.[Tomcat].[localhost].[/]       : Initializing Spring embedded WebApplicationContext
+2025-10-22T12:56:43.010+03:00  INFO 11500 --- [demo] [main] w.s.c.ServletWebServerApplicationContext : Root WebApplicationContext: initialization completed in 6698 ms
+2025-10-22T12:56:43.175+03:00  INFO 11500 --- [demo] [main] com.zaxxer.hikari.HikariDataSource       : HikariPool-1 - Starting...
+2025-10-22T12:56:43.531+03:00  INFO 11500 --- [demo] [main] com.zaxxer.hikari.pool.HikariPool        : HikariPool-1 - Added connection conn0: url=jdbc:h2:mem:notedb user=USER
+2025-10-22T12:56:43.535+03:00  INFO 11500 --- [demo] [main] com.zaxxer.hikari.HikariDataSource       : HikariPool-1 - Start completed.
+2025-10-22T12:56:43.738+03:00  INFO 11500 --- [demo] [main] o.hibernate.jpa.internal.util.LogHelper  : HHH000204: Processing PersistenceUnitInfo [name: default]
+2025-10-22T12:56:43.819+03:00  INFO 11500 --- [demo] [main] org.hibernate.Version                    : HHH000412: Hibernate ORM core version 6.6.29.Final
+2025-10-22T12:56:43.866+03:00  INFO 11500 --- [demo] [main] o.h.c.internal.RegionFactoryInitiator    : HHH000026: Second-level cache disabled
+2025-10-22T12:56:44.297+03:00  INFO 11500 --- [demo] [main] o.s.o.j.p.SpringPersistenceUnitInfo      : No LoadTimeWeaver setup: ignoring JPA class transformer
+2025-10-22T12:56:44.363+03:00  WARN 11500 --- [demo] [main] org.hibernate.orm.deprecation            : HHH90000025: H2Dialect does not need to be specified explicitly using 'hibernate.dialect' (remove the property setting and it will be selected by default)
+2025-10-22T12:56:44.383+03:00  INFO 11500 --- [demo] [main] org.hibernate.orm.connections.pooling    : HHH10001005: Database info:
+	Database JDBC URL [Connecting through datasource 'HikariDataSource (HikariPool-1)']
+	Database driver: undefined/unknown
+	Database version: 2.3.232
+	Autocommit mode: undefined/unknown
+	Isolation level: undefined/unknown
+	Minimum pool size: undefined/unknown
+	Maximum pool size: undefined/unknown
+2025-10-22T12:56:45.707+03:00  INFO 11500 --- [demo] [main] o.h.e.t.j.p.i.JtaPlatformInitiator       : HHH000489: No JTA platform available (set 'hibernate.transaction.jta.platform' to enable JTA platform integration)
+2025-10-22T12:56:45.758+03:00 DEBUG 11500 --- [demo] [main] org.hibernate.SQL                        : alter table if exists note_category alter column category_id set data type bigint
+2025-10-22T12:56:45.771+03:00 DEBUG 11500 --- [demo] [main] org.hibernate.SQL                        : alter table if exists note_category alter column note_id set data type bigint
+2025-10-22T12:56:45.777+03:00 DEBUG 11500 --- [demo] [main] org.hibernate.SQL                        : alter table if exists note_tag alter column note_id set data type bigint
+2025-10-22T12:56:45.781+03:00 DEBUG 11500 --- [demo] [main] org.hibernate.SQL                        : alter table if exists note_tag alter column tag_id set data type bigint
+2025-10-22T12:56:45.785+03:00 DEBUG 11500 --- [demo] [main] org.hibernate.SQL                        : alter table if exists tags alter column colour set data type varchar(100)
+2025-10-22T12:56:45.805+03:00  INFO 11500 --- [demo] [main] j.LocalContainerEntityManagerFactoryBean : Initialized JPA EntityManagerFactory for persistence unit 'default'
+2025-10-22T12:56:46.501+03:00  WARN 11500 --- [demo] [main] JpaBaseConfiguration$JpaWebConfiguration : spring.jpa.open-in-view is enabled by default. Therefore, database queries may be performed during view rendering. Explicitly configure spring.jpa.open-in-view to disable this warning
+2025-10-22T12:56:47.028+03:00  INFO 11500 --- [demo] [main] o.s.b.a.h2.H2ConsoleAutoConfiguration    : H2 console available at '/h2-console'. Database available at 'jdbc:h2:mem:notedb'
+2025-10-22T12:56:47.169+03:00  INFO 11500 --- [demo] [main] o.s.b.w.embedded.tomcat.TomcatWebServer  : Tomcat started on port 8080 (http) with context path '/'
+2025-10-22T12:56:47.179+03:00  INFO 11500 --- [demo] [main] com.example.note.demo.DemoApplication    : Started DemoApplication in 11.673 seconds (process running for 12.144)
+2025-10-22T12:57:06.363+03:00  INFO 11500 --- [demo] [http-nio-8080-exec-3] o.a.c.c.C.[Tomcat].[localhost].[/]       : Initializing Spring DispatcherServlet 'dispatcherServlet'
+2025-10-22T12:57:06.364+03:00  INFO 11500 --- [demo] [http-nio-8080-exec-3] o.s.web.servlet.DispatcherServlet        : Initializing Servlet 'dispatcherServlet'
+2025-10-22T12:57:06.369+03:00  INFO 11500 --- [demo] [http-nio-8080-exec-3] o.s.web.servlet.DispatcherServlet        : Completed initialization in 4 ms
+2025-10-22T12:57:06.899+03:00  INFO 11500 --- [demo] [http-nio-8080-exec-3] c.e.n.d.controller.CategoryController    : Received POST request to create category with name: Work
+2025-10-22T12:57:06.916+03:00  INFO 11500 --- [demo] [http-nio-8080-exec-3] c.e.note.demo.service.CategoryService    : Service: Saving category with name: Work
+2025-10-22T12:57:06.935+03:00  INFO 11500 --- [demo] [http-nio-8080-exec-3] c.e.n.d.repository.CategoryRepository    : Attempting to save category with name: Work
+2025-10-22T12:57:06.936+03:00  INFO 11500 --- [demo] [http-nio-8080-exec-3] c.e.n.d.repository.CategoryRepository    : Searching for category by name: Work
+2025-10-22T12:57:06.937+03:00  INFO 11500 --- [demo] [http-nio-8080-exec-3] c.e.n.d.repository.CategoryRepository    : Found category with name 'Work' and id
+2025-10-22T12:57:06.957+03:00  INFO 11500 --- [demo] [http-nio-8080-exec-3] c.e.n.d.repository.CategoryRepository    : No category found with name: Work
+2025-10-22T12:57:06.993+03:00  INFO 11500 --- [demo] [http-nio-8080-exec-3] c.e.n.d.repository.CategoryRepository    : Successfully saved category with id: 1 and name: Work
+2025-10-22T12:57:07.001+03:00  INFO 11500 --- [demo] [http-nio-8080-exec-3] c.e.note.demo.service.CategoryService    : Service: Successfully saved category with id: 1
+2025-10-22T12:57:08.235+03:00 ERROR 11500 --- [demo] [http-nio-8080-exec-3] o.a.c.c.C.[.[.[/].[dispatcherServlet]    : Servlet.service() for servlet [dispatcherServlet] in context with path [] threw exception [Request processing failed: org.springframework.data.redis.RedisConnectionFailureException: Unable to connect to Redis] with root cause
+
+java.net.ConnectException: Connection refused: getsockopt
+	at java.base/sun.nio.ch.Net.pollConnect(Native Method) ~[na:na]
+	at java.base/sun.nio.ch.Net.pollConnectNow(Net.java:682) ~[na:na]
+	at java.base/sun.nio.ch.SocketChannelImpl.finishConnect(SocketChannelImpl.java:1062) ~[na:na]
+	at io.netty.channel.socket.nio.NioSocketChannel.doFinishConnect(NioSocketChannel.java:336) ~[netty-transport-4.1.127.Final.jar:4.1.127.Final]
+	at io.netty.channel.nio.AbstractNioChannel$AbstractNioUnsafe.finishConnect(AbstractNioChannel.java:339) ~[netty-transport-4.1.127.Final.jar:4.1.127.Final]
+	at io.netty.channel.nio.NioEventLoop.processSelectedKey(NioEventLoop.java:784) ~[netty-transport-4.1.127.Final.jar:4.1.127.Final]
+	at io.netty.channel.nio.NioEventLoop.processSelectedKeysOptimized(NioEventLoop.java:732) ~[netty-transport-4.1.127.Final.jar:4.1.127.Final]
+	at io.netty.channel.nio.NioEventLoop.processSelectedKeys(NioEventLoop.java:658) ~[netty-transport-4.1.127.Final.jar:4.1.127.Final]
+	at io.netty.channel.nio.NioEventLoop.run(NioEventLoop.java:562) ~[netty-transport-4.1.127.Final.jar:4.1.127.Final]
+	at io.netty.util.concurrent.SingleThreadEventExecutor$4.run(SingleThreadEventExecutor.java:998) ~[netty-common-4.1.127.Final.jar:4.1.127.Final]
+	at io.netty.util.internal.ThreadExecutorMap$2.run(ThreadExecutorMap.java:74) ~[netty-common-4.1.127.Final.jar:4.1.127.Final]
+	at io.netty.util.concurrent.FastThreadLocalRunnable.run(FastThreadLocalRunnable.java:30) ~[netty-common-4.1.127.Final.jar:4.1.127.Final]
+	at java.base/java.lang.Thread.run(Thread.java:1575) ~[na:na]
+
+2025-10-22T12:58:00.783+03:00  INFO 11500 --- [demo] [SpringApplicationShutdownHook] o.s.b.w.e.tomcat.GracefulShutdown        : Commencing graceful shutdown. Waiting for active requests to complete
+2025-10-22T12:58:00.789+03:00  INFO 11500 --- [demo] [tomcat-shutdown] o.s.b.w.e.tomcat.GracefulShutdown        : Graceful shutdown complete
+2025-10-22T12:58:00.823+03:00  INFO 11500 --- [demo] [SpringApplicationShutdownHook] j.LocalContainerEntityManagerFactoryBean : Closing JPA EntityManagerFactory for persistence unit 'default'
+2025-10-22T12:58:00.826+03:00  INFO 11500 --- [demo] [SpringApplicationShutdownHook] com.zaxxer.hikari.HikariDataSource       : HikariPool-1 - Shutdown initiated...
+2025-10-22T12:58:00.832+03:00  INFO 11500 --- [demo] [SpringApplicationShutdownHook] com.zaxxer.hikari.HikariDataSource       : HikariPool-1 - Shutdown completed.
+2025-10-22T12:58:04.293+03:00  INFO 7480 --- [demo] [main] com.example.note.demo.DemoApplication    : Starting DemoApplication using Java 23.0.1 with PID 7480 (D:\JavaProjects\demo\target\classes started by 79012 in D:\JavaProjects\demo)
+2025-10-22T12:58:04.296+03:00  INFO 7480 --- [demo] [main] com.example.note.demo.DemoApplication    : No active profile set, falling back to 1 default profile: "default"
+2025-10-22T12:58:05.321+03:00  INFO 7480 --- [demo] [main] .s.d.r.c.RepositoryConfigurationDelegate : Multiple Spring Data modules found, entering strict repository configuration mode
+2025-10-22T12:58:05.323+03:00  INFO 7480 --- [demo] [main] .s.d.r.c.RepositoryConfigurationDelegate : Bootstrapping Spring Data JPA repositories in DEFAULT mode.
+2025-10-22T12:58:05.351+03:00  INFO 7480 --- [demo] [main] .s.d.r.c.RepositoryConfigurationDelegate : Finished Spring Data repository scanning in 19 ms. Found 0 JPA repository interfaces.
+2025-10-22T12:58:05.376+03:00  INFO 7480 --- [demo] [main] .s.d.r.c.RepositoryConfigurationDelegate : Multiple Spring Data modules found, entering strict repository configuration mode
+2025-10-22T12:58:05.378+03:00  INFO 7480 --- [demo] [main] .s.d.r.c.RepositoryConfigurationDelegate : Bootstrapping Spring Data Redis repositories in DEFAULT mode.
+2025-10-22T12:58:05.394+03:00  INFO 7480 --- [demo] [main] .s.d.r.c.RepositoryConfigurationDelegate : Finished Spring Data repository scanning in 5 ms. Found 0 Redis repository interfaces.
+2025-10-22T12:58:06.209+03:00  INFO 7480 --- [demo] [main] o.s.b.w.embedded.tomcat.TomcatWebServer  : Tomcat initialized with port 8080 (http)
+2025-10-22T12:58:06.229+03:00  INFO 7480 --- [demo] [main] o.apache.catalina.core.StandardService   : Starting service [Tomcat]
+2025-10-22T12:58:06.230+03:00  INFO 7480 --- [demo] [main] o.apache.catalina.core.StandardEngine    : Starting Servlet engine: [Apache Tomcat/10.1.46]
+2025-10-22T12:58:06.300+03:00  INFO 7480 --- [demo] [main] o.a.c.c.C.[Tomcat].[localhost].[/]       : Initializing Spring embedded WebApplicationContext
+2025-10-22T12:58:06.301+03:00  INFO 7480 --- [demo] [main] w.s.c.ServletWebServerApplicationContext : Root WebApplicationContext: initialization completed in 1936 ms
+2025-10-22T12:58:06.441+03:00  INFO 7480 --- [demo] [main] com.zaxxer.hikari.HikariDataSource       : HikariPool-1 - Starting...
+2025-10-22T12:58:06.644+03:00  INFO 7480 --- [demo] [main] com.zaxxer.hikari.pool.HikariPool        : HikariPool-1 - Added connection conn0: url=jdbc:h2:mem:notedb user=USER
+2025-10-22T12:58:06.647+03:00  INFO 7480 --- [demo] [main] com.zaxxer.hikari.HikariDataSource       : HikariPool-1 - Start completed.
+2025-10-22T12:58:06.786+03:00  INFO 7480 --- [demo] [main] o.hibernate.jpa.internal.util.LogHelper  : HHH000204: Processing PersistenceUnitInfo [name: default]
+2025-10-22T12:58:06.863+03:00  INFO 7480 --- [demo] [main] org.hibernate.Version                    : HHH000412: Hibernate ORM core version 6.6.29.Final
+2025-10-22T12:58:06.924+03:00  INFO 7480 --- [demo] [main] o.h.c.internal.RegionFactoryInitiator    : HHH000026: Second-level cache disabled
+2025-10-22T12:58:07.266+03:00  INFO 7480 --- [demo] [main] o.s.o.j.p.SpringPersistenceUnitInfo      : No LoadTimeWeaver setup: ignoring JPA class transformer
+2025-10-22T12:58:07.307+03:00  WARN 7480 --- [demo] [main] org.hibernate.orm.deprecation            : HHH90000025: H2Dialect does not need to be specified explicitly using 'hibernate.dialect' (remove the property setting and it will be selected by default)
+2025-10-22T12:58:07.328+03:00  INFO 7480 --- [demo] [main] org.hibernate.orm.connections.pooling    : HHH10001005: Database info:
+	Database JDBC URL [Connecting through datasource 'HikariDataSource (HikariPool-1)']
+	Database driver: undefined/unknown
+	Database version: 2.3.232
+	Autocommit mode: undefined/unknown
+	Isolation level: undefined/unknown
+	Minimum pool size: undefined/unknown
+	Maximum pool size: undefined/unknown
+2025-10-22T12:58:08.367+03:00  INFO 7480 --- [demo] [main] o.h.e.t.j.p.i.JtaPlatformInitiator       : HHH000489: No JTA platform available (set 'hibernate.transaction.jta.platform' to enable JTA platform integration)
+2025-10-22T12:58:08.419+03:00 DEBUG 7480 --- [demo] [main] org.hibernate.SQL                        : alter table if exists note_category alter column category_id set data type bigint
+2025-10-22T12:58:08.433+03:00 DEBUG 7480 --- [demo] [main] org.hibernate.SQL                        : alter table if exists note_category alter column note_id set data type bigint
+2025-10-22T12:58:08.438+03:00 DEBUG 7480 --- [demo] [main] org.hibernate.SQL                        : alter table if exists note_tag alter column note_id set data type bigint
+2025-10-22T12:58:08.452+03:00 DEBUG 7480 --- [demo] [main] org.hibernate.SQL                        : alter table if exists note_tag alter column tag_id set data type bigint
+2025-10-22T12:58:08.457+03:00 DEBUG 7480 --- [demo] [main] org.hibernate.SQL                        : alter table if exists tags alter column colour set data type varchar(100)
+2025-10-22T12:58:08.474+03:00  INFO 7480 --- [demo] [main] j.LocalContainerEntityManagerFactoryBean : Initialized JPA EntityManagerFactory for persistence unit 'default'
+2025-10-22T12:58:09.077+03:00  WARN 7480 --- [demo] [main] JpaBaseConfiguration$JpaWebConfiguration : spring.jpa.open-in-view is enabled by default. Therefore, database queries may be performed during view rendering. Explicitly configure spring.jpa.open-in-view to disable this warning
+2025-10-22T12:58:09.739+03:00  INFO 7480 --- [demo] [main] o.s.b.a.h2.H2ConsoleAutoConfiguration    : H2 console available at '/h2-console'. Database available at 'jdbc:h2:mem:notedb'
+2025-10-22T12:58:09.856+03:00  INFO 7480 --- [demo] [main] o.s.b.w.embedded.tomcat.TomcatWebServer  : Tomcat started on port 8080 (http) with context path '/'
+2025-10-22T12:58:09.868+03:00  INFO 7480 --- [demo] [main] com.example.note.demo.DemoApplication    : Started DemoApplication in 6.221 seconds (process running for 6.718)
+2025-10-22T13:00:57.980+03:00  INFO 7480 --- [demo] [http-nio-8080-exec-2] o.a.c.c.C.[Tomcat].[localhost].[/]       : Initializing Spring DispatcherServlet 'dispatcherServlet'
+2025-10-22T13:00:57.981+03:00  INFO 7480 --- [demo] [http-nio-8080-exec-2] o.s.web.servlet.DispatcherServlet        : Initializing Servlet 'dispatcherServlet'
+2025-10-22T13:00:57.983+03:00  INFO 7480 --- [demo] [http-nio-8080-exec-2] o.s.web.servlet.DispatcherServlet        : Completed initialization in 2 ms
+2025-10-22T13:00:58.294+03:00  INFO 7480 --- [demo] [http-nio-8080-exec-2] c.e.n.d.controller.CategoryController    : Received POST request to create category with name: Work
+2025-10-22T13:00:58.302+03:00  INFO 7480 --- [demo] [http-nio-8080-exec-2] c.e.note.demo.service.CategoryService    : Service: Saving category with name: Work
+2025-10-22T13:00:58.309+03:00  INFO 7480 --- [demo] [http-nio-8080-exec-2] c.e.n.d.repository.CategoryRepository    : Attempting to save category with name: Work
+2025-10-22T13:00:58.310+03:00  INFO 7480 --- [demo] [http-nio-8080-exec-2] c.e.n.d.repository.CategoryRepository    : Searching for category by name: Work
+2025-10-22T13:00:58.310+03:00  INFO 7480 --- [demo] [http-nio-8080-exec-2] c.e.n.d.repository.CategoryRepository    : Found category with name 'Work' and id
+2025-10-22T13:00:58.319+03:00  INFO 7480 --- [demo] [http-nio-8080-exec-2] c.e.n.d.repository.CategoryRepository    : No category found with name: Work
+2025-10-22T13:00:58.340+03:00  INFO 7480 --- [demo] [http-nio-8080-exec-2] c.e.n.d.repository.CategoryRepository    : Successfully saved category with id: 1 and name: Work
+2025-10-22T13:00:58.343+03:00  INFO 7480 --- [demo] [http-nio-8080-exec-2] c.e.note.demo.service.CategoryService    : Service: Successfully saved category with id: 1
+2025-10-22T13:00:58.895+03:00  INFO 7480 --- [demo] [http-nio-8080-exec-2] c.e.n.d.controller.CategoryController    : Successfully created category with name: Work
+2025-10-22T13:02:49.961+03:00  INFO 7480 --- [demo] [SpringApplicationShutdownHook] o.s.b.w.e.tomcat.GracefulShutdown        : Commencing graceful shutdown. Waiting for active requests to complete
+2025-10-22T13:02:49.969+03:00  INFO 7480 --- [demo] [tomcat-shutdown] o.s.b.w.e.tomcat.GracefulShutdown        : Graceful shutdown complete
+2025-10-22T13:02:49.989+03:00  INFO 7480 --- [demo] [SpringApplicationShutdownHook] j.LocalContainerEntityManagerFactoryBean : Closing JPA EntityManagerFactory for persistence unit 'default'
+2025-10-22T13:02:49.992+03:00  INFO 7480 --- [demo] [SpringApplicationShutdownHook] com.zaxxer.hikari.HikariDataSource       : HikariPool-1 - Shutdown initiated...
+2025-10-22T13:02:49.994+03:00  INFO 7480 --- [demo] [SpringApplicationShutdownHook] com.zaxxer.hikari.HikariDataSource       : HikariPool-1 - Shutdown completed.
+2025-10-22T13:44:57.438+03:00  INFO 17752 --- [demo] [main] com.example.note.demo.DemoApplication    : Starting DemoApplication using Java 23.0.1 with PID 17752 (D:\JavaProjects\demo\target\classes started by 79012 in D:\JavaProjects\demo)
+2025-10-22T13:44:57.441+03:00  INFO 17752 --- [demo] [main] com.example.note.demo.DemoApplication    : No active profile set, falling back to 1 default profile: "default"
+2025-10-22T13:44:58.279+03:00  INFO 17752 --- [demo] [main] .s.d.r.c.RepositoryConfigurationDelegate : Multiple Spring Data modules found, entering strict repository configuration mode
+2025-10-22T13:44:58.280+03:00  INFO 17752 --- [demo] [main] .s.d.r.c.RepositoryConfigurationDelegate : Bootstrapping Spring Data JPA repositories in DEFAULT mode.
+2025-10-22T13:44:58.299+03:00  INFO 17752 --- [demo] [main] .s.d.r.c.RepositoryConfigurationDelegate : Finished Spring Data repository scanning in 12 ms. Found 0 JPA repository interfaces.
+2025-10-22T13:44:58.314+03:00  INFO 17752 --- [demo] [main] .s.d.r.c.RepositoryConfigurationDelegate : Multiple Spring Data modules found, entering strict repository configuration mode
+2025-10-22T13:44:58.315+03:00  INFO 17752 --- [demo] [main] .s.d.r.c.RepositoryConfigurationDelegate : Bootstrapping Spring Data Redis repositories in DEFAULT mode.
+2025-10-22T13:44:58.328+03:00  INFO 17752 --- [demo] [main] .s.d.r.c.RepositoryConfigurationDelegate : Finished Spring Data repository scanning in 3 ms. Found 0 Redis repository interfaces.
+2025-10-22T13:44:58.949+03:00  INFO 17752 --- [demo] [main] o.s.b.w.embedded.tomcat.TomcatWebServer  : Tomcat initialized with port 8080 (http)
+2025-10-22T13:44:58.962+03:00  INFO 17752 --- [demo] [main] o.apache.catalina.core.StandardService   : Starting service [Tomcat]
+2025-10-22T13:44:58.963+03:00  INFO 17752 --- [demo] [main] o.apache.catalina.core.StandardEngine    : Starting Servlet engine: [Apache Tomcat/10.1.46]
+2025-10-22T13:44:59.012+03:00  INFO 17752 --- [demo] [main] o.a.c.c.C.[Tomcat].[localhost].[/]       : Initializing Spring embedded WebApplicationContext
+2025-10-22T13:44:59.012+03:00  INFO 17752 --- [demo] [main] w.s.c.ServletWebServerApplicationContext : Root WebApplicationContext: initialization completed in 1517 ms
+2025-10-22T13:44:59.137+03:00  INFO 17752 --- [demo] [main] com.zaxxer.hikari.HikariDataSource       : HikariPool-1 - Starting...
+2025-10-22T13:44:59.307+03:00  INFO 17752 --- [demo] [main] com.zaxxer.hikari.pool.HikariPool        : HikariPool-1 - Added connection conn0: url=jdbc:h2:mem:notedb user=USER
+2025-10-22T13:44:59.309+03:00  INFO 17752 --- [demo] [main] com.zaxxer.hikari.HikariDataSource       : HikariPool-1 - Start completed.
+2025-10-22T13:44:59.415+03:00  INFO 17752 --- [demo] [main] o.hibernate.jpa.internal.util.LogHelper  : HHH000204: Processing PersistenceUnitInfo [name: default]
+2025-10-22T13:44:59.456+03:00  INFO 17752 --- [demo] [main] org.hibernate.Version                    : HHH000412: Hibernate ORM core version 6.6.29.Final
+2025-10-22T13:44:59.487+03:00  INFO 17752 --- [demo] [main] o.h.c.internal.RegionFactoryInitiator    : HHH000026: Second-level cache disabled
+2025-10-22T13:44:59.741+03:00  INFO 17752 --- [demo] [main] o.s.o.j.p.SpringPersistenceUnitInfo      : No LoadTimeWeaver setup: ignoring JPA class transformer
+2025-10-22T13:44:59.780+03:00  WARN 17752 --- [demo] [main] org.hibernate.orm.deprecation            : HHH90000025: H2Dialect does not need to be specified explicitly using 'hibernate.dialect' (remove the property setting and it will be selected by default)
+2025-10-22T13:44:59.792+03:00  INFO 17752 --- [demo] [main] org.hibernate.orm.connections.pooling    : HHH10001005: Database info:
+	Database JDBC URL [Connecting through datasource 'HikariDataSource (HikariPool-1)']
+	Database driver: undefined/unknown
+	Database version: 2.3.232
+	Autocommit mode: undefined/unknown
+	Isolation level: undefined/unknown
+	Minimum pool size: undefined/unknown
+	Maximum pool size: undefined/unknown
+2025-10-22T13:45:00.472+03:00  INFO 17752 --- [demo] [main] o.h.e.t.j.p.i.JtaPlatformInitiator       : HHH000489: No JTA platform available (set 'hibernate.transaction.jta.platform' to enable JTA platform integration)
+2025-10-22T13:45:00.503+03:00 DEBUG 17752 --- [demo] [main] org.hibernate.SQL                        : alter table if exists note_category alter column category_id set data type bigint
+2025-10-22T13:45:00.512+03:00 DEBUG 17752 --- [demo] [main] org.hibernate.SQL                        : alter table if exists note_category alter column note_id set data type bigint
+2025-10-22T13:45:00.516+03:00 DEBUG 17752 --- [demo] [main] org.hibernate.SQL                        : alter table if exists note_tag alter column note_id set data type bigint
+2025-10-22T13:45:00.520+03:00 DEBUG 17752 --- [demo] [main] org.hibernate.SQL                        : alter table if exists note_tag alter column tag_id set data type bigint
+2025-10-22T13:45:00.524+03:00 DEBUG 17752 --- [demo] [main] org.hibernate.SQL                        : alter table if exists tags alter column colour set data type varchar(100)
+2025-10-22T13:45:00.533+03:00  INFO 17752 --- [demo] [main] j.LocalContainerEntityManagerFactoryBean : Initialized JPA EntityManagerFactory for persistence unit 'default'
+2025-10-22T13:45:00.964+03:00  WARN 17752 --- [demo] [main] JpaBaseConfiguration$JpaWebConfiguration : spring.jpa.open-in-view is enabled by default. Therefore, database queries may be performed during view rendering. Explicitly configure spring.jpa.open-in-view to disable this warning
+2025-10-22T13:45:01.352+03:00  INFO 17752 --- [demo] [main] o.s.b.a.h2.H2ConsoleAutoConfiguration    : H2 console available at '/h2-console'. Database available at 'jdbc:h2:mem:notedb'
+2025-10-22T13:45:01.458+03:00  INFO 17752 --- [demo] [main] o.s.b.w.embedded.tomcat.TomcatWebServer  : Tomcat started on port 8080 (http) with context path '/'
+2025-10-22T13:45:01.467+03:00  INFO 17752 --- [demo] [main] com.example.note.demo.DemoApplication    : Started DemoApplication in 4.479 seconds (process running for 4.853)
+2025-10-22T13:45:41.370+03:00  INFO 17752 --- [demo] [http-nio-8080-exec-2] o.a.c.c.C.[Tomcat].[localhost].[/]       : Initializing Spring DispatcherServlet 'dispatcherServlet'
+2025-10-22T13:45:41.371+03:00  INFO 17752 --- [demo] [http-nio-8080-exec-2] o.s.web.servlet.DispatcherServlet        : Initializing Servlet 'dispatcherServlet'
+2025-10-22T13:45:41.372+03:00  INFO 17752 --- [demo] [http-nio-8080-exec-2] o.s.web.servlet.DispatcherServlet        : Completed initialization in 1 ms
+2025-10-22T13:45:41.527+03:00  INFO 17752 --- [demo] [http-nio-8080-exec-2] c.e.n.d.controller.CategoryController    : Received POST request to create category with name: Work
+2025-10-22T13:45:41.533+03:00  INFO 17752 --- [demo] [http-nio-8080-exec-2] c.e.note.demo.service.CategoryService    : Service: Saving category with name: Work
+2025-10-22T13:45:41.538+03:00  INFO 17752 --- [demo] [http-nio-8080-exec-2] c.e.n.d.repository.CategoryRepository    : Attempting to save category with name: Work
+2025-10-22T13:45:41.539+03:00  INFO 17752 --- [demo] [http-nio-8080-exec-2] c.e.n.d.repository.CategoryRepository    : Searching for category by name: Work
+2025-10-22T13:45:41.543+03:00  INFO 17752 --- [demo] [http-nio-8080-exec-2] c.e.n.d.repository.CategoryRepository    : No category found with name: Work
+2025-10-22T13:45:41.554+03:00  INFO 17752 --- [demo] [http-nio-8080-exec-2] c.e.n.d.repository.CategoryRepository    : Successfully saved category with id: 1 and name: Work
+2025-10-22T13:45:41.556+03:00  INFO 17752 --- [demo] [http-nio-8080-exec-2] c.e.note.demo.service.CategoryService    : Service: Successfully saved category with id: 1
+2025-10-22T13:45:41.911+03:00  INFO 17752 --- [demo] [http-nio-8080-exec-2] c.e.n.d.controller.CategoryController    : Successfully created category with name: Work
+2025-10-22T13:45:50.510+03:00  INFO 17752 --- [demo] [http-nio-8080-exec-3] c.e.n.d.controller.CategoryController    : Received GET request to fetch category by ID: 1
+2025-10-22T13:45:50.526+03:00  INFO 17752 --- [demo] [http-nio-8080-exec-3] c.e.n.d.controller.CategoryController    : Successfully retrieved category with ID: 1 and name: Work
+2025-10-22T13:45:52.776+03:00  INFO 17752 --- [demo] [http-nio-8080-exec-4] c.e.n.d.controller.CategoryController    : Received GET request to fetch category by ID: 1
+2025-10-22T13:45:52.778+03:00  INFO 17752 --- [demo] [http-nio-8080-exec-4] c.e.n.d.controller.CategoryController    : Successfully retrieved category with ID: 1 and name: Work
+2025-10-22T13:46:02.223+03:00  INFO 17752 --- [demo] [http-nio-8080-exec-5] c.e.n.d.controller.CategoryController    : Received GET request to fetch category by ID: 1
+2025-10-22T13:46:02.225+03:00  INFO 17752 --- [demo] [http-nio-8080-exec-5] c.e.n.d.controller.CategoryController    : Successfully retrieved category with ID: 1 and name: Work
+2025-10-22T13:46:09.107+03:00  INFO 17752 --- [demo] [http-nio-8080-exec-6] c.e.n.d.controller.CategoryController    : Received GET request to fetch category by ID: 1
+2025-10-22T13:46:09.109+03:00  INFO 17752 --- [demo] [http-nio-8080-exec-6] c.e.n.d.controller.CategoryController    : Successfully retrieved category with ID: 1 and name: Work
+2025-10-22T13:46:20.757+03:00  INFO 17752 --- [demo] [http-nio-8080-exec-7] c.e.n.d.controller.CategoryController    : Received PUT request to update category with ID: 1 to new name: Fun
+2025-10-22T13:46:20.757+03:00  INFO 17752 --- [demo] [http-nio-8080-exec-7] c.e.note.demo.service.CategoryService    : Service: Updating category with id: 1 to name: Fun
+2025-10-22T13:46:20.757+03:00  INFO 17752 --- [demo] [http-nio-8080-exec-7] c.e.n.d.repository.CategoryRepository    : Updating category with id: 1 to name: Fun
+2025-10-22T13:46:20.759+03:00  INFO 17752 --- [demo] [http-nio-8080-exec-7] c.e.n.d.repository.CategoryRepository    : Updated category id: 1
+2025-10-22T13:46:20.760+03:00  INFO 17752 --- [demo] [http-nio-8080-exec-7] c.e.note.demo.service.CategoryService    : Service: Successfully updated category with id: 1
+2025-10-22T13:46:20.763+03:00  INFO 17752 --- [demo] [http-nio-8080-exec-7] c.e.n.d.controller.CategoryController    : Successfully updated category with ID: 1 to name: Fun
+2025-10-22T13:46:30.084+03:00  INFO 17752 --- [demo] [http-nio-8080-exec-8] c.e.n.d.controller.CategoryController    : Received DELETE request to remove category with ID: 1
+2025-10-22T13:46:30.085+03:00  INFO 17752 --- [demo] [http-nio-8080-exec-8] c.e.note.demo.service.CategoryService    : Service: Deleting category with id: 1
+2025-10-22T13:46:30.085+03:00  INFO 17752 --- [demo] [http-nio-8080-exec-8] c.e.n.d.repository.CategoryRepository    : Deleting category with id: 1
+2025-10-22T13:46:30.086+03:00  INFO 17752 --- [demo] [http-nio-8080-exec-8] c.e.n.d.repository.CategoryRepository    : Category delete result for id 1: true
+2025-10-22T13:46:30.087+03:00  INFO 17752 --- [demo] [http-nio-8080-exec-8] c.e.note.demo.service.CategoryService    : Service: Category deletion completed for id: 1, result: {deleted=true}
+2025-10-22T13:46:30.089+03:00  INFO 17752 --- [demo] [http-nio-8080-exec-8] c.e.n.d.controller.CategoryController    : Successfully processed DELETE request for category ID: 1, result: {deleted=true}
+2025-10-22T13:46:39.463+03:00  INFO 17752 --- [demo] [lettuce-eventExecutorLoop-1-1] i.l.core.protocol.ConnectionWatchdog     : Reconnecting, last destination was localhost/127.0.0.1:6379
+2025-10-22T13:46:39.470+03:00  WARN 17752 --- [demo] [lettuce-nioEventLoop-4-2] i.l.core.protocol.ConnectionWatchdog     : Cannot reconnect to [localhost/<unresolved>:6379]: Connection closed prematurely
+
+io.lettuce.core.RedisConnectionException: Connection closed prematurely
+	at io.lettuce.core.protocol.RedisHandshakeHandler.channelInactive(RedisHandshakeHandler.java:76) ~[lettuce-core-6.6.0.RELEASE.jar:6.6.0.RELEASE/643bd47]
+	at io.netty.channel.AbstractChannelHandlerContext.invokeChannelInactive(AbstractChannelHandlerContext.java:303) ~[netty-transport-4.1.127.Final.jar:4.1.127.Final]
+	at io.netty.channel.AbstractChannelHandlerContext.invokeChannelInactive(AbstractChannelHandlerContext.java:281) ~[netty-transport-4.1.127.Final.jar:4.1.127.Final]
+	at io.netty.channel.AbstractChannelHandlerContext.fireChannelInactive(AbstractChannelHandlerContext.java:274) ~[netty-transport-4.1.127.Final.jar:4.1.127.Final]
+	at io.netty.channel.ChannelInboundHandlerAdapter.channelInactive(ChannelInboundHandlerAdapter.java:81) ~[netty-transport-4.1.127.Final.jar:4.1.127.Final]
+	at io.lettuce.core.ChannelGroupListener.channelInactive(ChannelGroupListener.java:54) ~[lettuce-core-6.6.0.RELEASE.jar:6.6.0.RELEASE/643bd47]
+	at io.netty.channel.AbstractChannelHandlerContext.invokeChannelInactive(AbstractChannelHandlerContext.java:303) ~[netty-transport-4.1.127.Final.jar:4.1.127.Final]
+	at io.netty.channel.AbstractChannelHandlerContext.invokeChannelInactive(AbstractChannelHandlerContext.java:281) ~[netty-transport-4.1.127.Final.jar:4.1.127.Final]
+	at io.netty.channel.AbstractChannelHandlerContext.fireChannelInactive(AbstractChannelHandlerContext.java:274) ~[netty-transport-4.1.127.Final.jar:4.1.127.Final]
+	at io.netty.channel.DefaultChannelPipeline$HeadContext.channelInactive(DefaultChannelPipeline.java:1352) ~[netty-transport-4.1.127.Final.jar:4.1.127.Final]
+	at io.netty.channel.AbstractChannelHandlerContext.invokeChannelInactive(AbstractChannelHandlerContext.java:301) ~[netty-transport-4.1.127.Final.jar:4.1.127.Final]
+	at io.netty.channel.AbstractChannelHandlerContext.invokeChannelInactive(AbstractChannelHandlerContext.java:281) ~[netty-transport-4.1.127.Final.jar:4.1.127.Final]
+	at io.netty.channel.DefaultChannelPipeline.fireChannelInactive(DefaultChannelPipeline.java:850) ~[netty-transport-4.1.127.Final.jar:4.1.127.Final]
+	at io.netty.channel.AbstractChannel$AbstractUnsafe$7.run(AbstractChannel.java:811) ~[netty-transport-4.1.127.Final.jar:4.1.127.Final]
+	at io.netty.util.concurrent.AbstractEventExecutor.runTask(AbstractEventExecutor.java:173) ~[netty-common-4.1.127.Final.jar:4.1.127.Final]
+	at io.netty.util.concurrent.AbstractEventExecutor.safeExecute(AbstractEventExecutor.java:166) ~[netty-common-4.1.127.Final.jar:4.1.127.Final]
+	at io.netty.util.concurrent.SingleThreadEventExecutor.runAllTasks(SingleThreadEventExecutor.java:472) ~[netty-common-4.1.127.Final.jar:4.1.127.Final]
+	at io.netty.channel.nio.NioEventLoop.run(NioEventLoop.java:566) ~[netty-transport-4.1.127.Final.jar:4.1.127.Final]
+	at io.netty.util.concurrent.SingleThreadEventExecutor$4.run(SingleThreadEventExecutor.java:998) ~[netty-common-4.1.127.Final.jar:4.1.127.Final]
+	at io.netty.util.internal.ThreadExecutorMap$2.run(ThreadExecutorMap.java:74) ~[netty-common-4.1.127.Final.jar:4.1.127.Final]
+	at io.netty.util.concurrent.FastThreadLocalRunnable.run(FastThreadLocalRunnable.java:30) ~[netty-common-4.1.127.Final.jar:4.1.127.Final]
+	at java.base/java.lang.Thread.run(Thread.java:1575) ~[na:na]
+
+2025-10-22T13:46:48.460+03:00  INFO 17752 --- [demo] [lettuce-eventExecutorLoop-1-5] i.l.core.protocol.ConnectionWatchdog     : Reconnecting, last destination was localhost/<unresolved>:6379
+2025-10-22T13:46:48.460+03:00  WARN 17752 --- [demo] [lettuce-nioEventLoop-4-6] i.l.core.protocol.ConnectionWatchdog     : Cannot reconnect to [localhost/<unresolved>:6379]: Connection refused: getsockopt: localhost/127.0.0.1:6379
+2025-10-22T13:46:56.660+03:00  INFO 17752 --- [demo] [lettuce-eventExecutorLoop-1-6] i.l.core.protocol.ConnectionWatchdog     : Reconnecting, last destination was localhost/<unresolved>:6379
+2025-10-22T13:46:56.676+03:00  WARN 17752 --- [demo] [lettuce-nioEventLoop-4-7] i.l.core.protocol.ConnectionWatchdog     : Cannot reconnect to [localhost/<unresolved>:6379]: Connection refused: getsockopt: localhost/127.0.0.1:6379
+2025-10-22T13:47:13.173+03:00  INFO 17752 --- [demo] [lettuce-eventExecutorLoop-1-7] i.l.core.protocol.ConnectionWatchdog     : Reconnecting, last destination was localhost/<unresolved>:6379
+2025-10-22T13:47:13.177+03:00  WARN 17752 --- [demo] [lettuce-nioEventLoop-4-8] i.l.core.protocol.ConnectionWatchdog     : Cannot reconnect to [localhost/<unresolved>:6379]: Connection refused: getsockopt: localhost/127.0.0.1:6379
+2025-10-22T13:47:43.264+03:00  INFO 17752 --- [demo] [lettuce-eventExecutorLoop-1-3] i.l.core.protocol.ConnectionWatchdog     : Reconnecting, last destination was localhost/<unresolved>:6379
+2025-10-22T13:47:43.265+03:00  WARN 17752 --- [demo] [lettuce-nioEventLoop-4-1] i.l.core.protocol.ConnectionWatchdog     : Cannot reconnect to [localhost/<unresolved>:6379]: Connection refused: getsockopt: localhost/127.0.0.1:6379
+2025-10-22T13:48:13.361+03:00  INFO 17752 --- [demo] [lettuce-eventExecutorLoop-1-8] i.l.core.protocol.ConnectionWatchdog     : Reconnecting, last destination was localhost/<unresolved>:6379
+2025-10-22T13:48:13.365+03:00  WARN 17752 --- [demo] [lettuce-nioEventLoop-4-2] i.l.core.protocol.ConnectionWatchdog     : Cannot reconnect to [localhost/<unresolved>:6379]: Connection refused: getsockopt: localhost/127.0.0.1:6379
+2025-10-22T13:48:43.465+03:00  INFO 17752 --- [demo] [lettuce-eventExecutorLoop-1-2] i.l.core.protocol.ConnectionWatchdog     : Reconnecting, last destination was localhost/<unresolved>:6379
+2025-10-22T13:48:43.469+03:00  WARN 17752 --- [demo] [lettuce-nioEventLoop-4-3] i.l.core.protocol.ConnectionWatchdog     : Cannot reconnect to [localhost/<unresolved>:6379]: Connection refused: getsockopt: localhost/127.0.0.1:6379

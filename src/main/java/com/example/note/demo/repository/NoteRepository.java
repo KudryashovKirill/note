@@ -185,7 +185,6 @@ public class NoteRepository {
                 WHERE name = ?
                 """;
         try {
-            log.info("Found tag {}", name);
             return template.queryForObject(sqlQuery, Long.class, name);
         } catch (EmptyResultDataAccessException e) {
             log.info("Tag not found with name: {}", name);

@@ -8,10 +8,7 @@ import lombok.AccessLevel;
 import lombok.experimental.FieldDefaults;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.cache.annotation.CacheConfig;
-import org.springframework.cache.annotation.CacheEvict;
-import org.springframework.cache.annotation.Cacheable;
-import org.springframework.cache.annotation.Caching;
+import org.springframework.cache.annotation.*;
 import org.springframework.stereotype.Service;
 
 import java.time.LocalDate;
@@ -32,7 +29,14 @@ public class NoteService {
         this.noteMapper = noteMapper;
     }
 
-    @CacheEvict(allEntries = true)
+    @Caching(
+            put = {
+                    @CachePut(value = "#result.id")
+            },
+            evict = {
+                    @CacheEvict(key = "'all'")
+            }
+    )
     public NoteDto save(NoteDto noteDto) {
         log.info("Service: Saving new note with name: {}", noteDto.getName());
         if (noteDto.getDateOfCreation() == null) {
@@ -53,7 +57,7 @@ public class NoteService {
         return noteMapper.toDto(note);
     }
 
-    @Cacheable
+    @Cacheable(key = "'all'")
     public List<NoteDto> getAll() {
         log.debug("Service: Getting all notes");
         List<Note> notes = noteRepository.getAll();
@@ -61,10 +65,13 @@ public class NoteService {
         return noteMapper.toDto(notes);
     }
 
-    @Caching(evict = {
-            @CacheEvict(key = "#id"),
-            @CacheEvict(allEntries = true)
-    })
+    @Caching(put = {
+            @CachePut(key = "#id")
+    },
+            evict = {
+                    @CacheEvict(key = "'all'")
+            }
+    )
     public NoteDto update(NoteDto noteDto, Long id) {
         log.info("Service: Updating note with id: {}", id);
         Note note = noteRepository.update(noteMapper.toEntity(noteDto), id);
@@ -74,7 +81,7 @@ public class NoteService {
 
     @Caching(evict = {
             @CacheEvict(key = "#id"),
-            @CacheEvict(allEntries = true)
+            @CacheEvict(key = "'all'")
     })
     public Map<String, Boolean> delete(Long id) {
         log.info("Service: Deleting note with id: {}", id);

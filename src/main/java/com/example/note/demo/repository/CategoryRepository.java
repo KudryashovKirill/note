@@ -112,7 +112,6 @@ public class CategoryRepository {
                 WHERE name = ?
                 """;
         try {
-            log.info("Found category with name '{}' and id", name);
             return template.queryForObject(sqlQuery, Long.class, name);
         } catch (EmptyResultDataAccessException e) {
             log.info("No category found with name: {}", name);

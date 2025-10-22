@@ -12,10 +12,7 @@ import lombok.AccessLevel;
 import lombok.experimental.FieldDefaults;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.cache.annotation.CacheConfig;
-import org.springframework.cache.annotation.CacheEvict;
-import org.springframework.cache.annotation.Cacheable;
-import org.springframework.cache.annotation.Caching;
+import org.springframework.cache.annotation.*;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -40,10 +37,13 @@ public class TagService {
         this.noteMapper = noteMapper;
     }
 
-    @Caching(evict = {
-            @CacheEvict(value = "tags", allEntries = true),
-            @CacheEvict(value = "notes", allEntries = true)
-    })
+    @Caching(put = {
+            @CachePut(key = "#result.id")
+    },
+            evict = {
+                    @CacheEvict(key = "'all'")
+            }
+    )
     public TagDto save(TagDto tagDto) {
         log.info("Service: Saving tag with name: {} and colour: {}", tagDto.getName(), tagDto.getColour());
         Tag savedTag = tagRepository.save(tagMapper.toEntity(tagDto));
@@ -59,11 +59,14 @@ public class TagService {
         return tagMapper.toDto(tag);
     }
 
-    @Caching(evict = {
-            @CacheEvict(value = "#id"),
-            @CacheEvict(value = "tags", allEntries = true),
-            @CacheEvict(value = "notes", allEntries = true)
-    })
+    @Caching(put = {
+            @CachePut(key = "#id")
+    },
+            evict = {
+                    @CacheEvict(key = "'all'"),
+                    @CacheEvict(value = "notes", allEntries = true)
+            }
+    )
     public TagDto update(TagDto tagDto, Long id) {
         log.info("Service: Updating tag with id: {} to name: {}, colour: {}",
                 id, tagDto.getName(), tagDto.getColour());
@@ -81,7 +84,7 @@ public class TagService {
 
     @Caching(evict = {
             @CacheEvict(key = "#id"),
-            @CacheEvict(value = "tags", allEntries = true),
+            @CacheEvict(key = "'all'"),
             @CacheEvict(value = "notes", allEntries = true)
     })
     public Map<String, Boolean> delete(Long id) {
