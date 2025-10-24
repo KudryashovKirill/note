@@ -48,7 +48,7 @@ public class TagService {
         log.info("Service: Saving tag with name: {} and colour: {}", tagDto.getName(), tagDto.getColour());
         Tag savedTag = tagRepository.save(tagMapper.toEntity(tagDto));
         log.info("Service: Successfully saved tag with id: {}", savedTag.getId());
-        return tagMapper.toDto(tagRepository.save(savedTag));
+        return tagMapper.toDto(savedTag);
     }
 
     @Cacheable(key = "#id")
@@ -74,7 +74,7 @@ public class TagService {
         return tagMapper.toDto(tagRepository.update(tag, id));
     }
 
-    @Cacheable
+    @Cacheable(key = "'all'")
     public List<TagDto> getAll() {
         log.info("Service: Fetching all tags");
         List<Tag> tags = tagRepository.getAll();

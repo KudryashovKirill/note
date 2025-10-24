@@ -31,7 +31,7 @@ public class NoteService {
 
     @Caching(
             put = {
-                    @CachePut(value = "#result.id")
+                    @CachePut(key = "#result.id")
             },
             evict = {
                     @CacheEvict(key = "'all'")
@@ -57,7 +57,6 @@ public class NoteService {
         return noteMapper.toDto(note);
     }
 
-    @Cacheable(key = "'all'")
     public List<NoteDto> getAll() {
         log.debug("Service: Getting all notes");
         List<Note> notes = noteRepository.getAll();
