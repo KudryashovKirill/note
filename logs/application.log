@@ -3683,3 +3683,392 @@ com.fasterxml.jackson.databind.exc.MismatchedInputException: Unexpected token (S
 2025-10-24T13:49:37.512+03:00  INFO 1776 --- [demo] [SpringApplicationShutdownHook] j.LocalContainerEntityManagerFactoryBean : Closing JPA EntityManagerFactory for persistence unit 'default'
 2025-10-24T13:49:37.514+03:00  INFO 1776 --- [demo] [SpringApplicationShutdownHook] com.zaxxer.hikari.HikariDataSource       : HikariPool-1 - Shutdown initiated...
 2025-10-24T13:49:37.515+03:00  INFO 1776 --- [demo] [SpringApplicationShutdownHook] com.zaxxer.hikari.HikariDataSource       : HikariPool-1 - Shutdown completed.
+2025-10-24T13:53:37.332+03:00  INFO 12348 --- [demo] [main] com.example.note.demo.DemoApplication    : Starting DemoApplication using Java 23.0.1 with PID 12348 (D:\JavaProjects\demo\target\classes started by 79012 in D:\JavaProjects\demo)
+2025-10-24T13:53:37.335+03:00  INFO 12348 --- [demo] [main] com.example.note.demo.DemoApplication    : No active profile set, falling back to 1 default profile: "default"
+2025-10-24T13:53:38.067+03:00  INFO 12348 --- [demo] [main] .s.d.r.c.RepositoryConfigurationDelegate : Multiple Spring Data modules found, entering strict repository configuration mode
+2025-10-24T13:53:38.068+03:00  INFO 12348 --- [demo] [main] .s.d.r.c.RepositoryConfigurationDelegate : Bootstrapping Spring Data JPA repositories in DEFAULT mode.
+2025-10-24T13:53:38.087+03:00  INFO 12348 --- [demo] [main] .s.d.r.c.RepositoryConfigurationDelegate : Finished Spring Data repository scanning in 11 ms. Found 0 JPA repository interfaces.
+2025-10-24T13:53:38.100+03:00  INFO 12348 --- [demo] [main] .s.d.r.c.RepositoryConfigurationDelegate : Multiple Spring Data modules found, entering strict repository configuration mode
+2025-10-24T13:53:38.100+03:00  INFO 12348 --- [demo] [main] .s.d.r.c.RepositoryConfigurationDelegate : Bootstrapping Spring Data Redis repositories in DEFAULT mode.
+2025-10-24T13:53:38.112+03:00  INFO 12348 --- [demo] [main] .s.d.r.c.RepositoryConfigurationDelegate : Finished Spring Data repository scanning in 3 ms. Found 0 Redis repository interfaces.
+2025-10-24T13:53:38.684+03:00  INFO 12348 --- [demo] [main] o.s.b.w.embedded.tomcat.TomcatWebServer  : Tomcat initialized with port 8080 (http)
+2025-10-24T13:53:38.705+03:00  INFO 12348 --- [demo] [main] o.apache.catalina.core.StandardService   : Starting service [Tomcat]
+2025-10-24T13:53:38.705+03:00  INFO 12348 --- [demo] [main] o.apache.catalina.core.StandardEngine    : Starting Servlet engine: [Apache Tomcat/10.1.46]
+2025-10-24T13:53:38.757+03:00  INFO 12348 --- [demo] [main] o.a.c.c.C.[Tomcat].[localhost].[/]       : Initializing Spring embedded WebApplicationContext
+2025-10-24T13:53:38.758+03:00  INFO 12348 --- [demo] [main] w.s.c.ServletWebServerApplicationContext : Root WebApplicationContext: initialization completed in 1365 ms
+2025-10-24T13:53:38.880+03:00  INFO 12348 --- [demo] [main] com.zaxxer.hikari.HikariDataSource       : HikariPool-1 - Starting...
+2025-10-24T13:53:39.037+03:00  INFO 12348 --- [demo] [main] com.zaxxer.hikari.pool.HikariPool        : HikariPool-1 - Added connection conn0: url=jdbc:h2:mem:notedb user=USER
+2025-10-24T13:53:39.040+03:00  INFO 12348 --- [demo] [main] com.zaxxer.hikari.HikariDataSource       : HikariPool-1 - Start completed.
+2025-10-24T13:53:39.147+03:00  INFO 12348 --- [demo] [main] o.hibernate.jpa.internal.util.LogHelper  : HHH000204: Processing PersistenceUnitInfo [name: default]
+2025-10-24T13:53:39.185+03:00  INFO 12348 --- [demo] [main] org.hibernate.Version                    : HHH000412: Hibernate ORM core version 6.6.29.Final
+2025-10-24T13:53:39.216+03:00  INFO 12348 --- [demo] [main] o.h.c.internal.RegionFactoryInitiator    : HHH000026: Second-level cache disabled
+2025-10-24T13:53:39.458+03:00  INFO 12348 --- [demo] [main] o.s.o.j.p.SpringPersistenceUnitInfo      : No LoadTimeWeaver setup: ignoring JPA class transformer
+2025-10-24T13:53:39.499+03:00  WARN 12348 --- [demo] [main] org.hibernate.orm.deprecation            : HHH90000025: H2Dialect does not need to be specified explicitly using 'hibernate.dialect' (remove the property setting and it will be selected by default)
+2025-10-24T13:53:39.512+03:00  INFO 12348 --- [demo] [main] org.hibernate.orm.connections.pooling    : HHH10001005: Database info:
+	Database JDBC URL [Connecting through datasource 'HikariDataSource (HikariPool-1)']
+	Database driver: undefined/unknown
+	Database version: 2.3.232
+	Autocommit mode: undefined/unknown
+	Isolation level: undefined/unknown
+	Minimum pool size: undefined/unknown
+	Maximum pool size: undefined/unknown
+2025-10-24T13:53:40.252+03:00  INFO 12348 --- [demo] [main] o.h.e.t.j.p.i.JtaPlatformInitiator       : HHH000489: No JTA platform available (set 'hibernate.transaction.jta.platform' to enable JTA platform integration)
+2025-10-24T13:53:40.284+03:00 DEBUG 12348 --- [demo] [main] org.hibernate.SQL                        : alter table if exists note_category alter column category_id set data type bigint
+2025-10-24T13:53:40.289+03:00 DEBUG 12348 --- [demo] [main] org.hibernate.SQL                        : alter table if exists note_category alter column note_id set data type bigint
+2025-10-24T13:53:40.289+03:00 DEBUG 12348 --- [demo] [main] org.hibernate.SQL                        : alter table if exists note_tag alter column note_id set data type bigint
+2025-10-24T13:53:40.299+03:00 DEBUG 12348 --- [demo] [main] org.hibernate.SQL                        : alter table if exists note_tag alter column tag_id set data type bigint
+2025-10-24T13:53:40.302+03:00 DEBUG 12348 --- [demo] [main] org.hibernate.SQL                        : alter table if exists tags alter column colour set data type varchar(100)
+2025-10-24T13:53:40.311+03:00  INFO 12348 --- [demo] [main] j.LocalContainerEntityManagerFactoryBean : Initialized JPA EntityManagerFactory for persistence unit 'default'
+2025-10-24T13:53:40.719+03:00  WARN 12348 --- [demo] [main] JpaBaseConfiguration$JpaWebConfiguration : spring.jpa.open-in-view is enabled by default. Therefore, database queries may be performed during view rendering. Explicitly configure spring.jpa.open-in-view to disable this warning
+2025-10-24T13:53:41.072+03:00  INFO 12348 --- [demo] [main] o.s.b.a.h2.H2ConsoleAutoConfiguration    : H2 console available at '/h2-console'. Database available at 'jdbc:h2:mem:notedb'
+2025-10-24T13:53:41.151+03:00  INFO 12348 --- [demo] [main] o.s.b.w.embedded.tomcat.TomcatWebServer  : Tomcat started on port 8080 (http) with context path '/'
+2025-10-24T13:53:41.160+03:00  INFO 12348 --- [demo] [main] com.example.note.demo.DemoApplication    : Started DemoApplication in 4.27 seconds (process running for 4.62)
+2025-10-24T13:53:58.041+03:00  INFO 12348 --- [demo] [http-nio-8080-exec-1] o.a.c.c.C.[Tomcat].[localhost].[/]       : Initializing Spring DispatcherServlet 'dispatcherServlet'
+2025-10-24T13:53:58.041+03:00  INFO 12348 --- [demo] [http-nio-8080-exec-1] o.s.web.servlet.DispatcherServlet        : Initializing Servlet 'dispatcherServlet'
+2025-10-24T13:53:58.043+03:00  INFO 12348 --- [demo] [http-nio-8080-exec-1] o.s.web.servlet.DispatcherServlet        : Completed initialization in 1 ms
+2025-10-24T13:53:58.119+03:00  INFO 12348 --- [demo] [http-nio-8080-exec-1] c.e.n.d.controller.CategoryController    : Received GET request to fetch all categories
+2025-10-24T13:53:58.579+03:00  INFO 12348 --- [demo] [http-nio-8080-exec-1] c.e.n.d.controller.CategoryController    : Successfully retrieved 1 categories
+2025-10-24T13:54:02.910+03:00  INFO 12348 --- [demo] [http-nio-8080-exec-3] c.e.n.d.controller.CategoryController    : Received DELETE request to remove category with ID: 1
+2025-10-24T13:54:02.911+03:00  INFO 12348 --- [demo] [http-nio-8080-exec-3] c.e.note.demo.service.CategoryService    : Service: Deleting category with id: 1
+2025-10-24T13:54:02.915+03:00  INFO 12348 --- [demo] [http-nio-8080-exec-3] c.e.n.d.repository.CategoryRepository    : Deleting category with id: 1
+2025-10-24T13:54:02.924+03:00  INFO 12348 --- [demo] [http-nio-8080-exec-3] c.e.n.d.repository.CategoryRepository    : Category delete result for id 1: false
+2025-10-24T13:54:02.925+03:00  INFO 12348 --- [demo] [http-nio-8080-exec-3] c.e.note.demo.service.CategoryService    : Service: Category deletion completed for id: 1, result: {deleted=false}
+2025-10-24T13:54:02.930+03:00  INFO 12348 --- [demo] [http-nio-8080-exec-3] c.e.n.d.controller.CategoryController    : Successfully processed DELETE request for category ID: 1, result: {deleted=false}
+2025-10-24T13:54:02.940+03:00  INFO 12348 --- [demo] [http-nio-8080-exec-4] c.e.n.d.controller.CategoryController    : Received GET request to fetch all categories
+2025-10-24T13:54:02.941+03:00  INFO 12348 --- [demo] [http-nio-8080-exec-4] c.e.note.demo.service.CategoryService    : Service: Getting all categories
+2025-10-24T13:54:02.942+03:00  INFO 12348 --- [demo] [http-nio-8080-exec-4] c.e.n.d.repository.CategoryRepository    : Getting all categories
+2025-10-24T13:54:02.942+03:00  INFO 12348 --- [demo] [http-nio-8080-exec-4] c.e.n.d.repository.CategoryRepository    : Found categories
+2025-10-24T13:54:02.943+03:00  INFO 12348 --- [demo] [http-nio-8080-exec-4] c.e.note.demo.service.CategoryService    : Service: get 0 categories
+2025-10-24T13:54:02.954+03:00  INFO 12348 --- [demo] [http-nio-8080-exec-4] c.e.n.d.controller.CategoryController    : Successfully retrieved 0 categories
+2025-10-24T13:54:11.372+03:00  INFO 12348 --- [demo] [http-nio-8080-exec-5] c.e.n.d.controller.CategoryController    : Received POST request to create category with name: поцелуйчики
+2025-10-24T13:54:11.373+03:00  INFO 12348 --- [demo] [http-nio-8080-exec-5] c.e.note.demo.service.CategoryService    : Service: Saving category with name: поцелуйчики
+2025-10-24T13:54:11.374+03:00  INFO 12348 --- [demo] [http-nio-8080-exec-5] c.e.n.d.repository.CategoryRepository    : Attempting to save category with name: поцелуйчики
+2025-10-24T13:54:11.374+03:00  INFO 12348 --- [demo] [http-nio-8080-exec-5] c.e.n.d.repository.CategoryRepository    : Searching for category by name: поцелуйчики
+2025-10-24T13:54:11.377+03:00  INFO 12348 --- [demo] [http-nio-8080-exec-5] c.e.n.d.repository.CategoryRepository    : No category found with name: поцелуйчики
+2025-10-24T13:54:11.385+03:00  INFO 12348 --- [demo] [http-nio-8080-exec-5] c.e.n.d.repository.CategoryRepository    : Successfully saved category with id: 1 and name: поцелуйчики
+2025-10-24T13:54:11.386+03:00  INFO 12348 --- [demo] [http-nio-8080-exec-5] c.e.note.demo.service.CategoryService    : Service: Successfully saved category with id: 1
+2025-10-24T13:54:11.394+03:00  INFO 12348 --- [demo] [http-nio-8080-exec-5] c.e.n.d.controller.CategoryController    : Successfully created category with name: поцелуйчики
+2025-10-24T13:54:11.399+03:00  INFO 12348 --- [demo] [http-nio-8080-exec-6] c.e.n.d.controller.CategoryController    : Received GET request to fetch all categories
+2025-10-24T13:54:11.401+03:00  INFO 12348 --- [demo] [http-nio-8080-exec-6] c.e.note.demo.service.CategoryService    : Service: Getting all categories
+2025-10-24T13:54:11.402+03:00  INFO 12348 --- [demo] [http-nio-8080-exec-6] c.e.n.d.repository.CategoryRepository    : Getting all categories
+2025-10-24T13:54:11.402+03:00  INFO 12348 --- [demo] [http-nio-8080-exec-6] c.e.n.d.repository.CategoryRepository    : Found categories
+2025-10-24T13:54:11.402+03:00  INFO 12348 --- [demo] [http-nio-8080-exec-6] c.e.note.demo.service.CategoryService    : Service: get 1 categories
+2025-10-24T13:54:11.404+03:00  INFO 12348 --- [demo] [http-nio-8080-exec-6] c.e.n.d.controller.CategoryController    : Successfully retrieved 1 categories
+2025-10-24T13:54:17.357+03:00  INFO 12348 --- [demo] [http-nio-8080-exec-7] c.e.n.d.controller.CategoryController    : Received POST request to create category with name: гулять
+2025-10-24T13:54:17.358+03:00  INFO 12348 --- [demo] [http-nio-8080-exec-7] c.e.note.demo.service.CategoryService    : Service: Saving category with name: гулять
+2025-10-24T13:54:17.358+03:00  INFO 12348 --- [demo] [http-nio-8080-exec-7] c.e.n.d.repository.CategoryRepository    : Attempting to save category with name: гулять
+2025-10-24T13:54:17.358+03:00  INFO 12348 --- [demo] [http-nio-8080-exec-7] c.e.n.d.repository.CategoryRepository    : Searching for category by name: гулять
+2025-10-24T13:54:17.359+03:00  INFO 12348 --- [demo] [http-nio-8080-exec-7] c.e.n.d.repository.CategoryRepository    : No category found with name: гулять
+2025-10-24T13:54:17.359+03:00  INFO 12348 --- [demo] [http-nio-8080-exec-7] c.e.n.d.repository.CategoryRepository    : Successfully saved category with id: 2 and name: гулять
+2025-10-24T13:54:17.360+03:00  INFO 12348 --- [demo] [http-nio-8080-exec-7] c.e.note.demo.service.CategoryService    : Service: Successfully saved category with id: 2
+2025-10-24T13:54:17.364+03:00  INFO 12348 --- [demo] [http-nio-8080-exec-7] c.e.n.d.controller.CategoryController    : Successfully created category with name: гулять
+2025-10-24T13:54:17.368+03:00  INFO 12348 --- [demo] [http-nio-8080-exec-8] c.e.n.d.controller.CategoryController    : Received GET request to fetch all categories
+2025-10-24T13:54:17.369+03:00  INFO 12348 --- [demo] [http-nio-8080-exec-8] c.e.note.demo.service.CategoryService    : Service: Getting all categories
+2025-10-24T13:54:17.370+03:00  INFO 12348 --- [demo] [http-nio-8080-exec-8] c.e.n.d.repository.CategoryRepository    : Getting all categories
+2025-10-24T13:54:17.370+03:00  INFO 12348 --- [demo] [http-nio-8080-exec-8] c.e.n.d.repository.CategoryRepository    : Found categories
+2025-10-24T13:54:17.370+03:00  INFO 12348 --- [demo] [http-nio-8080-exec-8] c.e.note.demo.service.CategoryService    : Service: get 2 categories
+2025-10-24T13:54:17.371+03:00  INFO 12348 --- [demo] [http-nio-8080-exec-8] c.e.n.d.controller.CategoryController    : Successfully retrieved 2 categories
+2025-10-24T13:54:26.398+03:00  INFO 12348 --- [demo] [http-nio-8080-exec-9] c.e.n.d.controller.CategoryController    : Received POST request to create category with name: любовь
+2025-10-24T13:54:26.398+03:00  INFO 12348 --- [demo] [http-nio-8080-exec-9] c.e.note.demo.service.CategoryService    : Service: Saving category with name: любовь
+2025-10-24T13:54:26.399+03:00  INFO 12348 --- [demo] [http-nio-8080-exec-9] c.e.n.d.repository.CategoryRepository    : Attempting to save category with name: любовь
+2025-10-24T13:54:26.399+03:00  INFO 12348 --- [demo] [http-nio-8080-exec-9] c.e.n.d.repository.CategoryRepository    : Searching for category by name: любовь
+2025-10-24T13:54:26.399+03:00  INFO 12348 --- [demo] [http-nio-8080-exec-9] c.e.n.d.repository.CategoryRepository    : No category found with name: любовь
+2025-10-24T13:54:26.400+03:00  INFO 12348 --- [demo] [http-nio-8080-exec-9] c.e.n.d.repository.CategoryRepository    : Successfully saved category with id: 3 and name: любовь
+2025-10-24T13:54:26.400+03:00  INFO 12348 --- [demo] [http-nio-8080-exec-9] c.e.note.demo.service.CategoryService    : Service: Successfully saved category with id: 3
+2025-10-24T13:54:26.403+03:00  INFO 12348 --- [demo] [http-nio-8080-exec-9] c.e.n.d.controller.CategoryController    : Successfully created category with name: любовь
+2025-10-24T13:54:26.408+03:00  INFO 12348 --- [demo] [http-nio-8080-exec-10] c.e.n.d.controller.CategoryController    : Received GET request to fetch all categories
+2025-10-24T13:54:26.409+03:00  INFO 12348 --- [demo] [http-nio-8080-exec-10] c.e.note.demo.service.CategoryService    : Service: Getting all categories
+2025-10-24T13:54:26.410+03:00  INFO 12348 --- [demo] [http-nio-8080-exec-10] c.e.n.d.repository.CategoryRepository    : Getting all categories
+2025-10-24T13:54:26.410+03:00  INFO 12348 --- [demo] [http-nio-8080-exec-10] c.e.n.d.repository.CategoryRepository    : Found categories
+2025-10-24T13:54:26.410+03:00  INFO 12348 --- [demo] [http-nio-8080-exec-10] c.e.note.demo.service.CategoryService    : Service: get 3 categories
+2025-10-24T13:54:26.411+03:00  INFO 12348 --- [demo] [http-nio-8080-exec-10] c.e.n.d.controller.CategoryController    : Successfully retrieved 3 categories
+2025-10-24T13:54:30.084+03:00  INFO 12348 --- [demo] [http-nio-8080-exec-1] c.e.note.demo.controller.TagController   : Received GET request to fetch all tags
+2025-10-24T13:54:30.090+03:00  INFO 12348 --- [demo] [http-nio-8080-exec-1] c.e.note.demo.controller.TagController   : Successfully retrieved 1 tags
+2025-10-24T13:54:32.638+03:00  INFO 12348 --- [demo] [http-nio-8080-exec-3] c.e.note.demo.controller.TagController   : Received DELETE request to remove tag with ID: 1
+2025-10-24T13:54:32.638+03:00  INFO 12348 --- [demo] [http-nio-8080-exec-3] c.example.note.demo.service.TagService   : Service: Deleting tag with id: 1
+2025-10-24T13:54:32.638+03:00  INFO 12348 --- [demo] [http-nio-8080-exec-3] c.e.note.demo.repository.TagRepository   : Deleting tag with id: 1
+2025-10-24T13:54:32.639+03:00  INFO 12348 --- [demo] [http-nio-8080-exec-3] c.e.note.demo.repository.TagRepository   : Tag deletion result for id 1: false
+2025-10-24T13:54:32.640+03:00  INFO 12348 --- [demo] [http-nio-8080-exec-3] c.example.note.demo.service.TagService   : Service: Tag deletion completed for id: 1, result: {deleted=false}
+2025-10-24T13:54:32.647+03:00  INFO 12348 --- [demo] [http-nio-8080-exec-3] c.e.note.demo.controller.TagController   : Successfully processed DELETE request for tag ID: 1, result: {deleted=false}
+2025-10-24T13:54:32.652+03:00  INFO 12348 --- [demo] [http-nio-8080-exec-4] c.e.note.demo.controller.TagController   : Received GET request to fetch all tags
+2025-10-24T13:54:32.654+03:00  INFO 12348 --- [demo] [http-nio-8080-exec-4] c.example.note.demo.service.TagService   : Service: Fetching all tags
+2025-10-24T13:54:32.654+03:00  INFO 12348 --- [demo] [http-nio-8080-exec-4] c.e.note.demo.repository.TagRepository   : Getting all tags
+2025-10-24T13:54:32.654+03:00  INFO 12348 --- [demo] [http-nio-8080-exec-4] c.e.note.demo.repository.TagRepository   : Found tags
+2025-10-24T13:54:32.655+03:00  INFO 12348 --- [demo] [http-nio-8080-exec-4] c.example.note.demo.service.TagService   : Service: Retrieved 0 tags
+2025-10-24T13:54:32.657+03:00  INFO 12348 --- [demo] [http-nio-8080-exec-4] c.e.note.demo.controller.TagController   : Successfully retrieved 0 tags
+2025-10-24T13:54:43.376+03:00  INFO 12348 --- [demo] [http-nio-8080-exec-5] c.e.note.demo.controller.TagController   : Received POST request to create tag with name: Катюша and colour: #b209e1
+2025-10-24T13:54:43.376+03:00  INFO 12348 --- [demo] [http-nio-8080-exec-5] c.example.note.demo.service.TagService   : Service: Saving tag with name: Катюша and colour: #b209e1
+2025-10-24T13:54:43.376+03:00  INFO 12348 --- [demo] [http-nio-8080-exec-5] c.e.note.demo.repository.TagRepository   : Attempting to save tag with name: Катюша and colour: #b209e1
+2025-10-24T13:54:43.376+03:00  INFO 12348 --- [demo] [http-nio-8080-exec-5] c.e.note.demo.repository.TagRepository   : Searching for tag by name: Катюша
+2025-10-24T13:54:43.376+03:00  INFO 12348 --- [demo] [http-nio-8080-exec-5] c.e.note.demo.repository.TagRepository   : No tag found with name: Катюша
+2025-10-24T13:54:43.376+03:00  INFO 12348 --- [demo] [http-nio-8080-exec-5] c.e.note.demo.repository.TagRepository   : Successfully saved tag with id: 1, name: Катюша, colour: #b209e1
+2025-10-24T13:54:43.376+03:00  INFO 12348 --- [demo] [http-nio-8080-exec-5] c.example.note.demo.service.TagService   : Service: Successfully saved tag with id: 1
+2025-10-24T13:54:43.384+03:00  INFO 12348 --- [demo] [http-nio-8080-exec-5] c.e.note.demo.controller.TagController   : Successfully created tag with name: Катюша and colour: #b209e1
+2025-10-24T13:54:43.389+03:00  INFO 12348 --- [demo] [http-nio-8080-exec-6] c.e.note.demo.controller.TagController   : Received GET request to fetch all tags
+2025-10-24T13:54:43.391+03:00  INFO 12348 --- [demo] [http-nio-8080-exec-6] c.example.note.demo.service.TagService   : Service: Fetching all tags
+2025-10-24T13:54:43.391+03:00  INFO 12348 --- [demo] [http-nio-8080-exec-6] c.e.note.demo.repository.TagRepository   : Getting all tags
+2025-10-24T13:54:43.391+03:00  INFO 12348 --- [demo] [http-nio-8080-exec-6] c.e.note.demo.repository.TagRepository   : Found tags
+2025-10-24T13:54:43.391+03:00  INFO 12348 --- [demo] [http-nio-8080-exec-6] c.example.note.demo.service.TagService   : Service: Retrieved 1 tags
+2025-10-24T13:54:43.393+03:00  INFO 12348 --- [demo] [http-nio-8080-exec-6] c.e.note.demo.controller.TagController   : Successfully retrieved 1 tags
+2025-10-24T13:54:54.134+03:00  INFO 12348 --- [demo] [http-nio-8080-exec-7] c.e.note.demo.controller.TagController   : Received POST request to create tag with name: красотка and colour: #e21d1d
+2025-10-24T13:54:54.134+03:00  INFO 12348 --- [demo] [http-nio-8080-exec-7] c.example.note.demo.service.TagService   : Service: Saving tag with name: красотка and colour: #e21d1d
+2025-10-24T13:54:54.134+03:00  INFO 12348 --- [demo] [http-nio-8080-exec-7] c.e.note.demo.repository.TagRepository   : Attempting to save tag with name: красотка and colour: #e21d1d
+2025-10-24T13:54:54.134+03:00  INFO 12348 --- [demo] [http-nio-8080-exec-7] c.e.note.demo.repository.TagRepository   : Searching for tag by name: красотка
+2025-10-24T13:54:54.134+03:00  INFO 12348 --- [demo] [http-nio-8080-exec-7] c.e.note.demo.repository.TagRepository   : No tag found with name: красотка
+2025-10-24T13:54:54.134+03:00  INFO 12348 --- [demo] [http-nio-8080-exec-7] c.e.note.demo.repository.TagRepository   : Successfully saved tag with id: 2, name: красотка, colour: #e21d1d
+2025-10-24T13:54:54.134+03:00  INFO 12348 --- [demo] [http-nio-8080-exec-7] c.example.note.demo.service.TagService   : Service: Successfully saved tag with id: 2
+2025-10-24T13:54:54.151+03:00  INFO 12348 --- [demo] [http-nio-8080-exec-7] c.e.note.demo.controller.TagController   : Successfully created tag with name: красотка and colour: #e21d1d
+2025-10-24T13:54:54.155+03:00  INFO 12348 --- [demo] [http-nio-8080-exec-8] c.e.note.demo.controller.TagController   : Received GET request to fetch all tags
+2025-10-24T13:54:54.156+03:00  INFO 12348 --- [demo] [http-nio-8080-exec-8] c.example.note.demo.service.TagService   : Service: Fetching all tags
+2025-10-24T13:54:54.157+03:00  INFO 12348 --- [demo] [http-nio-8080-exec-8] c.e.note.demo.repository.TagRepository   : Getting all tags
+2025-10-24T13:54:54.157+03:00  INFO 12348 --- [demo] [http-nio-8080-exec-8] c.e.note.demo.repository.TagRepository   : Found tags
+2025-10-24T13:54:54.157+03:00  INFO 12348 --- [demo] [http-nio-8080-exec-8] c.example.note.demo.service.TagService   : Service: Retrieved 2 tags
+2025-10-24T13:54:54.158+03:00  INFO 12348 --- [demo] [http-nio-8080-exec-8] c.e.note.demo.controller.TagController   : Successfully retrieved 2 tags
+2025-10-24T13:55:09.851+03:00  INFO 12348 --- [demo] [http-nio-8080-exec-9] c.e.note.demo.controller.TagController   : Received POST request to create tag with name: приколы and colour: #000000
+2025-10-24T13:55:09.851+03:00  INFO 12348 --- [demo] [http-nio-8080-exec-9] c.example.note.demo.service.TagService   : Service: Saving tag with name: приколы and colour: #000000
+2025-10-24T13:55:09.851+03:00  INFO 12348 --- [demo] [http-nio-8080-exec-9] c.e.note.demo.repository.TagRepository   : Attempting to save tag with name: приколы and colour: #000000
+2025-10-24T13:55:09.851+03:00  INFO 12348 --- [demo] [http-nio-8080-exec-9] c.e.note.demo.repository.TagRepository   : Searching for tag by name: приколы
+2025-10-24T13:55:09.851+03:00  INFO 12348 --- [demo] [http-nio-8080-exec-9] c.e.note.demo.repository.TagRepository   : No tag found with name: приколы
+2025-10-24T13:55:09.851+03:00  INFO 12348 --- [demo] [http-nio-8080-exec-9] c.e.note.demo.repository.TagRepository   : Successfully saved tag with id: 3, name: приколы, colour: #000000
+2025-10-24T13:55:09.851+03:00  INFO 12348 --- [demo] [http-nio-8080-exec-9] c.example.note.demo.service.TagService   : Service: Successfully saved tag with id: 3
+2025-10-24T13:55:09.865+03:00  INFO 12348 --- [demo] [http-nio-8080-exec-9] c.e.note.demo.controller.TagController   : Successfully created tag with name: приколы and colour: #000000
+2025-10-24T13:55:09.870+03:00  INFO 12348 --- [demo] [http-nio-8080-exec-10] c.e.note.demo.controller.TagController   : Received GET request to fetch all tags
+2025-10-24T13:55:09.872+03:00  INFO 12348 --- [demo] [http-nio-8080-exec-10] c.example.note.demo.service.TagService   : Service: Fetching all tags
+2025-10-24T13:55:09.872+03:00  INFO 12348 --- [demo] [http-nio-8080-exec-10] c.e.note.demo.repository.TagRepository   : Getting all tags
+2025-10-24T13:55:09.873+03:00  INFO 12348 --- [demo] [http-nio-8080-exec-10] c.e.note.demo.repository.TagRepository   : Found tags
+2025-10-24T13:55:09.873+03:00  INFO 12348 --- [demo] [http-nio-8080-exec-10] c.example.note.demo.service.TagService   : Service: Retrieved 3 tags
+2025-10-24T13:55:09.875+03:00  INFO 12348 --- [demo] [http-nio-8080-exec-10] c.e.note.demo.controller.TagController   : Successfully retrieved 3 tags
+2025-10-24T13:55:11.713+03:00  INFO 12348 --- [demo] [http-nio-8080-exec-1] c.e.note.demo.controller.TagController   : Received GET request to fetch tag by ID: 3
+2025-10-24T13:55:11.717+03:00  INFO 12348 --- [demo] [http-nio-8080-exec-1] c.e.note.demo.controller.TagController   : Successfully retrieved tag with ID: 3, name: приколы, colour: #000000
+2025-10-24T13:55:16.998+03:00  INFO 12348 --- [demo] [http-nio-8080-exec-3] c.e.note.demo.controller.TagController   : Received PUT request to update tag with ID: 3 to name: приколы and colour: #4ddc18
+2025-10-24T13:55:16.999+03:00  INFO 12348 --- [demo] [http-nio-8080-exec-3] c.example.note.demo.service.TagService   : Service: Updating tag with id: 3 to name: приколы, colour: #4ddc18
+2025-10-24T13:55:17.000+03:00  INFO 12348 --- [demo] [http-nio-8080-exec-3] c.e.note.demo.repository.TagRepository   : Updating tag with id: 3 to name: приколы, colour: #4ddc18
+2025-10-24T13:55:17.004+03:00  INFO 12348 --- [demo] [http-nio-8080-exec-3] c.e.note.demo.repository.TagRepository   : Updated 1 rows for tag id: 3
+2025-10-24T13:55:17.011+03:00  INFO 12348 --- [demo] [http-nio-8080-exec-3] c.e.note.demo.controller.TagController   : Successfully updated tag with ID: 3 to name: приколы and colour: #4ddc18
+2025-10-24T13:55:17.014+03:00  INFO 12348 --- [demo] [http-nio-8080-exec-4] c.e.note.demo.controller.TagController   : Received GET request to fetch all tags
+2025-10-24T13:55:17.016+03:00  INFO 12348 --- [demo] [http-nio-8080-exec-4] c.example.note.demo.service.TagService   : Service: Fetching all tags
+2025-10-24T13:55:17.016+03:00  INFO 12348 --- [demo] [http-nio-8080-exec-4] c.e.note.demo.repository.TagRepository   : Getting all tags
+2025-10-24T13:55:17.016+03:00  INFO 12348 --- [demo] [http-nio-8080-exec-4] c.e.note.demo.repository.TagRepository   : Found tags
+2025-10-24T13:55:17.017+03:00  INFO 12348 --- [demo] [http-nio-8080-exec-4] c.example.note.demo.service.TagService   : Service: Retrieved 3 tags
+2025-10-24T13:55:17.018+03:00  INFO 12348 --- [demo] [http-nio-8080-exec-4] c.e.note.demo.controller.TagController   : Successfully retrieved 3 tags
+2025-10-24T13:55:20.856+03:00  INFO 12348 --- [demo] [http-nio-8080-exec-5] c.e.n.d.controller.CategoryController    : Received GET request to fetch all categories
+2025-10-24T13:55:20.860+03:00  INFO 12348 --- [demo] [http-nio-8080-exec-5] c.e.n.d.controller.CategoryController    : Successfully retrieved 3 categories
+2025-10-24T13:55:20.868+03:00  INFO 12348 --- [demo] [http-nio-8080-exec-6] c.e.note.demo.controller.TagController   : Received GET request to fetch all tags
+2025-10-24T13:55:20.870+03:00  INFO 12348 --- [demo] [http-nio-8080-exec-6] c.e.note.demo.controller.TagController   : Successfully retrieved 3 tags
+2025-10-24T13:55:20.874+03:00  INFO 12348 --- [demo] [http-nio-8080-exec-7] c.e.note.demo.controller.NoteController  : Received GET request to fetch all notes
+2025-10-24T13:55:20.874+03:00  INFO 12348 --- [demo] [http-nio-8080-exec-7] c.e.note.demo.repository.NoteRepository  : Getting all notes with relations
+2025-10-24T13:55:20.874+03:00  INFO 12348 --- [demo] [http-nio-8080-exec-7] c.e.note.demo.repository.NoteRepository  : Found notes with relations
+2025-10-24T13:55:20.877+03:00  INFO 12348 --- [demo] [http-nio-8080-exec-7] c.e.note.demo.controller.NoteController  : Successfully retrieved 0 notes
+2025-10-24T13:56:09.763+03:00  INFO 12348 --- [demo] [http-nio-8080-exec-8] c.e.note.demo.controller.NoteController  : Received POST request to create note with name: Погулять в субботу с Катей
+2025-10-24T13:56:09.764+03:00  INFO 12348 --- [demo] [http-nio-8080-exec-8] c.example.note.demo.service.NoteService  : Service: Saving new note with name: Погулять в субботу с Катей
+2025-10-24T13:56:09.765+03:00  INFO 12348 --- [demo] [http-nio-8080-exec-8] c.e.note.demo.repository.NoteRepository  : Saving new note with name: Погулять в субботу с Катей, categories: 3, tags: 3
+2025-10-24T13:56:09.767+03:00  INFO 12348 --- [demo] [http-nio-8080-exec-8] c.e.note.demo.repository.NoteRepository  : Note saved with id: 1
+2025-10-24T13:56:09.768+03:00  INFO 12348 --- [demo] [http-nio-8080-exec-8] c.e.note.demo.repository.NoteRepository  : Processing 3 categories
+2025-10-24T13:56:09.768+03:00  INFO 12348 --- [demo] [http-nio-8080-exec-8] c.e.note.demo.repository.NoteRepository  : Searching for category by name: поцелуйчики
+2025-10-24T13:56:09.768+03:00  INFO 12348 --- [demo] [http-nio-8080-exec-8] c.e.note.demo.repository.NoteRepository  : Found category поцелуйчики
+2025-10-24T13:56:09.769+03:00  INFO 12348 --- [demo] [http-nio-8080-exec-8] c.e.note.demo.repository.NoteRepository  : Searching for category by name: гулять
+2025-10-24T13:56:09.769+03:00  INFO 12348 --- [demo] [http-nio-8080-exec-8] c.e.note.demo.repository.NoteRepository  : Found category гулять
+2025-10-24T13:56:09.769+03:00  INFO 12348 --- [demo] [http-nio-8080-exec-8] c.e.note.demo.repository.NoteRepository  : Searching for category by name: любовь
+2025-10-24T13:56:09.769+03:00  INFO 12348 --- [demo] [http-nio-8080-exec-8] c.e.note.demo.repository.NoteRepository  : Found category любовь
+2025-10-24T13:56:09.769+03:00  INFO 12348 --- [demo] [http-nio-8080-exec-8] c.e.note.demo.repository.NoteRepository  : Batch inserting 3 note-category relations for note id: 1
+2025-10-24T13:56:09.772+03:00  INFO 12348 --- [demo] [http-nio-8080-exec-8] c.e.note.demo.repository.NoteRepository  : Batch inserted for note-category relations
+2025-10-24T13:56:09.772+03:00  INFO 12348 --- [demo] [http-nio-8080-exec-8] c.e.note.demo.repository.NoteRepository  : Added 3 categories to note
+2025-10-24T13:56:09.772+03:00  INFO 12348 --- [demo] [http-nio-8080-exec-8] c.e.note.demo.repository.NoteRepository  : Processing 3 tags
+2025-10-24T13:56:09.772+03:00  INFO 12348 --- [demo] [http-nio-8080-exec-8] c.e.note.demo.repository.NoteRepository  : Searching for tag by name: Катюша
+2025-10-24T13:56:09.773+03:00  INFO 12348 --- [demo] [http-nio-8080-exec-8] c.e.note.demo.repository.NoteRepository  : Searching for tag by name: красотка
+2025-10-24T13:56:09.773+03:00  INFO 12348 --- [demo] [http-nio-8080-exec-8] c.e.note.demo.repository.NoteRepository  : Searching for tag by name: приколы
+2025-10-24T13:56:09.773+03:00  INFO 12348 --- [demo] [http-nio-8080-exec-8] c.e.note.demo.repository.NoteRepository  : Batch inserting 3 note-tag relations for note id: 1
+2025-10-24T13:56:09.774+03:00  INFO 12348 --- [demo] [http-nio-8080-exec-8] c.e.note.demo.repository.NoteRepository  : Batch inserted for note-tag relations
+2025-10-24T13:56:09.774+03:00  INFO 12348 --- [demo] [http-nio-8080-exec-8] c.e.note.demo.repository.NoteRepository  : Added 3 tags to note
+2025-10-24T13:56:09.774+03:00  INFO 12348 --- [demo] [http-nio-8080-exec-8] c.e.note.demo.repository.NoteRepository  : Fetching note with relations by id: 1
+2025-10-24T13:56:09.777+03:00  INFO 12348 --- [demo] [http-nio-8080-exec-8] c.e.note.demo.repository.NoteRepository  : Found note: Погулять в субботу с Катей with 3 categories and 3 tags
+2025-10-24T13:56:09.778+03:00  INFO 12348 --- [demo] [http-nio-8080-exec-8] c.example.note.demo.service.NoteService  : Service: Successfully saved note with id: 1
+2025-10-24T13:56:09.785+03:00  INFO 12348 --- [demo] [http-nio-8080-exec-8] c.e.note.demo.controller.NoteController  : Successfully created note with name: Погулять в субботу с Катей
+2025-10-24T13:56:09.794+03:00  INFO 12348 --- [demo] [http-nio-8080-exec-9] c.e.note.demo.controller.NoteController  : Received GET request to fetch all notes
+2025-10-24T13:56:09.794+03:00  INFO 12348 --- [demo] [http-nio-8080-exec-9] c.e.note.demo.repository.NoteRepository  : Getting all notes with relations
+2025-10-24T13:56:09.794+03:00  INFO 12348 --- [demo] [http-nio-8080-exec-9] c.e.note.demo.repository.NoteRepository  : Found notes with relations
+2025-10-24T13:56:09.795+03:00  INFO 12348 --- [demo] [http-nio-8080-exec-9] c.e.note.demo.controller.NoteController  : Successfully retrieved 1 notes
+2025-10-24T13:57:07.714+03:00  INFO 12348 --- [demo] [SpringApplicationShutdownHook] o.s.b.w.e.tomcat.GracefulShutdown        : Commencing graceful shutdown. Waiting for active requests to complete
+2025-10-24T13:57:07.714+03:00  INFO 12348 --- [demo] [tomcat-shutdown] o.s.b.w.e.tomcat.GracefulShutdown        : Graceful shutdown complete
+2025-10-24T13:57:07.734+03:00  INFO 12348 --- [demo] [SpringApplicationShutdownHook] j.LocalContainerEntityManagerFactoryBean : Closing JPA EntityManagerFactory for persistence unit 'default'
+2025-10-24T13:57:07.736+03:00  INFO 12348 --- [demo] [SpringApplicationShutdownHook] com.zaxxer.hikari.HikariDataSource       : HikariPool-1 - Shutdown initiated...
+2025-10-24T13:57:07.736+03:00  INFO 12348 --- [demo] [SpringApplicationShutdownHook] com.zaxxer.hikari.HikariDataSource       : HikariPool-1 - Shutdown completed.
+2025-10-24T14:33:56.314+03:00  INFO 7224 --- [demo] [main] com.example.note.demo.DemoApplication    : Starting DemoApplication using Java 23.0.1 with PID 7224 (D:\JavaProjects\demo\target\classes started by 79012 in D:\JavaProjects\demo)
+2025-10-24T14:33:56.315+03:00  INFO 7224 --- [demo] [main] com.example.note.demo.DemoApplication    : No active profile set, falling back to 1 default profile: "default"
+2025-10-24T14:33:57.083+03:00  INFO 7224 --- [demo] [main] .s.d.r.c.RepositoryConfigurationDelegate : Multiple Spring Data modules found, entering strict repository configuration mode
+2025-10-24T14:33:57.084+03:00  INFO 7224 --- [demo] [main] .s.d.r.c.RepositoryConfigurationDelegate : Bootstrapping Spring Data JPA repositories in DEFAULT mode.
+2025-10-24T14:33:57.103+03:00  INFO 7224 --- [demo] [main] .s.d.r.c.RepositoryConfigurationDelegate : Finished Spring Data repository scanning in 12 ms. Found 0 JPA repository interfaces.
+2025-10-24T14:33:57.119+03:00  INFO 7224 --- [demo] [main] .s.d.r.c.RepositoryConfigurationDelegate : Multiple Spring Data modules found, entering strict repository configuration mode
+2025-10-24T14:33:57.120+03:00  INFO 7224 --- [demo] [main] .s.d.r.c.RepositoryConfigurationDelegate : Bootstrapping Spring Data Redis repositories in DEFAULT mode.
+2025-10-24T14:33:57.129+03:00  INFO 7224 --- [demo] [main] .s.d.r.c.RepositoryConfigurationDelegate : Finished Spring Data repository scanning in 3 ms. Found 0 Redis repository interfaces.
+2025-10-24T14:33:57.746+03:00  INFO 7224 --- [demo] [main] o.s.b.w.embedded.tomcat.TomcatWebServer  : Tomcat initialized with port 8080 (http)
+2025-10-24T14:33:57.769+03:00  INFO 7224 --- [demo] [main] o.apache.catalina.core.StandardService   : Starting service [Tomcat]
+2025-10-24T14:33:57.770+03:00  INFO 7224 --- [demo] [main] o.apache.catalina.core.StandardEngine    : Starting Servlet engine: [Apache Tomcat/10.1.46]
+2025-10-24T14:33:57.826+03:00  INFO 7224 --- [demo] [main] o.a.c.c.C.[Tomcat].[localhost].[/]       : Initializing Spring embedded WebApplicationContext
+2025-10-24T14:33:57.827+03:00  INFO 7224 --- [demo] [main] w.s.c.ServletWebServerApplicationContext : Root WebApplicationContext: initialization completed in 1464 ms
+2025-10-24T14:33:57.942+03:00  INFO 7224 --- [demo] [main] com.zaxxer.hikari.HikariDataSource       : HikariPool-1 - Starting...
+2025-10-24T14:33:58.081+03:00  INFO 7224 --- [demo] [main] com.zaxxer.hikari.pool.HikariPool        : HikariPool-1 - Added connection conn0: url=jdbc:h2:mem:notedb user=USER
+2025-10-24T14:33:58.083+03:00  INFO 7224 --- [demo] [main] com.zaxxer.hikari.HikariDataSource       : HikariPool-1 - Start completed.
+2025-10-24T14:33:58.191+03:00  INFO 7224 --- [demo] [main] o.hibernate.jpa.internal.util.LogHelper  : HHH000204: Processing PersistenceUnitInfo [name: default]
+2025-10-24T14:33:58.232+03:00  INFO 7224 --- [demo] [main] org.hibernate.Version                    : HHH000412: Hibernate ORM core version 6.6.29.Final
+2025-10-24T14:33:58.262+03:00  INFO 7224 --- [demo] [main] o.h.c.internal.RegionFactoryInitiator    : HHH000026: Second-level cache disabled
+2025-10-24T14:33:58.504+03:00  INFO 7224 --- [demo] [main] o.s.o.j.p.SpringPersistenceUnitInfo      : No LoadTimeWeaver setup: ignoring JPA class transformer
+2025-10-24T14:33:58.544+03:00  WARN 7224 --- [demo] [main] org.hibernate.orm.deprecation            : HHH90000025: H2Dialect does not need to be specified explicitly using 'hibernate.dialect' (remove the property setting and it will be selected by default)
+2025-10-24T14:33:58.556+03:00  INFO 7224 --- [demo] [main] org.hibernate.orm.connections.pooling    : HHH10001005: Database info:
+	Database JDBC URL [Connecting through datasource 'HikariDataSource (HikariPool-1)']
+	Database driver: undefined/unknown
+	Database version: 2.3.232
+	Autocommit mode: undefined/unknown
+	Isolation level: undefined/unknown
+	Minimum pool size: undefined/unknown
+	Maximum pool size: undefined/unknown
+2025-10-24T14:33:59.235+03:00  INFO 7224 --- [demo] [main] o.h.e.t.j.p.i.JtaPlatformInitiator       : HHH000489: No JTA platform available (set 'hibernate.transaction.jta.platform' to enable JTA platform integration)
+2025-10-24T14:33:59.264+03:00 DEBUG 7224 --- [demo] [main] org.hibernate.SQL                        : alter table if exists note_category alter column category_id set data type bigint
+2025-10-24T14:33:59.276+03:00 DEBUG 7224 --- [demo] [main] org.hibernate.SQL                        : alter table if exists note_category alter column note_id set data type bigint
+2025-10-24T14:33:59.280+03:00 DEBUG 7224 --- [demo] [main] org.hibernate.SQL                        : alter table if exists note_tag alter column note_id set data type bigint
+2025-10-24T14:33:59.283+03:00 DEBUG 7224 --- [demo] [main] org.hibernate.SQL                        : alter table if exists note_tag alter column tag_id set data type bigint
+2025-10-24T14:33:59.287+03:00 DEBUG 7224 --- [demo] [main] org.hibernate.SQL                        : alter table if exists tags alter column colour set data type varchar(100)
+2025-10-24T14:33:59.296+03:00  INFO 7224 --- [demo] [main] j.LocalContainerEntityManagerFactoryBean : Initialized JPA EntityManagerFactory for persistence unit 'default'
+2025-10-24T14:33:59.706+03:00  WARN 7224 --- [demo] [main] JpaBaseConfiguration$JpaWebConfiguration : spring.jpa.open-in-view is enabled by default. Therefore, database queries may be performed during view rendering. Explicitly configure spring.jpa.open-in-view to disable this warning
+2025-10-24T14:34:00.079+03:00  INFO 7224 --- [demo] [main] o.s.b.a.h2.H2ConsoleAutoConfiguration    : H2 console available at '/h2-console'. Database available at 'jdbc:h2:mem:notedb'
+2025-10-24T14:34:00.160+03:00  INFO 7224 --- [demo] [main] o.s.b.w.embedded.tomcat.TomcatWebServer  : Tomcat started on port 8080 (http) with context path '/'
+2025-10-24T14:34:00.171+03:00  INFO 7224 --- [demo] [main] com.example.note.demo.DemoApplication    : Started DemoApplication in 4.31 seconds (process running for 4.645)
+2025-10-24T14:35:43.034+03:00  INFO 7224 --- [demo] [SpringApplicationShutdownHook] o.s.b.w.e.tomcat.GracefulShutdown        : Commencing graceful shutdown. Waiting for active requests to complete
+2025-10-24T14:35:43.035+03:00  INFO 7224 --- [demo] [tomcat-shutdown] o.s.b.w.e.tomcat.GracefulShutdown        : Graceful shutdown complete
+2025-10-24T14:35:43.043+03:00  INFO 7224 --- [demo] [SpringApplicationShutdownHook] j.LocalContainerEntityManagerFactoryBean : Closing JPA EntityManagerFactory for persistence unit 'default'
+2025-10-24T14:35:43.052+03:00  INFO 7224 --- [demo] [SpringApplicationShutdownHook] com.zaxxer.hikari.HikariDataSource       : HikariPool-1 - Shutdown initiated...
+2025-10-24T14:35:43.053+03:00  INFO 7224 --- [demo] [SpringApplicationShutdownHook] com.zaxxer.hikari.HikariDataSource       : HikariPool-1 - Shutdown completed.
+2025-10-24T14:37:36.023+03:00  INFO 5508 --- [demo] [main] com.example.note.demo.DemoApplication    : Starting DemoApplication using Java 23.0.1 with PID 5508 (D:\JavaProjects\demo\target\classes started by 79012 in D:\JavaProjects\demo)
+2025-10-24T14:37:36.023+03:00  INFO 5508 --- [demo] [main] com.example.note.demo.DemoApplication    : No active profile set, falling back to 1 default profile: "default"
+2025-10-24T14:37:37.577+03:00  INFO 5508 --- [demo] [main] .s.d.r.c.RepositoryConfigurationDelegate : Multiple Spring Data modules found, entering strict repository configuration mode
+2025-10-24T14:37:37.577+03:00  INFO 5508 --- [demo] [main] .s.d.r.c.RepositoryConfigurationDelegate : Bootstrapping Spring Data JPA repositories in DEFAULT mode.
+2025-10-24T14:37:37.611+03:00  INFO 5508 --- [demo] [main] .s.d.r.c.RepositoryConfigurationDelegate : Finished Spring Data repository scanning in 18 ms. Found 0 JPA repository interfaces.
+2025-10-24T14:37:37.632+03:00  INFO 5508 --- [demo] [main] .s.d.r.c.RepositoryConfigurationDelegate : Multiple Spring Data modules found, entering strict repository configuration mode
+2025-10-24T14:37:37.648+03:00  INFO 5508 --- [demo] [main] .s.d.r.c.RepositoryConfigurationDelegate : Bootstrapping Spring Data Redis repositories in DEFAULT mode.
+2025-10-24T14:37:37.664+03:00  INFO 5508 --- [demo] [main] .s.d.r.c.RepositoryConfigurationDelegate : Finished Spring Data repository scanning in 4 ms. Found 0 Redis repository interfaces.
+2025-10-24T14:37:38.527+03:00  INFO 5508 --- [demo] [main] o.s.b.w.embedded.tomcat.TomcatWebServer  : Tomcat initialized with port 8080 (http)
+2025-10-24T14:37:38.560+03:00  INFO 5508 --- [demo] [main] o.apache.catalina.core.StandardService   : Starting service [Tomcat]
+2025-10-24T14:37:38.560+03:00  INFO 5508 --- [demo] [main] o.apache.catalina.core.StandardEngine    : Starting Servlet engine: [Apache Tomcat/10.1.46]
+2025-10-24T14:37:38.628+03:00  INFO 5508 --- [demo] [main] o.a.c.c.C.[Tomcat].[localhost].[/]       : Initializing Spring embedded WebApplicationContext
+2025-10-24T14:37:38.628+03:00  INFO 5508 --- [demo] [main] w.s.c.ServletWebServerApplicationContext : Root WebApplicationContext: initialization completed in 2529 ms
+2025-10-24T14:37:38.807+03:00  INFO 5508 --- [demo] [main] com.zaxxer.hikari.HikariDataSource       : HikariPool-1 - Starting...
+2025-10-24T14:37:39.030+03:00  INFO 5508 --- [demo] [main] com.zaxxer.hikari.pool.HikariPool        : HikariPool-1 - Added connection conn0: url=jdbc:h2:mem:notedb user=USER
+2025-10-24T14:37:39.030+03:00  INFO 5508 --- [demo] [main] com.zaxxer.hikari.HikariDataSource       : HikariPool-1 - Start completed.
+2025-10-24T14:37:39.192+03:00  INFO 5508 --- [demo] [main] o.hibernate.jpa.internal.util.LogHelper  : HHH000204: Processing PersistenceUnitInfo [name: default]
+2025-10-24T14:37:39.307+03:00  INFO 5508 --- [demo] [main] org.hibernate.Version                    : HHH000412: Hibernate ORM core version 6.6.29.Final
+2025-10-24T14:37:39.364+03:00  INFO 5508 --- [demo] [main] o.h.c.internal.RegionFactoryInitiator    : HHH000026: Second-level cache disabled
+2025-10-24T14:37:39.724+03:00  INFO 5508 --- [demo] [main] o.s.o.j.p.SpringPersistenceUnitInfo      : No LoadTimeWeaver setup: ignoring JPA class transformer
+2025-10-24T14:37:39.786+03:00  WARN 5508 --- [demo] [main] org.hibernate.orm.deprecation            : HHH90000025: H2Dialect does not need to be specified explicitly using 'hibernate.dialect' (remove the property setting and it will be selected by default)
+2025-10-24T14:37:39.810+03:00  INFO 5508 --- [demo] [main] org.hibernate.orm.connections.pooling    : HHH10001005: Database info:
+	Database JDBC URL [Connecting through datasource 'HikariDataSource (HikariPool-1)']
+	Database driver: undefined/unknown
+	Database version: 2.3.232
+	Autocommit mode: undefined/unknown
+	Isolation level: undefined/unknown
+	Minimum pool size: undefined/unknown
+	Maximum pool size: undefined/unknown
+2025-10-24T14:37:40.833+03:00  INFO 5508 --- [demo] [main] o.h.e.t.j.p.i.JtaPlatformInitiator       : HHH000489: No JTA platform available (set 'hibernate.transaction.jta.platform' to enable JTA platform integration)
+2025-10-24T14:37:40.879+03:00 DEBUG 5508 --- [demo] [main] org.hibernate.SQL                        : alter table if exists note_category alter column category_id set data type bigint
+2025-10-24T14:37:40.890+03:00 DEBUG 5508 --- [demo] [main] org.hibernate.SQL                        : alter table if exists note_category alter column note_id set data type bigint
+2025-10-24T14:37:40.895+03:00 DEBUG 5508 --- [demo] [main] org.hibernate.SQL                        : alter table if exists note_tag alter column note_id set data type bigint
+2025-10-24T14:37:40.899+03:00 DEBUG 5508 --- [demo] [main] org.hibernate.SQL                        : alter table if exists note_tag alter column tag_id set data type bigint
+2025-10-24T14:37:40.903+03:00 DEBUG 5508 --- [demo] [main] org.hibernate.SQL                        : alter table if exists tags alter column colour set data type varchar(100)
+2025-10-24T14:37:40.913+03:00  INFO 5508 --- [demo] [main] j.LocalContainerEntityManagerFactoryBean : Initialized JPA EntityManagerFactory for persistence unit 'default'
+2025-10-24T14:37:41.588+03:00  WARN 5508 --- [demo] [main] JpaBaseConfiguration$JpaWebConfiguration : spring.jpa.open-in-view is enabled by default. Therefore, database queries may be performed during view rendering. Explicitly configure spring.jpa.open-in-view to disable this warning
+2025-10-24T14:37:42.146+03:00  INFO 5508 --- [demo] [main] o.s.b.a.h2.H2ConsoleAutoConfiguration    : H2 console available at '/h2-console'. Database available at 'jdbc:h2:mem:notedb'
+2025-10-24T14:37:42.251+03:00  INFO 5508 --- [demo] [main] o.s.b.w.embedded.tomcat.TomcatWebServer  : Tomcat started on port 8080 (http) with context path '/'
+2025-10-24T14:37:42.264+03:00  INFO 5508 --- [demo] [main] com.example.note.demo.DemoApplication    : Started DemoApplication in 6.888 seconds (process running for 13.286)
+2025-10-24T14:37:43.793+03:00  INFO 5508 --- [demo] [http-nio-8080-exec-1] o.a.c.c.C.[Tomcat].[localhost].[/]       : Initializing Spring DispatcherServlet 'dispatcherServlet'
+2025-10-24T14:37:43.793+03:00  INFO 5508 --- [demo] [http-nio-8080-exec-1] o.s.web.servlet.DispatcherServlet        : Initializing Servlet 'dispatcherServlet'
+2025-10-24T14:37:43.793+03:00  INFO 5508 --- [demo] [http-nio-8080-exec-1] o.s.web.servlet.DispatcherServlet        : Completed initialization in 0 ms
+2025-10-24T14:37:43.876+03:00  INFO 5508 --- [demo] [http-nio-8080-exec-1] c.e.n.d.controller.CategoryController    : Received GET request to fetch all categories
+2025-10-24T14:37:44.305+03:00  INFO 5508 --- [demo] [http-nio-8080-exec-1] c.e.note.demo.service.CategoryService    : Service: Getting all categories
+2025-10-24T14:37:44.305+03:00  INFO 5508 --- [demo] [http-nio-8080-exec-1] c.e.n.d.repository.CategoryRepository    : Getting all categories
+2025-10-24T14:37:44.305+03:00  INFO 5508 --- [demo] [http-nio-8080-exec-1] c.e.n.d.repository.CategoryRepository    : Found categories
+2025-10-24T14:37:44.308+03:00  INFO 5508 --- [demo] [http-nio-8080-exec-1] c.e.note.demo.service.CategoryService    : Service: get 0 categories
+2025-10-24T14:37:44.341+03:00  INFO 5508 --- [demo] [http-nio-8080-exec-1] c.e.n.d.controller.CategoryController    : Successfully retrieved 0 categories
+2025-10-24T14:37:48.346+03:00  INFO 5508 --- [demo] [http-nio-8080-exec-2] c.e.n.d.controller.CategoryController    : Received GET request to fetch all categories
+2025-10-24T14:37:48.374+03:00  INFO 5508 --- [demo] [http-nio-8080-exec-2] c.e.n.d.controller.CategoryController    : Successfully retrieved 0 categories
+2025-10-24T14:37:49.055+03:00  INFO 5508 --- [demo] [http-nio-8080-exec-3] c.e.n.d.controller.CategoryController    : Received GET request to fetch all categories
+2025-10-24T14:37:49.058+03:00  INFO 5508 --- [demo] [http-nio-8080-exec-3] c.e.n.d.controller.CategoryController    : Successfully retrieved 0 categories
+2025-10-24T14:38:08.139+03:00  INFO 5508 --- [demo] [http-nio-8080-exec-7] c.e.note.demo.controller.TagController   : Received GET request to fetch all tags
+2025-10-24T14:38:08.141+03:00  INFO 5508 --- [demo] [http-nio-8080-exec-7] c.example.note.demo.service.TagService   : Service: Fetching all tags
+2025-10-24T14:38:08.142+03:00  INFO 5508 --- [demo] [http-nio-8080-exec-7] c.e.note.demo.repository.TagRepository   : Getting all tags
+2025-10-24T14:38:08.142+03:00  INFO 5508 --- [demo] [http-nio-8080-exec-7] c.e.note.demo.repository.TagRepository   : Found tags
+2025-10-24T14:38:08.143+03:00  INFO 5508 --- [demo] [http-nio-8080-exec-7] c.example.note.demo.service.TagService   : Service: Retrieved 0 tags
+2025-10-24T14:38:08.146+03:00  INFO 5508 --- [demo] [http-nio-8080-exec-7] c.e.note.demo.controller.TagController   : Successfully retrieved 0 tags
+2025-10-24T14:38:23.140+03:00  INFO 5508 --- [demo] [http-nio-8080-exec-10] c.e.n.d.controller.CategoryController    : Received GET request to fetch all categories
+2025-10-24T14:38:23.143+03:00  INFO 5508 --- [demo] [http-nio-8080-exec-10] c.e.n.d.controller.CategoryController    : Successfully retrieved 0 categories
+2025-10-24T14:38:28.162+03:00  INFO 5508 --- [demo] [http-nio-8080-exec-1] c.e.n.d.controller.CategoryController    : Received GET request to fetch all categories
+2025-10-24T14:38:28.165+03:00  INFO 5508 --- [demo] [http-nio-8080-exec-1] c.e.n.d.controller.CategoryController    : Successfully retrieved 0 categories
+2025-10-24T14:39:17.695+03:00  INFO 5508 --- [demo] [http-nio-8080-exec-2] c.e.note.demo.controller.TagController   : Received GET request to fetch all tags
+2025-10-24T14:39:17.697+03:00  INFO 5508 --- [demo] [http-nio-8080-exec-2] c.e.note.demo.controller.TagController   : Successfully retrieved 0 tags
+2025-10-24T14:39:56.698+03:00  INFO 5508 --- [demo] [SpringApplicationShutdownHook] o.s.b.w.e.tomcat.GracefulShutdown        : Commencing graceful shutdown. Waiting for active requests to complete
+2025-10-24T14:39:56.698+03:00  INFO 5508 --- [demo] [tomcat-shutdown] o.s.b.w.e.tomcat.GracefulShutdown        : Graceful shutdown complete
+2025-10-24T14:39:56.720+03:00  INFO 5508 --- [demo] [SpringApplicationShutdownHook] j.LocalContainerEntityManagerFactoryBean : Closing JPA EntityManagerFactory for persistence unit 'default'
+2025-10-24T14:39:56.721+03:00  INFO 5508 --- [demo] [SpringApplicationShutdownHook] com.zaxxer.hikari.HikariDataSource       : HikariPool-1 - Shutdown initiated...
+2025-10-24T14:39:56.721+03:00  INFO 5508 --- [demo] [SpringApplicationShutdownHook] com.zaxxer.hikari.HikariDataSource       : HikariPool-1 - Shutdown completed.
+2025-10-24T14:40:18.987+03:00  INFO 6932 --- [demo] [main] com.example.note.demo.DemoApplication    : Starting DemoApplication using Java 23.0.1 with PID 6932 (D:\JavaProjects\demo\target\classes started by 79012 in D:\JavaProjects\demo)
+2025-10-24T14:40:18.987+03:00  INFO 6932 --- [demo] [main] com.example.note.demo.DemoApplication    : No active profile set, falling back to 1 default profile: "default"
+2025-10-24T14:40:19.778+03:00  INFO 6932 --- [demo] [main] .s.d.r.c.RepositoryConfigurationDelegate : Multiple Spring Data modules found, entering strict repository configuration mode
+2025-10-24T14:40:19.778+03:00  INFO 6932 --- [demo] [main] .s.d.r.c.RepositoryConfigurationDelegate : Bootstrapping Spring Data JPA repositories in DEFAULT mode.
+2025-10-24T14:40:19.798+03:00  INFO 6932 --- [demo] [main] .s.d.r.c.RepositoryConfigurationDelegate : Finished Spring Data repository scanning in 12 ms. Found 0 JPA repository interfaces.
+2025-10-24T14:40:19.815+03:00  INFO 6932 --- [demo] [main] .s.d.r.c.RepositoryConfigurationDelegate : Multiple Spring Data modules found, entering strict repository configuration mode
+2025-10-24T14:40:19.817+03:00  INFO 6932 --- [demo] [main] .s.d.r.c.RepositoryConfigurationDelegate : Bootstrapping Spring Data Redis repositories in DEFAULT mode.
+2025-10-24T14:40:19.827+03:00  INFO 6932 --- [demo] [main] .s.d.r.c.RepositoryConfigurationDelegate : Finished Spring Data repository scanning in 3 ms. Found 0 Redis repository interfaces.
+2025-10-24T14:40:20.461+03:00  INFO 6932 --- [demo] [main] o.s.b.w.embedded.tomcat.TomcatWebServer  : Tomcat initialized with port 8080 (http)
+2025-10-24T14:40:20.482+03:00  INFO 6932 --- [demo] [main] o.apache.catalina.core.StandardService   : Starting service [Tomcat]
+2025-10-24T14:40:20.483+03:00  INFO 6932 --- [demo] [main] o.apache.catalina.core.StandardEngine    : Starting Servlet engine: [Apache Tomcat/10.1.46]
+2025-10-24T14:40:20.548+03:00  INFO 6932 --- [demo] [main] o.a.c.c.C.[Tomcat].[localhost].[/]       : Initializing Spring embedded WebApplicationContext
+2025-10-24T14:40:20.549+03:00  INFO 6932 --- [demo] [main] w.s.c.ServletWebServerApplicationContext : Root WebApplicationContext: initialization completed in 1502 ms
+2025-10-24T14:40:20.658+03:00  INFO 6932 --- [demo] [main] com.zaxxer.hikari.HikariDataSource       : HikariPool-1 - Starting...
+2025-10-24T14:40:20.837+03:00  INFO 6932 --- [demo] [main] com.zaxxer.hikari.pool.HikariPool        : HikariPool-1 - Added connection conn0: url=jdbc:h2:mem:notedb user=USER
+2025-10-24T14:40:20.838+03:00  INFO 6932 --- [demo] [main] com.zaxxer.hikari.HikariDataSource       : HikariPool-1 - Start completed.
+2025-10-24T14:40:20.958+03:00  INFO 6932 --- [demo] [main] o.hibernate.jpa.internal.util.LogHelper  : HHH000204: Processing PersistenceUnitInfo [name: default]
+2025-10-24T14:40:21.010+03:00  INFO 6932 --- [demo] [main] org.hibernate.Version                    : HHH000412: Hibernate ORM core version 6.6.29.Final
+2025-10-24T14:40:21.038+03:00  INFO 6932 --- [demo] [main] o.h.c.internal.RegionFactoryInitiator    : HHH000026: Second-level cache disabled
+2025-10-24T14:40:21.337+03:00  INFO 6932 --- [demo] [main] o.s.o.j.p.SpringPersistenceUnitInfo      : No LoadTimeWeaver setup: ignoring JPA class transformer
+2025-10-24T14:40:21.378+03:00  WARN 6932 --- [demo] [main] org.hibernate.orm.deprecation            : HHH90000025: H2Dialect does not need to be specified explicitly using 'hibernate.dialect' (remove the property setting and it will be selected by default)
+2025-10-24T14:40:21.389+03:00  INFO 6932 --- [demo] [main] org.hibernate.orm.connections.pooling    : HHH10001005: Database info:
+	Database JDBC URL [Connecting through datasource 'HikariDataSource (HikariPool-1)']
+	Database driver: undefined/unknown
+	Database version: 2.3.232
+	Autocommit mode: undefined/unknown
+	Isolation level: undefined/unknown
+	Minimum pool size: undefined/unknown
+	Maximum pool size: undefined/unknown
+2025-10-24T14:40:22.118+03:00  INFO 6932 --- [demo] [main] o.h.e.t.j.p.i.JtaPlatformInitiator       : HHH000489: No JTA platform available (set 'hibernate.transaction.jta.platform' to enable JTA platform integration)
+2025-10-24T14:40:22.158+03:00 DEBUG 6932 --- [demo] [main] org.hibernate.SQL                        : alter table if exists note_category alter column category_id set data type bigint
+2025-10-24T14:40:22.158+03:00 DEBUG 6932 --- [demo] [main] org.hibernate.SQL                        : alter table if exists note_category alter column note_id set data type bigint
+2025-10-24T14:40:22.168+03:00 DEBUG 6932 --- [demo] [main] org.hibernate.SQL                        : alter table if exists note_tag alter column note_id set data type bigint
+2025-10-24T14:40:22.168+03:00 DEBUG 6932 --- [demo] [main] org.hibernate.SQL                        : alter table if exists note_tag alter column tag_id set data type bigint
+2025-10-24T14:40:22.168+03:00 DEBUG 6932 --- [demo] [main] org.hibernate.SQL                        : alter table if exists tags alter column colour set data type varchar(100)
+2025-10-24T14:40:22.177+03:00  INFO 6932 --- [demo] [main] j.LocalContainerEntityManagerFactoryBean : Initialized JPA EntityManagerFactory for persistence unit 'default'
+2025-10-24T14:40:22.628+03:00  WARN 6932 --- [demo] [main] JpaBaseConfiguration$JpaWebConfiguration : spring.jpa.open-in-view is enabled by default. Therefore, database queries may be performed during view rendering. Explicitly configure spring.jpa.open-in-view to disable this warning
+2025-10-24T14:40:23.028+03:00  INFO 6932 --- [demo] [main] o.s.b.a.h2.H2ConsoleAutoConfiguration    : H2 console available at '/h2-console'. Database available at 'jdbc:h2:mem:notedb'
+2025-10-24T14:40:23.110+03:00  INFO 6932 --- [demo] [main] o.s.b.w.embedded.tomcat.TomcatWebServer  : Tomcat started on port 8080 (http) with context path '/'
+2025-10-24T14:40:23.120+03:00  INFO 6932 --- [demo] [main] com.example.note.demo.DemoApplication    : Started DemoApplication in 4.582 seconds (process running for 4.921)
+2025-10-24T14:40:28.009+03:00  INFO 6932 --- [demo] [http-nio-8080-exec-1] o.a.c.c.C.[Tomcat].[localhost].[/]       : Initializing Spring DispatcherServlet 'dispatcherServlet'
+2025-10-24T14:40:28.010+03:00  INFO 6932 --- [demo] [http-nio-8080-exec-1] o.s.web.servlet.DispatcherServlet        : Initializing Servlet 'dispatcherServlet'
+2025-10-24T14:40:28.011+03:00  INFO 6932 --- [demo] [http-nio-8080-exec-1] o.s.web.servlet.DispatcherServlet        : Completed initialization in 1 ms
+2025-10-24T14:40:28.088+03:00  INFO 6932 --- [demo] [http-nio-8080-exec-1] c.e.note.demo.controller.TagController   : Received GET request to fetch all tags
+2025-10-24T14:40:28.496+03:00  INFO 6932 --- [demo] [http-nio-8080-exec-1] c.e.note.demo.controller.TagController   : Successfully retrieved 0 tags
+2025-10-24T14:40:31.583+03:00  INFO 6932 --- [demo] [http-nio-8080-exec-3] c.e.note.demo.controller.TagController   : Received POST request to create tag with name: тест and colour: #000000
+2025-10-24T14:40:31.584+03:00  INFO 6932 --- [demo] [http-nio-8080-exec-3] c.example.note.demo.service.TagService   : Service: Saving tag with name: тест and colour: #000000
+2025-10-24T14:40:31.590+03:00  INFO 6932 --- [demo] [http-nio-8080-exec-3] c.e.note.demo.repository.TagRepository   : Attempting to save tag with name: тест and colour: #000000
+2025-10-24T14:40:31.591+03:00  INFO 6932 --- [demo] [http-nio-8080-exec-3] c.e.note.demo.repository.TagRepository   : Searching for tag by name: тест
+2025-10-24T14:40:31.597+03:00  INFO 6932 --- [demo] [http-nio-8080-exec-3] c.e.note.demo.repository.TagRepository   : No tag found with name: тест
+2025-10-24T14:40:31.609+03:00  INFO 6932 --- [demo] [http-nio-8080-exec-3] c.e.note.demo.repository.TagRepository   : Successfully saved tag with id: 1, name: тест, colour: #000000
+2025-10-24T14:40:31.609+03:00  INFO 6932 --- [demo] [http-nio-8080-exec-3] c.example.note.demo.service.TagService   : Service: Successfully saved tag with id: 1
+2025-10-24T14:40:31.648+03:00  INFO 6932 --- [demo] [http-nio-8080-exec-3] c.e.note.demo.controller.TagController   : Successfully created tag with name: тест and colour: #000000
+2025-10-24T14:40:31.654+03:00  INFO 6932 --- [demo] [http-nio-8080-exec-4] c.e.note.demo.controller.TagController   : Received GET request to fetch all tags
+2025-10-24T14:40:31.655+03:00  INFO 6932 --- [demo] [http-nio-8080-exec-4] c.example.note.demo.service.TagService   : Service: Fetching all tags
+2025-10-24T14:40:31.656+03:00  INFO 6932 --- [demo] [http-nio-8080-exec-4] c.e.note.demo.repository.TagRepository   : Getting all tags
+2025-10-24T14:40:31.656+03:00  INFO 6932 --- [demo] [http-nio-8080-exec-4] c.e.note.demo.repository.TagRepository   : Found tags
+2025-10-24T14:40:31.657+03:00  INFO 6932 --- [demo] [http-nio-8080-exec-4] c.example.note.demo.service.TagService   : Service: Retrieved 1 tags
+2025-10-24T14:40:31.661+03:00  INFO 6932 --- [demo] [http-nio-8080-exec-4] c.e.note.demo.controller.TagController   : Successfully retrieved 1 tags
+2025-10-24T14:40:39.957+03:00  INFO 6932 --- [demo] [SpringApplicationShutdownHook] o.s.b.w.e.tomcat.GracefulShutdown        : Commencing graceful shutdown. Waiting for active requests to complete
+2025-10-24T14:40:39.957+03:00  INFO 6932 --- [demo] [tomcat-shutdown] o.s.b.w.e.tomcat.GracefulShutdown        : Graceful shutdown complete
+2025-10-24T14:40:39.977+03:00  INFO 6932 --- [demo] [SpringApplicationShutdownHook] j.LocalContainerEntityManagerFactoryBean : Closing JPA EntityManagerFactory for persistence unit 'default'
+2025-10-24T14:40:39.978+03:00  INFO 6932 --- [demo] [SpringApplicationShutdownHook] com.zaxxer.hikari.HikariDataSource       : HikariPool-1 - Shutdown initiated...
+2025-10-24T14:40:39.978+03:00  INFO 6932 --- [demo] [SpringApplicationShutdownHook] com.zaxxer.hikari.HikariDataSource       : HikariPool-1 - Shutdown completed.
